@@ -21,7 +21,7 @@
 引入的方式需要关注下vue.config.js
 ```
 const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
-** 这里的types的选项，可以通过执行vue inspect > output.js，倒出output.js，然后查看output.js即可
+// 这里的types的选项，可以通过执行vue inspect > output.js，倒出output.js，然后查看output.js即可
 types.forEach(type => {
   config.module.rule('scss').oneOf(type).use('style-resource')
     .loader('style-resources-loader')
