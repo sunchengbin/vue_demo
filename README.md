@@ -62,4 +62,26 @@ baseUrl: process.env.NODE_ENV !== 'development' ? '/vue_demo/dist/' : './'
 > 主要是把常用的：封装过的http接口、接口路径、常用的函数等进行拆分
 
 ## 项目目录
-
+├── src
+    ├── components        组件
+        ├── svg_icon      svg组件
+    ├── minxins           混合模式
+    ├── views             页面
+    ├── assets            静态资源
+    ├── views             页面
+    └── libs              函数库集合
+        ├── app           项目中操作库函数
+        ├── base          基础函数聚合
+            ├── http.js   http请求封装, 基于axios
+            └── apis.js   接口请求url聚合
+        ├── interfaces.js 调用聚合、方便引用
+        └── utils         工具函数封装
+            └── index.js  常用函数聚合
+    ├── imgs              图片集合
+    └── css               样式集合
+├── .env.development      开发环境全局变量管理文件
+├── .env.stage            预上线环境全局变量管理文件
+├── .env.production       生产环境全局变量管理文件
+├── .eslintrc.js          eslint相关配置
+├── babel.config.js       babel相关配置
+└── vue.config.js         vue-cli3创建的项目，需要通过该文件进行webpack配置编辑
