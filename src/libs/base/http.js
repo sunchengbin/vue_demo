@@ -26,3 +26,5 @@ http.interceptors.respose.use(response => {
   // 调用一个错误提醒dialog
   return Promise.reject(error)
 })
+
+export default http

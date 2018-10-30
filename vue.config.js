@@ -1,5 +1,6 @@
 // 配置api地址：https://cli.vuejs.org/zh/config/#%E5%85%A8%E5%B1%80-cli-%E9%85%8D%E7%BD%AE
 const path = require('path')
+const webpack = require('webpack')
 module.exports = {
   // 修改output.path
   outputDir: 'dist',
@@ -26,6 +27,27 @@ module.exports = {
       .tap(options => {
         options = {
           symbolId: 'icon-[name]'
+        }
+        return options
+      })
+    // 移除 prefetch 插件
+    config.plugins.delete('prefetch')
+    // 引入
+    const chunkFolder = process.env.NODE_ENV !== 'production' ? 'debug' : 'dist'
+    config.plugin('dll-reference-plugin')
+      .use(webpack.DllReferencePlugin)
+      .tap(options => {
+        options[0] = {
+          context: __dirname,
+          manifest: require(path.join(__dirname, `./src/common_chunk/${chunkFolder}/manifest.json`))
+        }
+        return options
+      })
+    config.plugin('add-asset-html-webpack-plugin')
+      .use('add-asset-html-webpack-plugin')
+      .tap(options => {
+        options[0] = {
+          filepath: path.resolve(__dirname, `./src/common_chunk/${chunkFolder}/lib_*.js`)
         }
         return options
       })

@@ -61,6 +61,93 @@ baseUrl: process.env.NODE_ENV !== 'development' ? '/vue_demo/dist/' : './'
 #### 接口集合(src/libs)
 > 主要是把常用的：封装过的http接口、接口路径、常用的函数等进行拆分
 
+#### 动态加载路由
+> 首先按照规则在 src/routers 文件夹中添加不同功能模块相关的路由文件。js按照commonjs格式编写。
+
+例如: routers/index.js
+
+```
+module.exports = [
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import('@/views/about.vue')
+  },
+  {
+    path: '/help',
+    name: 'help',
+    component: () => import('@/views/help.vue')
+  }
+]
+
+```
+
+src/router.js 中添加
+
+```
+// 动态加载路由
+function importAll (r) {
+  r.keys().forEach(fileName => {
+    if (/.\//.test(fileName)) {
+      fileName = fileName.replace('./', '')
+    }
+    const file = require(`./routers/${fileName}`)
+    routes = routes.concat(file)
+  })
+}
+importAll(require.context('@/routers', true, /.js$/))
+
+```
+参考文档 [webpack上下文](https://webpack.docschina.org/guides/dependency-management/#require-context)
+
+#### 关闭prefetch
+
+参考文档 [prefetch](https://cli.vuejs.org/zh/guide/html-and-static-assets.html#prefetch)
+> 默认情况下所有import()的产物自动生成prefetch，这种链接消耗带宽，所以需要手动关闭，然后手动选择需要prefetch的链接。
+
+vue.config.js 中添加如下代码
+
+```
+
+module.exports = {
+  chainWebpack: config => {
+    // 移除 prefetch 插件
+    config.plugins.delete('prefetch')
+  }
+}
+
+```
+#### 公共模块的提取(dll-plugin)
+> 首先安装npm包webpack, webpack-cli, add-asset-html-webpack-plugin
+
+添加plugin,修改vue.config.js
+
+```
+
+// chainWebpack中添加如下代码
+chainWebpack: config => {
+  const chunkFolder = process.env.NODE_ENV !== 'production' ? 'debug' : 'dist'
+  config.plugin('dll-reference-plugin')
+    .use(webpack.DllReferencePlugin)
+    .tap(options => {
+      options[0] = {
+        context: __dirname,
+        manifest: require(path.join(__dirname, `./src/common_chunk/${chunkFolder}/manifest.json`))
+      }
+      return options
+    })
+  config.plugin('add-asset-html-webpack-plugin')
+    .use('add-asset-html-webpack-plugin')
+    .tap(options => {
+      options[0] = {
+        filepath: path.resolve(__dirname, `./src/common_chunk/${chunkFolder}/lib_*.js`)
+      }
+      return options
+    })
+}
+
+```
+
 ## 项目目录
 ├── src
     ├── components        组件
