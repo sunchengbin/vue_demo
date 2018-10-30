@@ -149,6 +149,7 @@ chainWebpack: config => {
 ```
 
 ## 项目目录
+```
 ├── src
     ├── components        组件
         ├── svg_icon      svg组件
@@ -172,3 +173,4 @@ chainWebpack: config => {
 ├── .eslintrc.js          eslint相关配置
 ├── babel.config.js       babel相关配置
 └── vue.config.js         vue-cli3创建的项目，需要通过该文件进行webpack配置编辑
+```
