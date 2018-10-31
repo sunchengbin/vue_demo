@@ -2,7 +2,7 @@
 
 ## 开发环境
 
-- [vuecli3](https://cli.vuejs.org/zh/)
+- [vue-cli3](https://cli.vuejs.org/zh/)
 - yarn
 
 ## 需要注意的问题
