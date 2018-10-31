@@ -1,5 +1,5 @@
 /*
- * 防抖（以最后一次事件的触发时间， 为起始时间去不断推移事件的执行）
+ * 防抖（以最后一次事件的触发时间为起始时间，去不断推移事件的执行）
  * 应用场景（例如：避免快速点击造成的多次提交、降低input检索频次）
  */
 function debounce (callback, wait = 300) {
@@ -19,6 +19,7 @@ function debounce (callback, wait = 300) {
     context = this
     args = arguments
     timestamp = Date.now()
+    // console.log(`timestamp is ${timestamp}`)
     if (!timeout) {
       timeout = setTimeout(laterFn, wait)
     }

@@ -14,7 +14,7 @@ http.interceptors.request.use(config => {
   Promise.reject(error)
 })
 
-http.interceptors.respose.use(response => {
+http.interceptors.response.use(response => {
   const res = response.data
   if (res.code !== 0) {
     // 根据不同错误码进行提示

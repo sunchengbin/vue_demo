@@ -22,6 +22,7 @@ function throttle (callback, wait = 300, opts = {}) {
     context = this
     args = arguments
     const now = Date.now()
+    // console.log(`time is ${now}`)
     if (!previous && opts.leading === false) previous = now
     const remaining = wait - (now - previous)
     if (remaining <= 0 || remaining > wait) {

@@ -82,7 +82,7 @@ module.exports = [
 
 ```
 
-src/router.js 中添加
+src/router.js 中添加动态路由加载 [webpack上下文](https://webpack.docschina.org/guides/dependency-management/#require-context)
 
 ```
 // 动态加载路由
@@ -98,11 +98,9 @@ function importAll (r) {
 importAll(require.context('@/routers', true, /.js$/))
 
 ```
-参考文档 [webpack上下文](https://webpack.docschina.org/guides/dependency-management/#require-context)
 
-#### 关闭prefetch
+#### 关闭prefetch (https://cli.vuejs.org/zh/guide/html-and-static-assets.html#prefetch)
 
-参考文档 [prefetch](https://cli.vuejs.org/zh/guide/html-and-static-assets.html#prefetch)
 > 默认情况下所有import()的产物自动生成prefetch，这种链接消耗带宽，所以需要手动关闭，然后手动选择需要prefetch的链接。
 
 vue.config.js 中添加如下代码

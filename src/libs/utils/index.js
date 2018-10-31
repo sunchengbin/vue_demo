@@ -1,7 +1,8 @@
 import debounce from './debounce'
 import throttle from './throttle'
 
-export {
+const utils = {
   debounce,
   throttle
 }
+export default utils
