@@ -117,9 +117,19 @@ module.exports = {
 
 ```
 #### 公共模块的提取(dll-plugin)
-> 首先安装npm包webpack, webpack-cli, add-asset-html-webpack-plugin
 
-添加plugin,修改vue.config.js
+一、安装npm包webpack, webpack-cli, add-asset-html-webpack-plugin
+
+二、创建webpack.dll.config.js
+
+三、package.json中添加构建执行命令
+
+```
+  "prod_dll": "NODE_ENV=production webpack --config webpack.dll.config.js --progress",
+  "dev_dll": "NODE_ENV=development webpack --config webpack.dll.config.js --progress"
+```
+
+四、修改vue.config.js,添加plugin
 
 ```
 
