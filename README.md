@@ -176,12 +176,14 @@ chainWebpack: config => {
     ├── views             页面
     └── libs              函数库集合
         ├── app           项目中操作库函数
+            ├── flexible  1px解决方案
+            └── weixin    微信api相关
         ├── base          基础函数聚合
-            ├── http.js   http请求封装, 基于axios
-            └── apis.js   接口请求url聚合
-        ├── interfaces.js 调用聚合、方便引用
+            ├── http      http请求封装, 基于axios
+            └── apis      接口请求url聚合
+        ├── interfaces    调用聚合、方便引用
         └── utils         工具函数封装
-            └── index.js  常用函数聚合
+            └── index     常用函数聚合
     ├── imgs              图片集合
     └── css               样式集合
 ├── .env.development      开发环境全局变量管理文件
