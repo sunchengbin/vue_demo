@@ -18,7 +18,7 @@
 并在mixin.scss中添加@mixin px2rem
 
 #### 样式模块的组件化拆分并全局引入base.scss
-引入的方式需要关注下vue.config.js
+首先安装style-resources-loader的npm包，然后在vue.config.js中添加如下代码
 ```
 const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
 // 这里的types的选项，可以通过执行vue inspect > output.js，倒出output.js，然后查看output.js即可
@@ -33,7 +33,8 @@ types.forEach(type => {
 })
 ```
 #### 添加svg组件
-首先创建svg组件，然后配置对应的loader（svg-sprite-loader）。修改vue.config.js
+
+首先安装svg-sprite-loader的npm包并创建svg组件，然后修改vue.config.js，配置对应的loader（svg-sprite-loader）。
 
 ```
 const svgRule = config.module.rule('svg')

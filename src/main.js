@@ -4,9 +4,11 @@ import router from './router'
 import store from './store'
 import '@/libs/app/flexible'
 import SvgIcon from '@/components/svg_icon/svg'
+// import Toast from '@/components/toast/index'
 
 Vue.config.productionTip = false
 Vue.component('svg-icon', SvgIcon)
+// Vue.use(Toast)
 
 new Vue({
   router,

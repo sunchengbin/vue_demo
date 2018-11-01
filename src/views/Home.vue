@@ -25,6 +25,9 @@ export default {
     clickBtn: utils.throttle(function () {
       console.log(this.btnTxt)
       console.log(`now is ${Date.now()}`)
+      this.$toast({
+        message: 'message'
+      })
     }, 1000)
   }
 }
