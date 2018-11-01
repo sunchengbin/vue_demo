@@ -11,17 +11,25 @@
 
 所以需要修改webpack配置和环境变量切换等方面需要学习新写法。
 
+**想要查看cli-service抽象过的webpack配置，需要执行vue inspect > output.js。查看output.js即可**
+
 ## 搭建框架过程说明
 
 #### 1px解决方案
+
 全局引入flexible.js (路径:src/libs/app/flexible.js)
+
+main.js中添加如下代码
+```
+import '@/libs/app/flexible'
+```
 并在mixin.scss中添加@mixin px2rem
 
 #### 样式模块的组件化拆分并全局引入base.scss
 首先安装style-resources-loader的npm包，然后在vue.config.js中添加如下代码
 ```
 const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
-// 这里的types的选项，可以通过执行vue inspect > output.js，倒出output.js，然后查看output.js即可
+// 这里的types的选项，可以通过执行vue inspect > output.js，导出output.js，然后在output.js中查看
 types.forEach(type => {
   config.module.rule('scss').oneOf(type).use('style-resource')
     .loader('style-resources-loader')
