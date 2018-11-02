@@ -10,7 +10,6 @@
 </template>
 
 <style lang="scss">
-@import './css/base';
 #app {
   text-align: center;
 }
