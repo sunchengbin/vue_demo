@@ -12,6 +12,7 @@
 <style lang="scss">
 #app {
   text-align: center;
+  height: 100%;
 }
 #nav {
   @include px2rem(padding, 30);
