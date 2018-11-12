@@ -24,8 +24,10 @@ var defaults = {
   confirmButtonClass: '',
   cancelButtonClass: ''
 };
+
 import Vue from 'vue';
 import msgboxVue from './index.vue';
+
 // 一个遍历参数的合集
 var merge = function (target) {
   for (var i = 1, j = arguments.length; i < j; i++) {
@@ -41,9 +43,11 @@ var merge = function (target) {
   }
   return target;
 };
+
 var MessageBoxConstructor = Vue.extend(msgboxVue); // 创造一个构造器，为了创建可复用组件
 var currentMsg, instance
 var msgQueue = []
+
 const defaultCallback = action => {
   if (currentMsg) {
     var callback = currentMsg.callback
@@ -78,15 +82,19 @@ var initInstance = function () {
   instance = new MessageBoxConstructor({
     el: document.createElement('div')
   });
+
   instance.callback = defaultCallback;
 }
+
 var showNextMsg = function () {
   if (!instance) {
     initInstance();
   }
+
   if (!instance.value || instance.closeTimer) {
     if (msgQueue.length > 0) {
       currentMsg = msgQueue.shift();
+
       var options = currentMsg.options;
       for (var prop in options) {
         if (options.hasOwnProperty(prop)) {
@@ -140,9 +148,12 @@ var MessageBox = function (options, callback) {
     showNextMsg();
   }
 }
+
+
 MessageBox.setDefaults = function (defaults) {
   MessageBox.defaults = defaults;
 }
+
 MessageBox.alert = function (message, title, options) {
   if (typeof title === 'object') {
     options = title;

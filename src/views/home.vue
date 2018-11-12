@@ -7,7 +7,8 @@
     <div class="btn">
       {{btnTxt}}
     </div>
-    <MessageBox />
+    <!-- <MessageBox /> -->
+    <Footer />
   </div>
 </template>
 
@@ -15,7 +16,7 @@
 import {
   utils
 } from '@/libs/interfaces'
-import MessageBox from '@/components/message-box/index.vue'
+import Footer from '@/components/footer/footer'
 export default {
   name: 'home',
   data () {
@@ -24,16 +25,29 @@ export default {
     }
   },
   components: {
-    MessageBox
+    Footer
+  },
+  created () {
+    this.$toast('ceshi')
+    // this.$messageBox.alert('操作成功', '')
   },
   methods: {
-    clickBtn: utils.throttle(function () {
-      console.log(this.btnTxt)
-      console.log(`now is ${Date.now()}`)
-      this.$toast({
-        message: 'message'
+    clickBtn () {
+      // this.$messageBox.alert('操作成功', '')
+      this.$messageBox.setDefaults({ confirmButtonText: '去冠名呀', cancelButtonText: '继续点歌' })
+      this.$messageBox.confirm('要去冠名吗？', '').then(confirm => {
+        console.log(confirm)
+      }).catch(cancel => {
+        console.log(cancel)
       })
-    }, 1000)
+      // this.$messageBox.close()
+      // this.$messageBox.prompt(' ', '请输入姓名').then(({ value }) => {
+      //   if (value) {
+      //     this.$messageBox.alert(`你的名字是 ${value}`, '输入成功');
+      //   }
+      // });
+
+    }
   }
 }
 </script>
