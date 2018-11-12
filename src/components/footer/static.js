@@ -19,6 +19,6 @@ const footIcons = [
     name: '我的',
     activeSrc: 'my_icon_active',
     routeTo: '/thunder/customer'
-  },
+  }
 ]
 export default footIcons

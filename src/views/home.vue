@@ -7,8 +7,8 @@
     <div class="btn">
       {{btnTxt}}
     </div>
-    <!-- <MessageBox /> -->
-    <Footer />
+    <foot-bar current-page="首页" />
+    <swipe />
   </div>
 </template>
 
@@ -16,7 +16,7 @@
 import {
   utils
 } from '@/libs/interfaces'
-import Footer from '@/components/footer/footer'
+import swipe from '@/components/swipe/swipe'
 export default {
   name: 'home',
   data () {
@@ -25,7 +25,7 @@ export default {
     }
   },
   components: {
-    Footer
+    swipe
   },
   created () {
     this.$toast('ceshi')
