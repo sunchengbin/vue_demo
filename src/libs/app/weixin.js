@@ -162,6 +162,26 @@ const weixin = {
         alert(res.resultStr)
       }
     })
+  },
+  startRecord () {
+    console.log(this)
+    wx.startRecord()
+  },
+  stopRecord (_this) {
+    wx.stopRecord({
+      success: function (res) {
+        return wx.translateVoice({
+          localId: res.localId, // 需要识别的音频的本地Id，由录音相关接口获得
+          isShowProgressTips: 1, // 默认为1，显示进度提示
+          success: function (res) {
+            _this.setWord(res.translateResult)
+          },
+          fail: function () {
+            alert('识别失败')
+          }
+        })
+      }
+    })
   }
 }
 

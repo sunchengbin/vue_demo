@@ -19,7 +19,7 @@
 <script>
 import swiperSlides from './static'
 export default {
-  name: 'swipe',
+  name: 'barSwiper',
   data () {
     return {
       swiperOption: {

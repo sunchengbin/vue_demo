@@ -8,7 +8,7 @@
                   :icon-class="currentPage === item.name ? item.activeSrc : item.defaultSrc"
                   class-name="side" />
         <img v-else
-             src="@/imgs/charge_icon.png"
+             src="./imgs/charge_icon.png"
              alt=""
              class="center">
         <p v-if="item.name">{{item.name}}</p>
@@ -31,12 +31,12 @@ export default {
   },
   data () {
     return {
-      footIcons: footIcons,
+      footIcons: footIcons
     }
   },
   methods: {
     handleClick (path) {
-      this.$router.push(path);
+      this.$router.push(path)
     }
   }
 }

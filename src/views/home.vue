@@ -8,15 +8,17 @@
       {{btnTxt}}
     </div>
     <foot-bar current-page="首页" />
-    <swipe />
+    <barSwiper />
+    <voice />
   </div>
 </template>
 
 <script>
-import {
-  utils
-} from '@/libs/interfaces'
-import swipe from '@/components/swipe/swipe'
+// import {
+//   utils
+// } from '@/libs/interfaces'
+import barSwiper from '@/components/swiper/index'
+import voice from '@/components/voice/index'
 export default {
   name: 'home',
   data () {
@@ -25,7 +27,8 @@ export default {
     }
   },
   components: {
-    swipe
+    barSwiper,
+    voice
   },
   created () {
     this.$toast('ceshi')
@@ -46,7 +49,6 @@ export default {
       //     this.$messageBox.alert(`你的名字是 ${value}`, '输入成功');
       //   }
       // });
-
     }
   }
 }
@@ -57,4 +59,3 @@ export default {
   height: 100%;
 }
 </style>
-

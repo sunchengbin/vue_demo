@@ -34,8 +34,8 @@
   </div>
 </template>
 <script type="text/babel">
-let CONFIRM_TEXT = '确定';
-let CANCEL_TEXT = '取消';
+let CONFIRM_TEXT = '确定'
+let CANCEL_TEXT = '取消'
 export default {
   props: {
     modal: {
@@ -62,95 +62,95 @@ export default {
   },
   computed: {
     confirmButtonClasses () {
-      let classes = 'msgbox-btn msgbox-btn-confirm ' + this.confirmButtonClass;
+      let classes = 'msgbox-btn msgbox-btn-confirm ' + this.confirmButtonClass
       if (this.confirmButtonHighlight) {
-        classes += ' msgbox-confirm-highlight';
+        classes += ' msgbox-confirm-highlight'
       }
-      return classes;
+      return classes
     },
     cancelButtonClasses () {
-      let classes = 'msgbox-btn msgbox-btn-cancel ' + this.cancelButtonClass;
+      let classes = 'msgbox-btn msgbox-btn-cancel ' + this.cancelButtonClass
       if (this.cancelButtonHighlight) {
-        classes += ' mmsgbox-cancel-highlight';
+        classes += ' mmsgbox-cancel-highlight'
       }
-      return classes;
+      return classes
     }
   },
   methods: {
     doClose () {
-      this.value = false;
-      this._closing = true;
-      this.onClose && this.onClose();
+      this.value = false
+      this._closing = true
+      this.onClose && this.onClose()
       setTimeout(() => {
         if (this.modal && this.bodyOverflow !== 'hidden') {
-          document.body.style.overflow = this.bodyOverflow;
-          document.body.style.paddingRight = this.bodyPaddingRight;
+          document.body.style.overflow = this.bodyOverflow
+          document.body.style.paddingRight = this.bodyPaddingRight
         }
-        this.bodyOverflow = null;
-        this.bodyPaddingRight = null;
-      }, 200);
-      this.opened = false;
+        this.bodyOverflow = null
+        this.bodyPaddingRight = null
+      }, 200)
+      this.opened = false
       if (!this.transition) {
-        this.doAfterClose();
+        this.doAfterClose()
       }
     },
     handleAction (action) {
       if (this.$type === 'prompt' && action === 'confirm' && !this.validate()) {
-        return;
+        return
       }
-      var callback = this.callback;
-      this.value = false;
-      callback(action);
+      var callback = this.callback
+      this.value = false
+      callback(action)
     },
     validate () {
       if (this.$type === 'prompt') {
-        var inputPattern = this.inputPattern;
+        var inputPattern = this.inputPattern
         if (inputPattern && !inputPattern.test(this.inputValue || '')) {
-          this.editorErrorMessage = this.inputErrorMessage || '输入的数据不合法!';
-          this.$refs.input.classList.add('invalid');
-          return false;
+          this.editorErrorMessage = this.inputErrorMessage || '输入的数据不合法!'
+          this.$refs.input.classList.add('invalid')
+          return false
         }
-        var inputValidator = this.inputValidator;
+        var inputValidator = this.inputValidator
         if (typeof inputValidator === 'function') {
-          var validateResult = inputValidator(this.inputValue);
+          var validateResult = inputValidator(this.inputValue)
           if (validateResult === false) {
-            this.editorErrorMessage = this.inputErrorMessage || '输入的数据不合法!';
-            this.$refs.input.classList.add('invalid');
-            return false;
+            this.editorErrorMessage = this.inputErrorMessage || '输入的数据不合法!'
+            this.$refs.input.classList.add('invalid')
+            return false
           }
           if (typeof validateResult === 'string') {
-            this.editorErrorMessage = validateResult;
-            return false;
+            this.editorErrorMessage = validateResult
+            return false
           }
         }
       }
-      this.editorErrorMessage = '';
-      this.$refs.input.classList.remove('invalid');
-      return true;
+      this.editorErrorMessage = ''
+      this.$refs.input.classList.remove('invalid')
+      return true
     },
     handleInputType (val) {
-      if (val === 'range' || !this.$refs.input) return;
-      this.$refs.input.type = val;
+      if (val === 'range' || !this.$refs.input) return
+      this.$refs.input.type = val
     }
   },
   watch: {
     inputValue () {
       if (this.$type === 'prompt') {
-        this.validate();
+        this.validate()
       }
     },
     value (val) {
-      this.handleInputType(this.inputType);
+      this.handleInputType(this.inputType)
       if (val && this.$type === 'prompt') {
         setTimeout(() => {
           if (this.$refs.input) {
-            this.$refs.input.focus();
+            this.$refs.input.focus()
           }
-        }, 500);
+        }, 500)
       }
     },
     inputType (val) {
-      this.handleInputType(val);
+      this.handleInputType(val)
     }
   },
   data () {
@@ -174,9 +174,9 @@ export default {
       cancelButtonClass: '',
       editorErrorMessage: null,
       callback: null
-    };
+    }
   }
-};
+}
 </script>
 <style lang="scss">
 .msgbox {
@@ -184,8 +184,9 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
-  background: url('../../imgs/alert.png') no-repeat;
+  background: url('./imgs/alert.png') no-repeat;
   background-position: center;
+  background-size: cover;
   @include px2rem(width, 500);
   @include px2rem(height, 300);
   border-radius: 3px;
