@@ -8,8 +8,16 @@
       {{btnTxt}}
     </div>
     <foot-bar current-page="首页" />
-    <barSwiper />
-    <voice />
+    <swiper :auto="4000">
+      <swiper-item :class="'slide'+(index+1)"
+                   v-for="(item,index) in swiperSlides"
+                   :key="index">
+        <img :src="item.classdetailbigimage"
+             alt="">
+      </swiper-item>
+    </swiper>
+    <!-- <voice /> -->
+    <Upload />
   </div>
 </template>
 
@@ -17,17 +25,18 @@
 // import {
 //   utils
 // } from '@/libs/interfaces'
-import barSwiper from '@/components/swiper/index'
 import voice from '@/components/voice/index'
+import SWIPER from '@/components/swiper/static'
 export default {
   name: 'home',
   data () {
     return {
-      btnTxt: '按钮'
+      btnTxt: '按钮',
+      swiperSlides: SWIPER.swiperSlides
     }
   },
   components: {
-    barSwiper,
+    // barSwiper,
     voice
   },
   created () {
@@ -57,5 +66,13 @@ export default {
 <style lang="scss">
 .home {
   height: 100%;
+  .swiper-item {
+    @include px2rem(width, 800);
+    @include px2rem(border-radius, 8);
+    img {
+      @include px2rem(width, 800);
+      @include px2rem(border-radius, 8);
+    }
+  }
 }
 </style>

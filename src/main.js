@@ -7,14 +7,16 @@ import SvgIcon from '@/components/svg_icon/svg'
 import MessageBox from '@/components/message_box/index'
 import Toast from '@/components/toast/index'
 import Footer from '@/components/footer/footer'
-import VueAwesomeSwiper from 'vue-awesome-swiper'
+import Swiper from '@/components/swiper/swiper'
+import SwipeItem from '@/components/swiper/swiper_item'
 
-Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false
 Vue.component('svg-icon', SvgIcon)
 Vue.$messageBox = Vue.prototype.$messageBox = MessageBox
 Vue.$toast = Vue.prototype.$toast = Toast
 Vue.component(Footer.name, Footer)
+Vue.component(Swiper.name, Swiper)
+Vue.component(SwipeItem.name, SwipeItem)
 
 new Vue({
   router,

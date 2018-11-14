@@ -5,6 +5,8 @@
   -webkit-touch-callout: none;
   background: transparent;
   outline: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 html,body {

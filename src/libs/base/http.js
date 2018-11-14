@@ -16,7 +16,7 @@ http.interceptors.request.use(config => {
 
 http.interceptors.response.use(response => {
   const res = response.data
-  if (res.code !== 0) {
+  if (res.errcode !== 200) {
     // 根据不同错误码进行提示
     Promise.reject(res.message)
   } else {
