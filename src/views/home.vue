@@ -17,7 +17,6 @@
       </swiper-item>
     </swiper>
     <!-- <voice /> -->
-    <Upload />
   </div>
 </template>
 
