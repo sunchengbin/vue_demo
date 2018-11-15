@@ -42,7 +42,7 @@ export default {
     voice
   },
   created () {
-    this.$toast('ceshi')
+
   },
   methods: {
     clickBtn () {
