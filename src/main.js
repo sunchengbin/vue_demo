@@ -12,11 +12,9 @@ import Footer from '@/components/footer/footer'
 import Swiper from '@/components/swiper/swiper'
 import SwipeItem from '@/components/swiper/swiper_item'
 Vue.config.productionTip = false
-Vue.component('svg-icon', SvgIcon)
 Vue.$toast = Vue.prototype.$toast = Toast
 Vue.$loading = Vue.prototype.$loading = loading
 Vue.use(lazyload)
-Vue.config.productionTip = false
 Vue.component('svg-icon', SvgIcon)
 Vue.$messageBox = Vue.prototype.$messageBox = MessageBox
 Vue.component(Footer.name, Footer)

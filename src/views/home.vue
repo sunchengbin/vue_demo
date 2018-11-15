@@ -109,7 +109,6 @@ export default {
     hidePanel () {
       this.payShow = false
     }
-
   },
   mounted () {
     // Toast()
