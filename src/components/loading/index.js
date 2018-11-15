@@ -30,11 +30,11 @@ LoadingConstructor.prototype.close = () => {
 }
 export default intance
 // 用法
-// import loading from '@/components/loading'
-// 1、 loading.open() //显示loading
-// 2、 loading,open({
+// 已经绑定到Vue原型上
+// 1、 this.$loading.open() //显示loading
+// 2、 this.$loading,open({
 //  message: '数据加载'，可选
 //  iconType: 'dash' || 'cycle' //两种loading效果 可选
 // })
-// 3、loading.open('传入提示信息')
+// 3、this.$loading.open('传入提示信息')
 // loading.close() //关闭loading

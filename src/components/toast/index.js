@@ -50,10 +50,11 @@ const Toast = (options = {}) => {
 }
 export default Toast
 // 使用方法
-// import Toast from '@/components/toast'
-// Toast({
+// 已经绑定到Vue原型上
+// this.$toast({
 //   message: '操作成功', // 显示提示文字 可选
 //   iconName: 'vip', // 图标 可选
 //   position: 'bottom',// 位置信息 可选
 //   duration: 3000 // 显示时间
 // })
+// 或者this.$toast('message')
