@@ -5,7 +5,6 @@ import store from './store'
 import '@/libs/app/flexible'
 import SvgIcon from '@/components/svg_icon/svg'
 import MessageBox from '@/components/message_box/index'
-import Toast from '@/components/toast/index'
 import Footer from '@/components/footer/footer'
 import Swiper from '@/components/swiper/swiper'
 import SwipeItem from '@/components/swiper/swiper_item'
@@ -13,7 +12,6 @@ import SwipeItem from '@/components/swiper/swiper_item'
 Vue.config.productionTip = false
 Vue.component('svg-icon', SvgIcon)
 Vue.$messageBox = Vue.prototype.$messageBox = MessageBox
-Vue.$toast = Vue.prototype.$toast = Toast
 Vue.component(Footer.name, Footer)
 Vue.component(Swiper.name, Swiper)
 Vue.component(SwipeItem.name, SwipeItem)

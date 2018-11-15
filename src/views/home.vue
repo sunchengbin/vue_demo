@@ -33,7 +33,7 @@ export default {
     }
   },
   created () {
-    this.$toast('ceshi')
+
   },
   methods: {
     clickBtn () {
