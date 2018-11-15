@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <search-bar></search-bar>
     <h1>svg组件的引入</h1>
     <div @click="clickBtn">
       <svg-icon icon-class="vip" />
@@ -36,16 +35,16 @@
     </ul>
     <play-control />>
     <foot-bar current-page="首页" />
-    <!-- <swiper :auto="2000">
+    <swiper :auto="2000">
       <swiper-item :class="'slide'+(index+1)"
                    v-for="(item,index) in swiperSlides"
                    :key="index">
         <img :src="item.classdetailbigimage"
              alt="">
       </swiper-item>
-    </swiper> -->
-    <!-- <voice /> -->
-    <!-- <bottomEntry /> -->
+    </swiper>
+    <voice />
+
   </div>
 </template>
 
@@ -54,14 +53,12 @@ import {
   utils
 } from '@/libs/interfaces'
 import paypanel from '@/components/pay_panel'
-import searchBar from '@/components/search_bar'
 import songItem from '@/components/song_item'
 import playControl from '@/components/play_control'
 // import {
 //   utils
 // } from '@/libs/interfaces'
 import voice from '@/components/voice/index'
-// import bottomEntry from '@/components/footer/bottom_entry'
 import SWIPER from '@/components/swiper/static'
 export default {
   name: 'home',
@@ -72,7 +69,8 @@ export default {
       price: 200,
       singers: [{ singer: '哈辉', singerhead: 'https://qnktv.ktvdaren.com/singer/103901.jpg', singerid: 103901 }],
       songs: [{ songid: 7654282, music_name: '刘哈哈与大先生', flag: ['MV', '国语'], singer: '刘心', played: 0 }],
-      swiperSlides: SWIPER.swiperSlides
+      swiperSlides: SWIPER.swiperSlides,
+      isVoiceShow: false
     }
   },
   created () {
@@ -122,11 +120,8 @@ export default {
   components: {
     // loading
     paypanel,
-    searchBar,
     songItem,
     playControl,
-    // barSwiper,
-    // bottomEntry,
     voice
   }
 }
