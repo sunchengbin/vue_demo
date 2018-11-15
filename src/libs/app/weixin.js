@@ -30,7 +30,7 @@ const weixin = {
           timestamp: parseInt(res.data.signature.timestamp),
           nonceStr: res.data.signature.nonceStr,
           signature: res.data.signature.signature,
-          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'chooseImage', 'uploadImage', 'scanQRCode']
+          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'chooseImage', 'uploadImage', 'scanQRCode', 'startRecord', 'stopRecord', 'wxPay']
         })
         wx.ready(function () {
           console.log('微信js初始化成功')
@@ -196,6 +196,28 @@ const weixin = {
         })
       } catch (e) {
 
+      }
+    })
+  },
+  startRecord (e) {
+    console.log(e)
+    wx.startRecord()
+  },
+  stopRecord (_this) {
+    console.log(wx.stopRecord, _this.setWord())
+    wx.stopRecord({
+      success (res) {
+        return wx.translateVoice({
+          localId: res.localId, // 需要识别的音频的本地Id，由录音相关接口获得
+          isShowProgressTips: 1, // 默认为1，显示进度提示
+          success: function (res) {
+            console.log(res.translateResult, 'res.translateResult')
+            _this.setWord(res.translateResult)
+          },
+          fail: function () {
+            alert('识别失败')
+          }
+        })
       }
     })
   }
