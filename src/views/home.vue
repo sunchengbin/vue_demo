@@ -8,15 +8,15 @@
       {{btnTxt}}
     </div>
     <foot-bar current-page="首页" />
-    <swiper :auto="2000">
+    <!-- <swiper :auto="2000">
       <swiper-item :class="'slide'+(index+1)"
                    v-for="(item,index) in swiperSlides"
                    :key="index">
         <img :src="item.classdetailbigimage"
              alt="">
       </swiper-item>
-    </swiper>
-    <voice />
+    </swiper> -->
+    <!-- <voice /> -->
     <!-- <bottomEntry /> -->
   </div>
 </template>
@@ -25,15 +25,24 @@
 // import {
 //   utils
 // } from '@/libs/interfaces'
+import voice from '@/components/voice/index'
+// import bottomEntry from '@/components/footer/bottom_entry'
+import SWIPER from '@/components/swiper/static'
 export default {
   name: 'home',
   data () {
     return {
-      btnTxt: '按钮'
+      btnTxt: '按钮',
+      swiperSlides: SWIPER.swiperSlides
     }
   },
+  components: {
+    // barSwiper,
+    // bottomEntry,
+    voice
+  },
   created () {
-
+    this.$toast('ceshi')
   },
   methods: {
     clickBtn () {
