@@ -1,8 +1,29 @@
+<!--
+  message-box的使用说明
+  1> 在main.js中引入 import MessageBox from '@/components/message_box/index'
+  2> 挂载到vue实例 Vue.$messageBox = Vue.prototype.$messageBox = MessageBox
+  3> 在组件所需处直接调用 例如：
+      alert弹框：          this.$messageBox.alert('操作成功', '')
+      关闭弹框：            this.$messageBox.close()
+      初始化弹框按钮内容：    this.$messageBox.setDefaults({ confirmButtonText: '去冠名呀', cancelButtonText: '继续点歌' })
+      带回调的confirm弹框：  this.$messageBox.confirm('要去冠名吗？', '').then(confirm => {
+                              console.log(confirm)
+                           }).catch(cancel => {
+                              console.log(cancel)
+                           })  
+      带输入框的弹框：       this.$messageBox.prompt(' ', '请输入姓名').then(({ value }) => {
+                              if (value) {
+                                this.$messageBox.alert(`你的名字是 ${value}`, '输入成功');
+                              }
+                          });   
+-->
+
 <template>
-  <div class="msgbox-wrapper">
+  <div class="msgbox-wrapper"
+       v-show="value"
+       @click="doClose">
     <transition name="fade">
-      <div class="msgbox"
-           v-show="value">
+      <div class="msgbox">
         <div class="msgbox-title"
              v-if="title !== ''">
           <div class="title">{{ title }}</div>
@@ -90,9 +111,9 @@ export default {
         this.bodyPaddingRight = null
       }, 200)
       this.opened = false
-      if (!this.transition) {
-        this.doAfterClose()
-      }
+      // if (!this.transition) {
+      //   this.doAfterClose()
+      // }
     },
     handleAction (action) {
       if (this.$type === 'prompt' && action === 'confirm' && !this.validate()) {
@@ -179,24 +200,30 @@ export default {
 }
 </script>
 <style lang="scss">
+.msgbox-wrapper {
+  z-index: 10000;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
 .msgbox {
   position: fixed;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
   background: url('./imgs/alert.png') no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-size: 100%;
   @include px2rem(width, 500);
-  @include px2rem(height, 300);
+  @include px2rem(height, 420);
   border-radius: 3px;
   @include fontSize(16px);
   -webkit-user-select: none;
-  overflow: hidden;
   backface-visibility: hidden;
   transition: 0.2s;
   .msgbox-title {
-    padding: 15px 0 0;
+    @include px2rem(padding, 85 0 0);
     .title {
       text-align: center;
       padding-left: 0;
@@ -216,10 +243,10 @@ export default {
   }
   .content_pad_yt {
     // 当没有title时content的padding
-    @include px2rem(padding, 100 10 40);
+    @include px2rem(padding, 80 10 40);
   }
   .content_pad_nt {
-    @include px2rem(padding, 130 50 40);
+    @include px2rem(padding, 200 50 40);
   }
   .msgbox-btns {
     display: -webkit-box;
@@ -227,6 +254,7 @@ export default {
     display: -ms-flexbox;
     display: flex;
     line-height: 40px;
+    @include px2rem(margin-top, 20);
     .msgbox-btn {
       width: 2.41546rem;
       height: 0.80515rem;

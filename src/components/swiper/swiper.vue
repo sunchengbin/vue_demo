@@ -1,3 +1,25 @@
+<!--
+swiper组件的使用说明：
+  1> 在main.js中引入组件：import Swiper from '@/components/swiper/swiper'
+                        import SwipeItem from '@/components/swiper/swiper_item'
+  2> 注册并挂载组件：      Vue.component(Swiper.name, Swiper)
+                        Vue.component(SwipeItem.name, SwipeItem)
+  3> 在需要的地方引入组件，例如以下几种引入方式：
+        以速度5s匀速：    <swiper :auto="5000">
+                          <swiper-item :class="'slide'+(index+1)"
+                                        v-for="(item,index) in swiperSlides"
+                                        :key="index">
+                            <img :src="item.classdetailbigimage"
+                                  alt="">
+                          </swiper-item>
+                        </swiper>
+
+        是否显示小圆圈：  添加属性  :show-indicators="false"
+        不自动播放：     添加属性  :auto="0"
+        默认第一张图片：  添加属性  :defaultIndex="1"
+        。。。
+-->
+
 <template>
   <div class="swiper">
     <div class="swiper-items-wrap">
@@ -91,6 +113,7 @@ export default {
       this.doOnTouchMove(event);
     });
     element.addEventListener('touchend', (event) => {
+      console.log(this.userScrolling)
       if (this.userScrolling) {
         this.dragging = false;
         this.dragState = {};
@@ -193,12 +216,12 @@ export default {
         if (this.isDone) {
           this.end();
         }
-        if (prevPage) {
-          prevPage.style.display = '';
-        }
-        if (nextPage) {
-          nextPage.style.display = '';
-        }
+        // if (prevPage) {
+        //   prevPage.style.display = '';
+        // }
+        // if (nextPage) {
+        //   nextPage.style.display = '';
+        // }
       }
       setTimeout(() => {
         if (towards === 'next') {
@@ -257,8 +280,8 @@ export default {
           if (called) return;
           called = true;
           this.animating = false;
-          element.style.webkitTransition = '';
-          element.style.webkitTransform = '';
+          // element.style.webkitTransition = '';
+          // element.style.webkitTransform = '';
           if (callback) {
             callback.apply(this, arguments);
           }
@@ -278,9 +301,9 @@ export default {
         if (Math.abs(_offset - offset) < 0.5) {
           this.animating = false;
           _offset = offset;
-          element.style.webkitTransform = '';
+          // element.style.webkitTransform = '';
           if (nextElement) {
-            nextElement.style.webkitTransform = '';
+            // nextElement.style.webkitTransform = '';
           }
           cancelAnimationFrame(raf);
           if (callback) {
@@ -289,7 +312,7 @@ export default {
           return;
         }
         _offset = ALPHA * _offset + (1.0 - ALPHA) * offset;
-        element.style.webkitTransform = `translate3d(${_offset}px, 0, 0)`;
+        element.style.transform = `translate3d(${_offset}px, 0, 0)`;
         if (nextElement) {
           nextElement.style.webkitTransform = `translate3d(${_offset - offset}px, 0, 0)`;
         }
@@ -359,6 +382,7 @@ export default {
       }
     },
     doOnTouchEnd () {
+      console.log(this.noDrag, 'doOnTouchEnd')
       if (this.noDrag) return;
       var dragState = this.dragState;
       var dragDuration = new Date() - dragState.startTime;
@@ -389,6 +413,7 @@ export default {
       if (this.$children.length < 2) {
         towards = null;
       }
+      console.log(this.dragState)
       this.doAnimate(towards, {
         offsetLeft: offsetLeft,
         pageWidth: dragState.pageWidth,
@@ -440,42 +465,54 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .swiper {
   overflow: hidden;
   position: relative;
-  @include px2rem(height, 400);
+  @include px2rem(height, 300);
   .swiper-items-wrap {
     position: relative;
     overflow: hidden;
     height: 100%;
     > div {
       position: absolute;
+      top: 8%;
+      left: 5%;
       transform: translateX(-100%);
-      size: 100% 100%;
+      @include px2rem(width, 680);
+      @include px2rem(height, 260);
+      overflow: hidden;
       display: none;
       &:active {
         display: block;
         transform: none;
       }
     }
+    img {
+      @include px2rem(border-radius, 10);
+    }
   }
   .swiper-indicators {
     position: absolute;
-    @include px2rem(bottom, 10);
+    @include px2rem(bottom, 35);
     left: 50%;
     transform: translateX(-50%);
   }
   .swipe-indicator {
-    @include px2rem(size, 8 8);
+    @include px2rem(width, 15);
+    @include px2rem(height, 15);
     display: inline-block;
     border-radius: 100%;
     background: #000;
     opacity: 0.2;
-    @include px2rem(margin, 0 3);
+    @include px2rem(margin, 0 10);
     &:active {
       background: #fff;
     }
+  }
+  .is-active {
+    opacity: 1;
+    background: #ff6d00;
   }
 }
 </style>

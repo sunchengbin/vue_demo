@@ -8,7 +8,7 @@
       {{btnTxt}}
     </div>
     <foot-bar current-page="首页" />
-    <swiper :auto="4000">
+    <swiper :auto="2000">
       <swiper-item :class="'slide'+(index+1)"
                    v-for="(item,index) in swiperSlides"
                    :key="index">
@@ -16,7 +16,8 @@
              alt="">
       </swiper-item>
     </swiper>
-    <!-- <voice /> -->
+    <voice />
+    <!-- <bottomEntry /> -->
   </div>
 </template>
 
@@ -24,33 +25,25 @@
 // import {
 //   utils
 // } from '@/libs/interfaces'
-import voice from '@/components/voice/index'
-import SWIPER from '@/components/swiper/static'
 export default {
   name: 'home',
   data () {
     return {
-      btnTxt: '按钮',
-      swiperSlides: SWIPER.swiperSlides
+      btnTxt: '按钮'
     }
-  },
-  components: {
-    // barSwiper,
-    voice
   },
   created () {
     this.$toast('ceshi')
-    // this.$messageBox.alert('操作成功', '')
   },
   methods: {
     clickBtn () {
-      // this.$messageBox.alert('操作成功', '')
+      this.$messageBox.alert('操作成功', '')
       this.$messageBox.setDefaults({ confirmButtonText: '去冠名呀', cancelButtonText: '继续点歌' })
-      this.$messageBox.confirm('要去冠名吗？', '').then(confirm => {
-        console.log(confirm)
-      }).catch(cancel => {
-        console.log(cancel)
-      })
+      // this.$messageBox.confirm('要去冠名吗？', '').then(confirm => {
+      //   console.log(confirm)
+      // }).catch(cancel => {
+      //   console.log(cancel)
+      // })
       // this.$messageBox.close()
       // this.$messageBox.prompt(' ', '请输入姓名').then(({ value }) => {
       //   if (value) {
@@ -65,13 +58,5 @@ export default {
 <style lang="scss">
 .home {
   height: 100%;
-  .swiper-item {
-    @include px2rem(width, 800);
-    @include px2rem(border-radius, 8);
-    img {
-      @include px2rem(width, 800);
-      @include px2rem(border-radius, 8);
-    }
-  }
 }
 </style>

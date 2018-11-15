@@ -1,3 +1,10 @@
+<!--
+voice组件的使用说明
+  1> 在需要的组件引入voice： import voice from '@/components/voice/index'
+  2> 注册组件
+  3> 使用组件 <voice />
+-->
+
 <template>
   <div class="voice"
        @click="closeVoice"

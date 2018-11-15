@@ -9,7 +9,7 @@ var defaults = {
   type: '',
   showInput: false,
   showClose: true,
-  modalFade: false,
+  modalFade: true,
   lockScroll: false,
   closeOnClickModal: true,
   inputValue: null,

@@ -1,3 +1,10 @@
+<!--
+  footer组件使用说明：
+  1> 在main.js引入组件 import Footer from '@/components/footer/footer'
+  2> 注册组件 Vue.component(Footer.name, Footer)
+  3> 在需要的组件里面使用 例如：<foot-bar current-page="首页" />   current-page为当前页的name值
+-->
+
 <template>
   <footer>
     <ul class="foot-bar">
@@ -18,7 +25,7 @@
 </template>
 
 <script>
-import footIcons from './static'
+import COMMON from './static'
 
 export default {
   name: 'foot-bar',
@@ -31,7 +38,7 @@ export default {
   },
   data () {
     return {
-      footIcons: footIcons
+      footIcons: COMMON.footIcons
     }
   },
   methods: {
