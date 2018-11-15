@@ -1,8 +1,8 @@
 import wx from 'weixin-js-sdk'
 import {
-  utils,
-  apis,
-  http
+  utils
+  // apis,
+  // http
 } from '@/libs/interfaces'
 const weixin = {
   wxLoginUrl: '', // 授权登录url
@@ -18,34 +18,35 @@ const weixin = {
     return utils.util.getUrlPrem('browser') === 'xcx' || window.__wxjs_environment === 'miniprogram'
   },
   init (callback) {
-    let req = {
-      'action': 'js_signature',
-      'url': window.location.href.replace(/#.*$/, '')
-    }
-    http.get(`${apis.initWx}?param=` + encodeURIComponent(JSON.stringify(req))).then(function (res) {
-      try {
-        wx.config({
-          debug: false,
-          appId: res.data.signature.appId,
-          timestamp: parseInt(res.data.signature.timestamp),
-          nonceStr: res.data.signature.nonceStr,
-          signature: res.data.signature.signature,
-          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'chooseImage', 'uploadImage', 'scanQRCode']
-        })
-        wx.ready(function () {
-          console.log('微信js初始化成功')
-          callback && callback(res)
-        })
-        wx.error(res => {
-          alert('微信js初始化失败')
-          alert(JSON.stringify(res))
-        })
-      } catch (g) {
-        alert(g)
-      }
-    }).catch(function (error) {
-      console.log(error)
-    })
+    console.log('wx init')
+    // let req = {
+    //   'action': 'js_signature',
+    //   'url': window.location.href.replace(/#.*$/, '')
+    // }
+    // http.get(`${apis.initWx}?param=` + encodeURIComponent(JSON.stringify(req))).then(function (res) {
+    //   try {
+    //     wx.config({
+    //       debug: false,
+    //       appId: res.data.signature.appId,
+    //       timestamp: parseInt(res.data.signature.timestamp),
+    //       nonceStr: res.data.signature.nonceStr,
+    //       signature: res.data.signature.signature,
+    //       jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'chooseImage', 'uploadImage', 'scanQRCode']
+    //     })
+    //     wx.ready(function () {
+    //       console.log('微信js初始化成功')
+    //       callback && callback(res)
+    //     })
+    //     wx.error(res => {
+    //       alert('微信js初始化失败')
+    //       alert(JSON.stringify(res))
+    //     })
+    //   } catch (g) {
+    //     alert(g)
+    //   }
+    // }).catch(function (error) {
+    //   console.log(error)
+    // })
   },
   updateShare (conf) {
     let settings = 'onMenuShareTimeline onMenuShareAppMessage'

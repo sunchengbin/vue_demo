@@ -11,9 +11,10 @@
 
 <style lang="scss">
 #app {
-  text-align: center;
+  min-height: 100vh;
 }
 #nav {
+  text-align: center;
   @include px2rem(padding, 30);
   a {
     font-weight: bold;

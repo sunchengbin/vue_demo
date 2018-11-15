@@ -1,3 +1,13 @@
+/*
+* 用例
+* Toast({
+*   duration  显示时长
+*   message   消息文字
+*   position  提示显示的位置top/middle/bottom
+*   className 可以添加自定义样式名class
+*   iconClass toast图标class
+* })
+*/
 import Vue from 'vue'
 import Index from './index.vue'
 

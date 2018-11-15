@@ -1,8 +1,10 @@
 <template>
   <transition name="toast-pop">
-    <div class="toast" v-show="visible" :class="customClass" :style="{ 'padding': iconClass === '' ? '10px' : '20px' }">
-      <svg-icon class-name="icon" :icon-class="iconClass" v-if="iconClass !== ''"/>
-      <span class="text" :style="{ 'padding-top': iconClass === '' ? '0' : '10px' }">{{ message }}</span>
+    <div class="toast" v-show="visible" :class="customClass">
+      <div class="icon-box" v-if="iconClass !== ''">
+        <svg-icon class-name="icon" :icon-class="iconClass"/>
+      </div>
+      <div class="text">{{ message }}</div>
     </div>
   </transition>
 </template>
@@ -11,17 +13,28 @@
     position: fixed;
     max-width: 80%;
     @include px2rem(border-radius, 10);
-    background: rgba(0, 0, 0, 0.7);
+    @include px2rem(padding, 10 15);
+    background: $dialog_bg_color;
     color: $write_font_color;
     box-sizing: border-box;
-    text-align: center;
     z-index: 1000;
     transition: opacity .3s linear;
-    // .icon { }
-    .text {
+    display: flex;
+    .icon-box, .text {
+      display: flex;
+      align-items: center;
       @include fontSize(12px);
-      display: block;
-      text-align: center;
+    }
+    .icon-box {
+      flex-grow: 0;
+      .icon {
+        @include px2rem(width, 40);
+        @include px2rem(height, 40);
+        @include px2rem(margin-right, 10);
+      }
+    }
+    .text {
+      flex-grow: 1;
     }
   }
   .placetop {
