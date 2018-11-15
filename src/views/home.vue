@@ -35,6 +35,17 @@
                  :songindex="index"></song-item>
     </ul>
     <play-control />>
+    <foot-bar current-page="首页" />
+    <!-- <swiper :auto="2000">
+      <swiper-item :class="'slide'+(index+1)"
+                   v-for="(item,index) in swiperSlides"
+                   :key="index">
+        <img :src="item.classdetailbigimage"
+             alt="">
+      </swiper-item>
+    </swiper> -->
+    <!-- <voice /> -->
+    <!-- <bottomEntry /> -->
   </div>
 </template>
 
@@ -46,6 +57,12 @@ import paypanel from '@/components/pay_panel'
 import searchBar from '@/components/search_bar'
 import songItem from '@/components/song_item'
 import playControl from '@/components/play_control'
+// import {
+//   utils
+// } from '@/libs/interfaces'
+import voice from '@/components/voice/index'
+// import bottomEntry from '@/components/footer/bottom_entry'
+import SWIPER from '@/components/swiper/static'
 export default {
   name: 'home',
   data () {
@@ -54,8 +71,12 @@ export default {
       payShow: false,
       price: 200,
       singers: [{ singer: '哈辉', singerhead: 'https://qnktv.ktvdaren.com/singer/103901.jpg', singerid: 103901 }],
-      songs: [{ songid: 7654282, music_name: '刘哈哈与大先生', flag: ['MV', '国语'], singer: '刘心', played: 0 }]
+      songs: [{ songid: 7654282, music_name: '刘哈哈与大先生', flag: ['MV', '国语'], singer: '刘心', played: 0 }],
+      swiperSlides: SWIPER.swiperSlides
     }
+  },
+  created () {
+
   },
   methods: {
     clickBtn: utils.throttle(function () {
@@ -68,6 +89,19 @@ export default {
         position: 'bottom'
         // toastSvg: 'toast-Icon'
       })
+      this.$messageBox.alert('操作成功', '')
+      this.$messageBox.setDefaults({ confirmButtonText: '去冠名呀', cancelButtonText: '继续点歌' })
+      // this.$messageBox.confirm('要去冠名吗？', '').then(confirm => {
+      //   console.log(confirm)
+      // }).catch(cancel => {
+      //   console.log(cancel)
+      // })
+      // this.$messageBox.close()
+      // this.$messageBox.prompt(' ', '请输入姓名').then(({ value }) => {
+      //   if (value) {
+      //     this.$messageBox.alert(`你的名字是 ${value}`, '输入成功');
+      //   }
+      // });
     }, 1000),
     payPanelShow () {
       this.payShow = true
@@ -91,9 +125,16 @@ export default {
     paypanel,
     searchBar,
     songItem,
-    playControl
+    playControl,
+    // barSwiper,
+    // bottomEntry,
+    voice
   }
 }
 </script>
-<style lang="scss" scoped>
+
+<style lang="scss">
+.home {
+  height: 100%;
+}
 </style>
