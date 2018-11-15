@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <search-bar></search-bar>
     <h1>svg组件的引入</h1>
     <div @click="clickBtn">
       <svg-icon icon-class="vip" />
@@ -12,6 +13,28 @@
     <paypanel v-show="payShow"
               @hidePanel="hidePanel"
               :price="price"></paypanel>
+    <ul class="list"
+        v-show="singers.length>0">
+      <song-item v-for="(item) in singers"
+                 :key="item.singerid"
+                 :singer_ID="item.singerid"
+                 :title="item.singer"
+                 :imgs="item.singerhead"
+                 :type="'singer'"
+                 :is_search="true"></song-item>
+    </ul>
+    <ul class="list songs-list">
+      <song-item v-for="(item,index) in songs"
+                 :key="item.songid"
+                 :title="item.music_name"
+                 :sub_title="item.singer"
+                 :song_ID="item.songid"
+                 :flags="item.flag"
+                 :type="'song'"
+                 :origin="'search'"
+                 :songindex="index"></song-item>
+    </ul>
+    <play-control />>
   </div>
 </template>
 
@@ -19,16 +42,19 @@
 import {
   utils
 } from '@/libs/interfaces'
-import Toast from '@/components/toast'
-import loading from '@/components/loading'
 import paypanel from '@/components/pay_panel'
+import searchBar from '@/components/search_bar'
+import songItem from '@/components/song_item'
+import playControl from '@/components/play_control'
 export default {
   name: 'home',
   data () {
     return {
       btnTxt: '按钮',
       payShow: false,
-      price: 200
+      price: 200,
+      singers: [{ singer: '哈辉', singerhead: 'https://qnktv.ktvdaren.com/singer/103901.jpg', singerid: 103901 }],
+      songs: [{ songid: 7654282, music_name: '刘哈哈与大先生', flag: ['MV', '国语'], singer: '刘心', played: 0 }]
     }
   },
   methods: {
@@ -36,7 +62,7 @@ export default {
       console.log(this.btnTxt)
       console.log(`now is ${Date.now()}`)
       this.payPanelShow()
-      Toast({
+      this.$toast({
         message: '操作成功',
         iconName: 'vip',
         position: 'bottom'
@@ -53,14 +79,19 @@ export default {
   },
   mounted () {
     // Toast()
-    loading.open()
-    setTimeout(function () {
-      loading.close()
-    }, 2000)
+    const self = this
+    self.$toast('操作失败')
+    // self.$loading.open()
+    // setTimeout(function () {
+    //   self.$loading.close()
+    // }, 2000)
   },
   components: {
     // loading
-    paypanel
+    paypanel,
+    searchBar,
+    songItem,
+    playControl
   }
 }
 </script>

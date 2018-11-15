@@ -16,7 +16,7 @@
         <span class="go-charge"
               v-show="!can_pay">
           点击充值
-          <img src="../../imgs/icon/arrow_right_grey.png"
+          <img src="./img/icon/arrow_right_grey.png"
                alt="">
         </span>
         <span class="confirm-icon"
@@ -199,7 +199,7 @@ export default {
   }
   .wx-icon {
     @include px2rem(height, 34);
-    background: url('../../imgs/icon/wx_pay_icon.png') no-repeat;
+    background: url('./img/icon/wx_pay_icon.png') no-repeat;
     background-size: contain;
   }
   .pay-text {
@@ -238,10 +238,10 @@ export default {
   .confirm-icon {
     @include px2rem(width, 32);
     @include px2rem(height, 32);
-    background: url('../../imgs/icon/pay_not_choose.png') no-repeat;
+    background: url('./img/icon/pay_not_choose.png') no-repeat;
     background-size: contain;
     &.active {
-      background: url('../../imgs/icon/pay_is_choose.png') no-repeat;
+      background: url('./img/icon/pay_is_choose.png') no-repeat;
       background-size: 100%;
     }
   }

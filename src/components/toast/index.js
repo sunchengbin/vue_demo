@@ -25,13 +25,12 @@ ToastConstructor.prototype.close = function () {
   toastTool.push(this)
   console.log(toastTool)
 }
-const Toast = (options) => {
+const Toast = (options = {}) => {
   const intance = getIntance()
-  options = options || {}
   document.body.appendChild(intance.$el)
+  intance.message = typeof options !== 'object' ? options : options.message || '操作成功'
   intance.duration = options.duration || 3000
-  intance.message = options.message || 'Not work'
-  intance.className = options.messag || ''
+  intance.className = options.className || ''
   intance.iconName = options.iconName || ''
   intance.position = options.position || ''
   intance.toastSvg = options.toastSvg || 'toast-svg'
@@ -55,5 +54,6 @@ export default Toast
 // Toast({
 //   message: '操作成功', // 显示提示文字 可选
 //   iconName: 'vip', // 图标 可选
-//   position: 'bottom' // 位置信息 可选
+//   position: 'bottom',// 位置信息 可选
+//   duration: 3000 // 显示时间
 // })
