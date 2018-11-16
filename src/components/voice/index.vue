@@ -16,7 +16,8 @@ voice组件的使用说明
         <h1 class="action">搜歌</h1>
         <p class="guide">您可以这样说：十年</p>
         <ul class="voice-fun">
-          <li v-for="item in serve">{{item}}</li>
+          <li v-for="(item,index) in serve"
+              :key="index">{{item}}</li>
         </ul>
       </div>
     </div>
@@ -35,7 +36,6 @@ voice组件的使用说明
 
 <script>
 import Wx from '@/libs/app/weixin'
-import queryUrl from '@/libs/base/query'
 import http from '@/libs/base/http'
 export default {
   name: 'voice',
@@ -55,14 +55,14 @@ export default {
     // 解析语音时显示的文本
     press_tip_text: function () {
       return this.voice_resolve ? '正在识别中...' : '< 松手发指令 >'
-    },
+    }
   },
   created () {
     // 如果没有缓存语音字典数据，则获取数据
     let self = this
     http.get('https://k.ktvsky.com/bar/u/remote_ctrl/dict')
       .then(function (res) {
-        this.result_list = res.data
+        self.result_list = res.data
       }).catch(function (err) {
         console.log('Inside error, fetching product line items failed', err)
       })
@@ -79,7 +79,7 @@ export default {
         return
       }
       Wx.startRecord()
-      const timeOutEvent = setTimeout(() => {
+      this.timeOutEvent = setTimeout(() => {
         this.moveVoice()
       }, 500)
     },
@@ -122,7 +122,7 @@ export default {
         openid: self.openid,
         unionid: self.unionid
       }
-      ajax.get('https://k.ktvsky.com/bar/u/remote_ctrl/song/' + text, params)
+      http.get('https://k.ktvsky.com/bar/u/remote_ctrl/song/' + text, params)
         .then(res => {
           if (res.errcode === 21001) {
             self.closeVoice()
@@ -135,6 +135,12 @@ export default {
         .catch(function (err) {
           console.log('Inside error, fetching product line items failed', err)
         })
+    }
+  },
+  destroyed () {
+    if (this.timeOutEvent) {
+      clearTimeout(this.timeOutEvent)
+      this.timeOutEvent = null
     }
   }
 }

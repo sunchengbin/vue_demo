@@ -192,7 +192,7 @@ export default {
         speedX = options.speedX
       }
       var newIndex
-      var oldPage = this.$children[index].$el
+      // var oldPage = this.$children[index].$el
       if (towards === 'prev') {
         if (index > 0) {
           newIndex = index - 1
@@ -210,7 +210,7 @@ export default {
       }
       var callback = () => {
         if (newIndex !== undefined) {
-          var newPage = this.$children[newIndex].$el
+          // var newPage = this.$children[newIndex].$el
           this.index = newIndex
         }
         if (this.isDone) {
