@@ -1,3 +1,6 @@
+import {
+  util
+} from '@/libs/utils'
 const COMMON = {
   footIcons: [
     {
@@ -5,7 +8,7 @@ const COMMON = {
       defaultSrc: 'home_icon',
       name: '首页',
       activeSrc: 'home_icon_active',
-      routeTo: '/thunder/home'
+      routeTo: util.getRouterPath('index', 'about')
     },
     {
       id: 2,

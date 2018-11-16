@@ -49,4 +49,17 @@ export default class util {
     }
     return items
   }
+
+  static getRouterPath (fileName, pageName) {
+    let path = '/home';
+    (async function () {
+      let routers = await import(`@/routers/${fileName}`)
+      routers.default.forEach(router => {
+        if (router.name === pageName) {
+          path = router.patn
+        }
+      })
+    })()
+    return path
+  }
 }

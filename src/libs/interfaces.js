@@ -1,6 +1,6 @@
 import http from './base/http'
 import apis from './base/apis'
-import utils from './utils/index'
+import * as utils from './utils'
 
 export {
   http,
