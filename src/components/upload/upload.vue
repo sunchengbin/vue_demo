@@ -51,6 +51,7 @@ export default {
     }
   },
   created () {
+    /* eslint-disable */
     http.get('https://coupon.ktvsky.com/by/upload', {}).then(res => {
       this.upyun.policy = res.upyun[1]
       this.upyun.signature = res.upyun[0]
@@ -58,6 +59,7 @@ export default {
     }).catch(err => {
       console.log('异常1')
     })
+    /* eslint-enable */
   },
   props: ['imgUrl'],
   methods: {
@@ -65,9 +67,9 @@ export default {
     upLoadPic (event) {
       let that = this
       event.preventDefault()
-      let size = event.target.files[0].size,
-        type = event.target.files[0].type.indexOf('image'),
-        formData = new FormData(this.$refs.upload)
+      // let size = event.target.files[0].size
+      // let type = event.target.files[0].type.indexOf('image')
+      let formData = new FormData(this.$refs.upload)
       http.post('https://v0.api.upyun.com/autodynemv', formData).then(res => {
         console.log('正常2', res)
         let url = 'https://autodynemv.b0.upaiyun.com/' + res['url']

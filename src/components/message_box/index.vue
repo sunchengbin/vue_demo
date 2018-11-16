@@ -6,16 +6,18 @@
       alert弹框：          this.$messageBox.alert('操作成功', '')
       关闭弹框：            this.$messageBox.close()
       初始化弹框按钮内容：    this.$messageBox.setDefaults({ confirmButtonText: '去冠名呀', cancelButtonText: '继续点歌' })
-      带回调的confirm弹框：  this.$messageBox.confirm('要去冠名吗？', '').then(confirm => {
-                              console.log(confirm)
-                           }).catch(cancel => {
-                              console.log(cancel)
-                           })  
-      带输入框的弹框：       this.$messageBox.prompt(' ', '请输入姓名').then(({ value }) => {
-                              if (value) {
-                                this.$messageBox.alert(`你的名字是 ${value}`, '输入成功');
-                              }
-                          });   
+      带回调的confirm弹框：
+      this.$messageBox.confirm('要去冠名吗？', '').then(confirm => {
+        console.log(confirm)
+      }).catch(cancel => {
+        console.log(cancel)
+      })
+      带输入框的弹框：
+      this.$messageBox.prompt(' ', '请输入姓名').then(({ value }) => {
+        if (value) {
+          this.$messageBox.alert(`你的名字是 ${value}`, '输入成功');
+        }
+      });
 -->
 
 <template>
