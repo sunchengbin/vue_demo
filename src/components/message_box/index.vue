@@ -10,12 +10,12 @@
                               console.log(confirm)
                            }).catch(cancel => {
                               console.log(cancel)
-                           })  
+                           })
       带输入框的弹框：       this.$messageBox.prompt(' ', '请输入姓名').then(({ value }) => {
                               if (value) {
                                 this.$messageBox.alert(`你的名字是 ${value}`, '输入成功');
                               }
-                          });   
+                          })
 -->
 
 <template>

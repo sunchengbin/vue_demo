@@ -12,11 +12,17 @@ import Footer from '@/components/footer/footer'
 import Swiper from '@/components/swiper/swiper'
 import SwipeItem from '@/components/swiper/swiper_item'
 Vue.config.productionTip = false
+
+// 插件
+Vue.use(lazyload)
+
+// 全局变量
 Vue.$toast = Vue.prototype.$toast = Toast
 Vue.$loading = Vue.prototype.$loading = loading
-Vue.use(lazyload)
-Vue.component('svg-icon', SvgIcon)
 Vue.$messageBox = Vue.prototype.$messageBox = MessageBox
+
+// 组件
+Vue.component('svg-icon', SvgIcon)
 Vue.component(Footer.name, Footer)
 Vue.component(Swiper.name, Swiper)
 Vue.component(SwipeItem.name, SwipeItem)

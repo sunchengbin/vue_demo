@@ -33,7 +33,7 @@
                  :origin="'search'"
                  :songindex="index"></song-item>
     </ul>
-    <play-control />>
+    <play-control />
     <foot-bar current-page="首页" />
     <swiper :auto="2000">
       <swiper-item :class="'slide'+(index+1)"
