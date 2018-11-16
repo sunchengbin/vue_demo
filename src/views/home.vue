@@ -52,14 +52,11 @@
 import {
   utils
 } from '@/libs/interfaces'
-import paypanel from '@/components/pay_panel'
-import songItem from '@/components/song_item'
-import playControl from '@/components/play_control'
-// import {
-//   utils
-// } from '@/libs/interfaces'
-import voice from '@/components/voice/index'
-import SWIPER from '@/components/swiper/static'
+import paypanel from '@/components/app/pay_panel'
+import songItem from '@/components/app/song_item'
+import playControl from '@/components/app/play_control'
+import voice from '@/components/app/voice/index'
+import SWIPER from '@/components/common/swiper/static'
 export default {
   name: 'home',
   data () {
@@ -127,7 +124,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .home {
   height: 100%;
 }
