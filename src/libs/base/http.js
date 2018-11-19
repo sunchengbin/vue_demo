@@ -13,6 +13,9 @@ http.interceptors.request.use(config => {
     config.data = qs.stringify(config.data)
     config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
   }
+  //
+  config.baseURL = 'baseUrl'
+  console.log('baseUrl is ' + config.baseURL)
   return config
 }, error => {
   // 拦截请求错误

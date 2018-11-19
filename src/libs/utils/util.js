@@ -50,17 +50,21 @@ export default class util {
     return items
   }
 
-  static getRouterPath (fileName, pageName) {
+  // 获取页面路由路径
+  static async getRouterPath (pageName) {
     let path = '/'
-    if (fileName) {
-      (async function () {
-        let routers = await import(`@/routers/${fileName}`)
-        routers.default.forEach(router => {
-          if (router.name === pageName) {
-            path = router.patn
-          }
-        })
-      })()
+    let allRouters = require.context('@/routers', true, /.js$/).keys()
+    for (let i = 0; i < allRouters.length; i++) {
+      let fileName = allRouters[i]
+      if (/.\//.test(fileName)) {
+        fileName = fileName.replace('./', '')
+      }
+      let routers = await import(`@/routers/${fileName}`)
+      routers.default.forEach(router => {
+        if (router.name === pageName) {
+          path = router.path
+        }
+      })
     }
     return path
   }

@@ -10,7 +10,7 @@
     <ul class="foot-bar">
       <li v-for="item in footIcons"
           :key="item.id"
-          @click="handleClick(item.routeTo||'/thunder/home')">
+          @click="handleClick(item.routeName)">
         <svg-icon v-if="item.name"
                   :icon-class="currentPage === item.name ? item.activeSrc : item.defaultSrc"
                   class-name="side" />
@@ -26,7 +26,9 @@
 
 <script>
 import COMMON from './static'
-
+import {
+  util
+} from '@/libs/utils'
 export default {
   name: 'foot-bar',
   props: {
@@ -42,9 +44,13 @@ export default {
     }
   },
   methods: {
-    handleClick (path) {
+    async handleClick (routeName) {
+      const path = await util.getRouterPath(routeName)
       this.$router.push(path)
     }
+  },
+  created () {
+    // console.log(global.RoutersArr)
   }
 }
 </script>

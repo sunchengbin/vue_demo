@@ -69,7 +69,7 @@ export default {
     }
   },
   created () {
-    console.log(this.$store.state.show)
+    // console.log(this.$store.state.show)
   },
   methods: {
     clickBtn: utils.throttle(function () {
