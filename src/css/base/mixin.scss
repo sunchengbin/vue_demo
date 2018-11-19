@@ -31,12 +31,12 @@
   }
 }
 
-//原稿字体转换
-/*
+@mixin fontSize($font-size) {
+  //原稿字体转换
+  /*
 * 用例
 * @include fontSize(12px);
 */
-@mixin fontSize($font-size) {
 
   font-size: $font-size;
 

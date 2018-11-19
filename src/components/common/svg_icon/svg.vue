@@ -37,11 +37,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .svg-icon {
-    width: 1rem;
-    height: 1rem;
-    vertical-align: -0.15em;
-    fill: currentColor;
-    overflow: hidden;
-  }
+.svg-icon {
+  width: 1rem;
+  height: 1rem;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 </style>

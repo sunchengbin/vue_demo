@@ -30,7 +30,7 @@ const weixin = {
           timestamp: parseInt(res.data.signature.timestamp),
           nonceStr: res.data.signature.nonceStr,
           signature: res.data.signature.signature,
-          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'chooseImage', 'uploadImage', 'scanQRCode']
+          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'chooseImage', 'uploadImage', 'scanQRCode', 'startRecord', 'stopRecord', 'chooseWXPay']
         })
         wx.ready(function () {
           console.log('微信js初始化成功')
@@ -160,6 +160,64 @@ const weixin = {
         let result = res.resultStr // 当needResult 为 1 时，扫码返回的结果
         callback && callback(result)
         alert(res.resultStr)
+      }
+    })
+  },
+  wxPay (openid, unionid, callback) {
+    const req = {
+      openid: openid,
+      unionid: unionid
+    }
+    let type = 'success'
+    http.get(`${apis.payWx}?param=` + encodeURIComponent(JSON.stringify(req))).then(function (res) {
+      try {
+        wx.chooseWXPay({
+          timestamp: res.pay.jspay.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+          nonceStr: res.pay.jspay.nonceStr, // 支付签名随机串，不长于 32 位
+          package: res.pay.jspay.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+          signType: res.pay.jspay.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+          paySign: res.pay.jspay.paySign, // 支付签名
+          fail: function (res) {
+            type = 'fail'
+            callback && callback(type)
+          },
+          success: function (res) {
+            // 支付成功后的回调函数
+            type = 'success'
+            if (res.errMsg === 'chooseWXPay:ok') {
+              callback && callback(type)
+            }
+          },
+          cancel: function (res) {
+            type = 'cancel'
+            callback && callback(type)
+            // 支付取消回调函数
+          }
+        })
+      } catch (e) {
+
+      }
+    })
+  },
+  startRecord (e) {
+    console.log(e)
+    wx.startRecord()
+  },
+  stopRecord (_this) {
+    console.log(wx.stopRecord, _this.setWord())
+    wx.stopRecord({
+      success (res) {
+        return wx.translateVoice({
+          localId: res.localId, // 需要识别的音频的本地Id，由录音相关接口获得
+          isShowProgressTips: 1, // 默认为1，显示进度提示
+          success: function (res) {
+            console.log(res.translateResult, 'res.translateResult')
+            _this.setWord(res.translateResult)
+          },
+          fail: function () {
+            alert('识别失败')
+          }
+        })
       }
     })
   }
