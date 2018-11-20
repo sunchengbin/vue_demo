@@ -49,40 +49,4 @@ export default class util {
     }
     return items
   }
-
-  // 获取页面路由路径
-  static async getRouterPath (pageName) {
-    let path = '/'
-    let allRouters = require.context('@/routers', true, /.js$/).keys()
-    for (let i = 0; i < allRouters.length; i++) {
-      if (path !== '/') break
-      let fileName = allRouters[i]
-      if (/.\//.test(fileName)) {
-        fileName = fileName.replace('./', '')
-      }
-      let routers = await import(`@/routers/${fileName}`)
-      for (let j in routers.default) {
-        const router = routers.default[j]
-        if (router.name === pageName) {
-          path = router.path
-          break
-        }
-      }
-    }
-    return path
-  }
-
-  static async getRoutes () {
-    let routes = []
-    let allRouters = require.context('@/routers', true, /.js$/).keys()
-    for (let i = 0; i < allRouters.length; i++) {
-      let fileName = allRouters[i]
-      if (/.\//.test(fileName)) {
-        fileName = fileName.replace('./', '')
-      }
-      let routers = await import(`@/routers/${fileName}`)
-      routes = routes.concat(routers.default)
-    }
-    return routes
-  }
 }
