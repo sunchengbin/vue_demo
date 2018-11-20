@@ -15,8 +15,9 @@ function importAll (r) {
     if (/.\//.test(fileName)) {
       fileName = fileName.replace('./', '')
     }
-    const file = require(`./routers/${fileName}`)
-    routes = routes.concat(file)
+    import(`./routers/${fileName}`).then(file => {
+      routes = routes.concat(file)
+    })
   })
 }
 importAll(require.context('@/routers', true, /.js$/))

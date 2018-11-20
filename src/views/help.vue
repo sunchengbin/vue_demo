@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import Upload from '@/components/upload/upload'
-import bottomEntry from '@/components/footer/bottom_entry'
-import searchBar from '@/components/search_bar'
+import Upload from '@/components/app/upload/upload'
+import bottomEntry from '@/components/app/footer/bottom_entry'
+import searchBar from '@/components/app/search_bar'
 export default {
   components: {
     Upload,
@@ -21,4 +21,3 @@ export default {
 
 <style>
 </style>
-

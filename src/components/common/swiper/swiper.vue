@@ -217,10 +217,10 @@ export default {
           this.end()
         }
         // if (prevPage) {
-        //   prevPage.style.display = '';
+        //   prevPage.style.display = ''
         // }
         // if (nextPage) {
-        //   nextPage.style.display = '';
+        //   nextPage.style.display = ''
         // }
       }
       setTimeout(() => {
@@ -280,8 +280,8 @@ export default {
           if (called) return
           called = true
           this.animating = false
-          // element.style.webkitTransition = '';
-          // element.style.webkitTransform = '';
+          // element.style.webkitTransition = ''
+          // element.style.webkitTransform = ''
           if (callback) {
             callback.apply(this, arguments)
           }
@@ -301,9 +301,9 @@ export default {
         if (Math.abs(_offset - offset) < 0.5) {
           this.animating = false
           _offset = offset
-          // element.style.webkitTransform = '';
+          // element.style.webkitTransform = ''
           if (nextElement) {
-            // nextElement.style.webkitTransform = '';
+            // nextElement.style.webkitTransform = ''
           }
           cancelAnimationFrame(raf)
           if (callback) {
@@ -465,7 +465,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .swiper {
   overflow: hidden;
   position: relative;

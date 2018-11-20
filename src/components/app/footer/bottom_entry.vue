@@ -1,11 +1,9 @@
 <!--
 使用说明：
   1> 在要应用的组件引入 import bottomEntry from '@/components/footer/bottom_entry'
-  2> 注册组件  
+  2> 注册组件
   3> 应用 <bottomEntry />
 -->
-
-
 <template>
   <div class="bottom_entry">
     <ul class="entries">
@@ -95,4 +93,4 @@ export default {
     }
   }
 }
-</style>  
+</style>

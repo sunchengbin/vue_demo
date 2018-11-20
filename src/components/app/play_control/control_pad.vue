@@ -82,17 +82,17 @@ export default {
       entries: [
         {
           name: '霸屏祝福',
-          icon: require('../../imgs/icon/zhufu_entry_icon.png'),
+          icon: require('../../../imgs/icon/zhufu_entry_icon.png'),
           route: 'zhufu'
         },
         {
           name: '特权赠送',
-          icon: require('../../imgs/icon/charge_entry_icon.png'),
+          icon: require('../../../imgs/icon/charge_entry_icon.png'),
           route: 'charge'
         },
         {
           name: '霸屏表白',
-          icon: require('../../imgs/icon/biaobai_entry_icon.png'),
+          icon: require('../../../imgs/icon/biaobai_entry_icon.png'),
           route: 'biaobai'
         }
       ]
