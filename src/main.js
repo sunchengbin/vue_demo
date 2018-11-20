@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './app.vue'
-import router from './router'
+import router from '@/routers'
 import store from './store'
 import '@/libs/app/flexible'
 import SvgIcon from '@/components/common/svg_icon/svg'
@@ -11,6 +11,8 @@ import MessageBox from '@/components/common/message_box'
 import Footer from '@/components/app/footer/footer'
 import Swiper from '@/components/common/swiper/swiper'
 import SwipeItem from '@/components/common/swiper/swiper_item'
+import '@/router'
+
 Vue.config.productionTip = false
 
 // 插件

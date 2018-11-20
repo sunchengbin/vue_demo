@@ -48,9 +48,9 @@
 </template>
 <script>
 import {
-  utils,
-  http,
-  chttp
+  utils
+  // http,
+  // chttp
 } from '@/libs/interfaces'
 import paypanel from '@/components/app/pay_panel'
 import songItem from '@/components/app/song_item'
@@ -71,17 +71,18 @@ export default {
     }
   },
   created () {
-    http.get('/base?BaseUrlType=coupon')
-    http.post('/base', {
-      data: {
-        type: 1
-      }
-    })
-    chttp.post('/base', {
-      data: {
-        type: 1
-      }
-    })
+    // http.get('/base?BaseUrlType=coupon')
+    // http.get('/base?BaseUrlType=app')
+    // http.post('/base', {
+    //   data: {
+    //     type: 1
+    //   }
+    // })
+    // chttp.post('/base', {
+    //   data: {
+    //     type: 1
+    //   }
+    // })
   },
   methods: {
     clickBtn: utils.throttle(function () {
