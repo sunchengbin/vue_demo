@@ -71,7 +71,12 @@ export default {
     }
   },
   created () {
-    http.get('/base?id=123')
+    http.get('/base?BaseUrlType=coupon')
+    http.post('/base', {
+      data: {
+        type: 1
+      }
+    })
     chttp.post('/base', {
       data: {
         type: 1
