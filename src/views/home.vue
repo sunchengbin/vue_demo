@@ -48,7 +48,9 @@
 </template>
 <script>
 import {
-  utils
+  utils,
+  http,
+  chttp
 } from '@/libs/interfaces'
 import paypanel from '@/components/app/pay_panel'
 import songItem from '@/components/app/song_item'
@@ -69,7 +71,17 @@ export default {
     }
   },
   created () {
-    // console.log(this.$store.state.show)
+    http.get('/base?BaseUrlType=coupon')
+    http.post('/base', {
+      data: {
+        type: 1
+      }
+    })
+    chttp.post('/base', {
+      data: {
+        type: 1
+      }
+    })
   },
   methods: {
     clickBtn: utils.throttle(function () {
