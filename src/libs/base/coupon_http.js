@@ -3,7 +3,7 @@ import axios from 'axios'
 import qs from 'qs'
 
 const http = axios.create({
-  baseURL: process.env.VUE_APP_KTV_BASEURL,
+  baseURL: process.env.VUE_APP_COUPON_BASEURL,
   timeout: 50000
 })
 
