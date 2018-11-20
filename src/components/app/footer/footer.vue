@@ -26,9 +26,9 @@
 
 <script>
 import COMMON from './static'
-import {
-  util
-} from '@/libs/utils'
+// import {
+//   util
+// } from '@/libs/utils'
 export default {
   name: 'foot-bar',
   props: {
@@ -45,8 +45,7 @@ export default {
   },
   methods: {
     async handleClick (routeName) {
-      const path = await util.getRouterPath(routeName)
-      this.$router.push(path)
+      this.$router.push({ name: routeName })
     }
   },
   created () {

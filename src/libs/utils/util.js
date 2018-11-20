@@ -49,23 +49,4 @@ export default class util {
     }
     return items
   }
-
-  // 获取页面路由路径
-  static async getRouterPath (pageName) {
-    let path = '/'
-    let allRouters = require.context('@/routers', true, /.js$/).keys()
-    for (let i = 0; i < allRouters.length; i++) {
-      let fileName = allRouters[i]
-      if (/.\//.test(fileName)) {
-        fileName = fileName.replace('./', '')
-      }
-      let routers = await import(`@/routers/${fileName}`)
-      routers.default.forEach(router => {
-        if (router.name === pageName) {
-          path = router.path
-        }
-      })
-    }
-    return path
-  }
 }
