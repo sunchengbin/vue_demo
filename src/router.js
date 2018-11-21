@@ -1,5 +1,7 @@
 import router from '@/routers'
 import Vue from 'vue'
+import weixin from './libs/app/weixin'
+import store from './store'
 // 动态加载路由
 async function getAsyncRoutes () {
   let routes = []
@@ -17,13 +19,19 @@ async function getAsyncRoutes () {
   return routes
 }
 
+function saveOpenid (openid, unionid) {
+  store.commit('SAVE_OPENID', openid)
+  store.commit('SAVE_UNIONID', unionid)
+}
 let isAdded = false
 router.beforeEach(async (to, from, next) => {
   Vue.$toast({
     message: 'loading'
   })
-  console.log(from)
+  console.log(to)
   // if () {  验证是否授权
+  // 判断是否授权,如果未授权则跳到授权
+  weixin.getOpenID(to.path, to.query, saveOpenid)
   if (!isAdded) {
     let routes = await getAsyncRoutes()
     router.addRoutes(routes) // 动态添加路由
@@ -35,5 +43,4 @@ router.beforeEach(async (to, from, next) => {
   next()
   // }
 })
-router.afterEach(() => {
-})
+router.afterEach(() => {})

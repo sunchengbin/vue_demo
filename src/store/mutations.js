@@ -1,4 +1,12 @@
 export default {
+  // 保存openid
+  SAVE_OPENID (state, openid) {
+    state.openid = openid
+  },
+  // 保存unionid
+  SAVE_UNIONID (state, unionid) {
+    state.unionid = unionid
+  },
   // 设备版本
   SAVE_DEVICE_INFO (state, payload) {
     state.device = payload
