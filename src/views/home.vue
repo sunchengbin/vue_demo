@@ -1,163 +1,128 @@
 <template>
   <div class="home">
-    <div class="head-wrapper">
-      <div class="search-bar">
-        <p class="search-region" v-on:click="skip('https://vod.ktvsky.com/thunder/search')">
-          <span class="search-title">输入歌曲名、歌星名</span>
-        </p>
-      </div>
-      <div class="scanCode">
-        <p @click='bindRoom'>绑定包房</p>
-      </div>
+    <h1>svg组件的引入</h1>
+    <div @click="clickBtn">
+      <svg-icon icon-class="vip" />
     </div>
-    <div class="banner-wrapper">
-      <Swiper>
-        <div v-for="(item, index) in banner" :key='index' class='banner-slide' v-on:click="skip(item.route)">
-          <img :src="item.imgUrl" alt="">
-        </div>
-      </Swiper>
+    <div class="btn">
+      {{btnTxt}}
     </div>
-    <div class="item-nav-wrapper">
-      <div class='item-nav'>
-        <div class="item-guanming">
-          <p>歌曲冠名</p>
-        </div>
-        <div class="item-thumb">
-          <p>为Ta点赞</p>
-        </div>
-        <div class="item-zhufu">
-          <p>霸屏祝福</p>
-        </div>
-      </div>
-      <div class='item-nav'>
-        <div class="item-vip">
-          <p>会员VIP</p>
-        </div>
-        <div class="item-mv">
-          <p>照片MV</p>
-        </div>
-        <div class="item-biaoqing">
-          <p>魔法表情</p>
-        </div>
-      </div>
-    </div>
-    <div class="home-title">点歌分类</div>
-    <div class="home-title">歌单分类</div>
-    <div class="sort-list">
-      <div class="sort-wrapper">
-        <div class="sort">
-          KTV必点
-        </div>
-        <div class="sort">
-          最热歌曲
-        </div>
-        <div class="sort">
-          情歌对唱
-        </div>
-        <div class="sort">
-          影视金曲
-        </div>
-      </div>
-      <div class="sort-wrapper">
-        <div class="sort">
-          网络神曲
-        </div>
-        <div class="sort">
-          最新歌曲
-        </div>
-        <div class="sort">
-          粤语歌曲
-        </div>
-        <div class="sort">
-          派对嗨炸
-        </div>
-      </div>
-    </div>
-    <Footer></Footer>
+    <!-- <loading message="数据加载中" /> -->
+    <!-- <toast message='警告'></toast> -->
+    <paypanel v-show="payShow"
+              @hidePanel="hidePanel"
+              :price="price"></paypanel>
+    <ul class="list"
+        v-show="singers.length>0">
+      <song-item v-for="(item) in singers"
+                 :key="item.singerid"
+                 :singer_ID="item.singerid"
+                 :title="item.singer"
+                 :imgs="item.singerhead"
+                 :type="'singer'"
+                 :is_search="true"></song-item>
+    </ul>
+    <ul class="list songs-list">
+      <song-item v-for="(item,index) in songs"
+                 :key="item.songid"
+                 :title="item.music_name"
+                 :sub_title="item.singer"
+                 :song_ID="item.songid"
+                 :flags="item.flag"
+                 :type="'song'"
+                 :origin="'search'"
+                 :songindex="index"></song-item>
+    </ul>
+    <play-control />
+    <foot-bar current-page="首页" />
+    <swiper :auto="2000">
+      <swiper-item :class="'slide'+(index+1)"
+                   v-for="(item,index) in swiperSlides"
+                   :key="index">
+        <img :src="item.classdetailbigimage"
+             alt="">
+      </swiper-item>
+    </swiper>
+    <voice />
   </div>
 </template>
 <script>
 import {
-  util
-} from '@/libs/utils'
-import weixin from '../libs/app/weixin.js'
-import { banner } from '../static/index'
-import Swiper from '@/components/common/swiper/index.vue'
-import Footer from '@/components/app/footer/footer.vue'
-
+  utils
+} from '@/libs/interfaces'
+import paypanel from '@/components/app/pay_panel'
+import songItem from '@/components/app/song_item'
+import playControl from '@/components/app/play_control'
+import voice from '@/components/app/voice/index'
+import SWIPER from '@/components/common/swiper/static'
 export default {
   name: 'home',
   data () {
     return {
-      banner: []
+      btnTxt: '按钮',
+      payShow: false,
+      price: 200,
+      singers: [{ singer: '哈辉', singerhead: 'https://qnktv.ktvdaren.com/singer/103901.jpg', singerid: 103901 }],
+      songs: [{ songid: 7654282, music_name: '刘哈哈与大先生', flag: ['MV', '国语'], singer: '刘心', played: 0 }],
+      swiperSlides: SWIPER.swiperSlides,
+      isVoiceShow: false
     }
   },
   created () {
-    this.banner = banner
+    // console.log(this.$store.state.show)
   },
   methods: {
-    bindRoom () {
-      weixin.scanQRCode()
+    clickBtn: utils.throttle(function () {
+      console.log(this.btnTxt)
+      console.log(`now is ${Date.now()}`)
+      this.payPanelShow()
+      this.$toast({
+        message: '操作成功',
+        iconName: 'vip',
+        position: 'bottom'
+        // toastSvg: 'toast-Icon'
+      })
+      this.$messageBox.alert('操作成功', '')
+      this.$messageBox.setDefaults({ confirmButtonText: '去冠名呀', cancelButtonText: '继续点歌' })
+      // this.$messageBox.confirm('要去冠名吗？', '').then(confirm => {
+      //   console.log(confirm)
+      // }).catch(cancel => {
+      //   console.log(cancel)
+      // })
+      // this.$messageBox.close()
+      // this.$messageBox.prompt(' ', '请输入姓名').then(({ value }) => {
+      //   if (value) {
+      //     this.$messageBox.alert(`你的名字是 ${value}`, '输入成功');
+      //   }
+      // });
+    }, 1000),
+    payPanelShow () {
+      this.payShow = true
     },
-    skip (path) {
-      if (path.indexOf('http') >= 0) {
-        location.href = path
-      } else {
-        this.$router.push(path)
-      }
-      
+    hidePanel () {
+      this.payShow = false
     }
   },
   mounted () {
+    // Toast()
+    const self = this
+    self.$toast('操作失败')
+    // self.$loading.open()
+    // setTimeout(function () {
+    //   self.$loading.close()
+    // }, 2000)
   },
   components: {
-    Swiper,
-    Footer
+    // loading
+    paypanel,
+    songItem,
+    playControl,
+    voice
   }
 }
 </script>
 <style lang="scss" scoped>
-.search-bar {
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-  @include px2rem(height, 60);
-  @include px2rem(margin, 0 10);
-  @include px2rem(border-radius, 2);
-  background: #fff;
-  .search-title {
-    @include px2rem(margin-left, 4);
-    @include px2rem(font-size, 28);
-    color: #ff7d0e;
-  }
-}
-.banner-wrapper {
-  width: 100%;
-  @include px2rem(height, 280);
-  .banner-slide {
-    width: 100%;
-    height: 100%;
-  }
-}
-.search-region {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 85%;
+.home {
   height: 100%;
-  img {
-    @include px2rem(width, 32);
-    @include px2rem(height, 32);
-  }
-}
-.item-nav, .sort-wrapper{
-  display: flex;
-  justify-content: space-around;
-  @include px2rem(line-height, 60);
-}
-.home-title{
-  @include px2rem(line-height, 60);
-  @include px2rem(padding-left, 30);
-  text-align: left;
 }
 </style>

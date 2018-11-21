@@ -1,12 +1,9 @@
 // 封装http请求
 import axios from 'axios'
 import qs from 'qs'
-import {
-  util
-} from '@/libs/utils'
 
 const http = axios.create({
-  baseURL: process.env.VUE_APP_KTV_BASEURL,
+  baseURL: process.env.VUE_APP_COUPON_BASEURL,
   timeout: 50000
 })
 
@@ -16,11 +13,6 @@ http.interceptors.request.use(config => {
     config.data = qs.stringify(config.data)
     config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
   }
-  // 接口url中添加BaseUrlType查询字段。如：/login?BaseUrlType=coupon
-  // 自动切换http请求的BaseUrl为coupon域名
-  if (util.getUrlPrem('BaseUrlType', config.url) === 'coupon') {
-    config.baseURL = process.env.VUE_APP_COUPON_BASEURL
-  }
   return config
 }, error => {
   // 拦截请求错误
@@ -29,17 +21,16 @@ http.interceptors.request.use(config => {
 
 http.interceptors.response.use(response => {
   const res = response.data
-  return res
-  // if (res.errcode === 200) {
-  //   return res
-  // } else {
-  //   if (res.code === 200) {
-  //     return res
-  //   } else {
-  //     // 根据不同错误码进行提示
-  //     return Promise.reject(res.message)
-  //   }
-  // }
+  if (res.errcode === 200) {
+    return res
+  } else {
+    if (res.code === 200) {
+      return res
+    } else {
+      // 根据不同错误码进行提示
+      return Promise.reject(res.errmsg)
+    }
+  }
 }, error => {
   // 调用一个错误提醒dialog
   return Promise.reject(error)

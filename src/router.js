@@ -1,29 +1,39 @@
+import router from '@/routers'
 import Vue from 'vue'
-import Router from 'vue-router'
-import home from '@/views/home.vue'
-Vue.use(Router)
-
-let routes = [{
-  path: '/',
-  name: 'home',
-  component: home
-}]
-
 // 动态加载路由
-function importAll (r) {
-  r.keys().forEach(fileName => {
-    if (/.\//.test(fileName)) {
-      fileName = fileName.replace('./', '')
+async function getAsyncRoutes () {
+  let routes = []
+  const allRouters = require.context('@/routers', true, /.js$/).keys()
+  for (let i in allRouters) {
+    let fileName = allRouters[i]
+    if (!/index.js/.test(fileName)) {
+      if (/.\//.test(fileName)) {
+        fileName = fileName.replace('./', '')
+      }
+      let file = await import(`@/routers/${fileName}`)
+      routes = routes.concat(file.default)
     }
-    import(`./routers/${fileName}`).then(file => {
-      routes = routes.concat(file)
-    })
-  })
+  }
+  return routes
 }
-importAll(require.context('@/routers', true, /.js$/))
 
-export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+let isAdded = false
+router.beforeEach(async (to, from, next) => {
+  Vue.$toast({
+    message: 'loading'
+  })
+  console.log(from)
+  // if () {  验证是否授权
+  if (!isAdded) {
+    let routes = await getAsyncRoutes()
+    router.addRoutes(routes) // 动态添加路由
+    isAdded = true
+    next({ ...to,
+      replace: true
+    })
+  }
+  next()
+  // }
+})
+router.afterEach(() => {
 })
