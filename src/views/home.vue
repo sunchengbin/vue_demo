@@ -43,7 +43,7 @@
              alt="">
       </swiper-item>
     </swiper>
-    <voice />
+    <!-- <voice /> -->
   </div>
 </template>
 <script>
@@ -71,6 +71,7 @@ export default {
     }
   },
   created () {
+    this.$store.dispatch('getFuncVersion')
     // http.get('/base?BaseUrlType=coupon')
     // http.get('/base?BaseUrlType=app')
     // http.post('/base', {
@@ -120,6 +121,7 @@ export default {
     // Toast()
     const self = this
     self.$toast('操作失败')
+    // self.$store.dispatch('getDeviceInfo')
     // self.$loading.open()
     // setTimeout(function () {
     //   self.$loading.close()

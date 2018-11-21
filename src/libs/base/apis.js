@@ -1,6 +1,7 @@
 const apis = {
   login: '/v1/login',
   initWx: '/v1/wx',
-  deviceInfo: '/stb/device'
+  deviceUrl: '/stb/device',
+  funcUrl: '/stb/func'
 }
 export default apis
