@@ -5,7 +5,7 @@ module.exports = {
   // 修改output.path
   outputDir: 'dist',
   // 修改output.publishPath
-  baseUrl: process.env.NODE_ENV !== 'development' ? '/vue_demo/dist/' : './',
+  baseUrl: process.env.BASE_URL,
   chainWebpack: config => {
     // 添加全局scss文件
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']

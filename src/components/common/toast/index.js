@@ -23,7 +23,7 @@ ToastConstructor.prototype.close = function () {
   this.closed = true
   this.$el.addEventListener('transitionend', removeDom)
   toastTool.push(this)
-  console.log(toastTool)
+  // console.log(toastTool)
 }
 const Toast = (options = {}) => {
   const intance = getIntance()

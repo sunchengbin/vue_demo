@@ -30,7 +30,7 @@ const weixin = {
           timestamp: parseInt(res.data.signature.timestamp),
           nonceStr: res.data.signature.nonceStr,
           signature: res.data.signature.signature,
-          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'chooseImage', 'uploadImage', 'scanQRCode', 'startRecord', 'stopRecord', 'wxPay', 'getLocation']
+          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'chooseImage', 'uploadImage', 'scanQRCode', 'startRecord', 'stopRecord', 'chooseWXPay', 'getLocation']
         })
         wx.ready(function () {
           console.log('微信js初始化成功')

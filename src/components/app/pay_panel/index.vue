@@ -43,7 +43,7 @@
   </div>
 </template>
 <script>
-import Toast from '@/components/toast'
+import Toast from '@/components/common/toast'
 import weixin from '@/libs/app/weixin'
 export default {
   name: 'pay_panel',

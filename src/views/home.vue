@@ -33,7 +33,7 @@
                  :origin="'search'"
                  :songindex="index"></song-item>
     </ul>
-    <play-control />>
+    <play-control />
     <foot-bar current-page="首页" />
     <swiper :auto="2000">
       <swiper-item :class="'slide'+(index+1)"
@@ -44,22 +44,19 @@
       </swiper-item>
     </swiper>
     <voice />
-    <router-link to="/reserve">广场</router-link>
   </div>
 </template>
-
 <script>
 import {
   utils
+  // http,
+  // chttp
 } from '@/libs/interfaces'
-import paypanel from '@/components/pay_panel'
-import songItem from '@/components/song_item'
-import playControl from '@/components/play_control'
-// import {
-//   utils
-// } from '@/libs/interfaces'
-import voice from '@/components/voice/index'
-import SWIPER from '@/components/swiper/static'
+import paypanel from '@/components/app/pay_panel'
+import songItem from '@/components/app/song_item'
+import playControl from '@/components/app/play_control'
+import voice from '@/components/app/voice/index'
+import SWIPER from '@/components/common/swiper/static'
 export default {
   name: 'home',
   data () {
@@ -74,21 +71,32 @@ export default {
     }
   },
   created () {
-    console.log(this.$store.state.show)
+    // http.get('/base?BaseUrlType=coupon')
+    // http.get('/base?BaseUrlType=app')
+    // http.post('/base', {
+    //   data: {
+    //     type: 1
+    //   }
+    // })
+    // chttp.post('/base', {
+    //   data: {
+    //     type: 1
+    //   }
+    // })
   },
   methods: {
     clickBtn: utils.throttle(function () {
       console.log(this.btnTxt)
       console.log(`now is ${Date.now()}`)
-      this.payPanelShow()
-      this.$toast({
-        message: '操作成功',
-        iconName: 'vip',
-        position: 'bottom'
-        // toastSvg: 'toast-Icon'
-      })
-      this.$messageBox.alert('操作成功', '')
-      this.$messageBox.setDefaults({ confirmButtonText: '去冠名呀', cancelButtonText: '继续点歌' })
+      // this.payPanelShow()
+      // this.$toast({
+      //   message: '操作成功',
+      //   iconName: 'vip',
+      //   position: 'bottom'
+      //   // toastSvg: 'toast-Icon'
+      // })
+      // this.$messageBox.alert('操作成功', '')
+      // this.$messageBox.setDefaults({ confirmButtonText: '去冠名呀', cancelButtonText: '继续点歌' })
       // this.$messageBox.confirm('要去冠名吗？', '').then(confirm => {
       //   console.log(confirm)
       // }).catch(cancel => {
@@ -110,8 +118,8 @@ export default {
   },
   mounted () {
     // Toast()
-    const self = this
-    self.$toast('操作失败')
+    // const self = this
+    // self.$toast('操作失败')
     // self.$loading.open()
     // setTimeout(function () {
     //   self.$loading.close()
@@ -126,8 +134,7 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
+<style lang="scss" scoped>
 .home {
   height: 100%;
 }
