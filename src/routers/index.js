@@ -1,4 +1,4 @@
-module.exports = [
+const routers = [
   {
     path: '/about',
     name: 'about',
@@ -10,3 +10,4 @@ module.exports = [
     component: () => import('@/views/help.vue')
   }
 ]
+export default routers

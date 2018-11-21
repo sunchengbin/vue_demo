@@ -5,7 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    show: false
+    bind_status: false,
+    user_img: null,
+    user_name: '未登录'
   },
   mutations: {
 

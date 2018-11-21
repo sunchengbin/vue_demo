@@ -44,7 +44,7 @@
       </swiper-item>
     </swiper>
     <voice />
-
+    <router-link to="/reserve">广场</router-link>
   </div>
 </template>
 

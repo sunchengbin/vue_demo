@@ -30,7 +30,7 @@ const weixin = {
           timestamp: parseInt(res.data.signature.timestamp),
           nonceStr: res.data.signature.nonceStr,
           signature: res.data.signature.signature,
-          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'chooseImage', 'uploadImage', 'scanQRCode', 'startRecord', 'stopRecord', 'wxPay']
+          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'chooseImage', 'uploadImage', 'scanQRCode', 'startRecord', 'stopRecord', 'wxPay', 'getLocation']
         })
         wx.ready(function () {
           console.log('微信js初始化成功')
@@ -217,6 +217,58 @@ const weixin = {
           fail: function () {
             alert('识别失败')
           }
+        })
+      }
+    })
+  },
+  getLocation (that) {
+    wx.getLocation({
+      type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+      success: function (res) {
+        that.latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
+        that.longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
+        // var map = new BMap.Map("container"); //初始化地图类
+        var pointAdd = new BMap.Point(res.longitude, res.latitude)
+        var gc = new BMap.Geocoder()
+        gc.getLocation(pointAdd, (rs) => {
+          const city = rs.addressComponents.city
+          if (city.charAt(city.length - 1) === '市') {
+            that.location_city = city.substring(0, city.length - 1)
+          } else {
+            that.location_city = city
+          }
+          localStorage.setItem('location_city', that.location_city)
+          if (that.key || that.city) {
+            dpStore(
+              that.p,
+              that.ps,
+              that.city,
+              that.latitude,
+              that.longitude,
+              that.location_city,
+              that.key ? that.key : '',
+              that.openid
+            ).then(res => {
+              that.showLoad = false
+              if (res.store.length < that.ps) {
+                that.isRefresh = false
+                that.showTitle = !that.showTitle
+              }
+              that.store = res.store
+              that.showLoad = false
+            })
+            return
+          }
+          dpStore(that.p, that.ps, that.city, that.latitude, that.longitude,
+            that.location_city, that.key ? that.key : '', that.openid).then(res => {
+            that.showLoad = false
+            if (res.store.length < this.ps) {
+              that.isRefresh = false
+              that.showTitle = !that.showTitle
+            }
+            that.store = res.store
+            that.showLoad = false
+          })
         })
       }
     })
