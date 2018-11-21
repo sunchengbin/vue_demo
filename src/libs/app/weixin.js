@@ -7,7 +7,35 @@ import {
   chttp
 } from '@/libs/interfaces'
 const weixin = {
-  wxLoginUrl: '', // 授权登录url
+  // wxLoginUrl: '', // 授权登录url
+  wxLoginUrl (page, query) {
+    const appid = process.env.VUE_APP_APPID
+    const loginUrl = process.env.VUE_APP_LOGINURL
+    let queryString = ''
+    for (const key in query) {
+      queryString += key + '=' + query[key]
+    }
+    return 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appid + '&redirect_uri=' + loginUrl + '&response_type=code&scope=snsapi_userinfo&state=/' + page + '?' + queryString + '&connect_redirect=1#wechat_redirect'
+    // return 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appid + '&redirect_uri=' + loginUrl + '&response_type=code&scope=snsapi_userinfo&state=/' + page + '?type=' + type + '&connect_redirect=1#wechat_redirect'
+  },
+  // 判断是否授权
+  getOpenID (page, query, callback) {
+    // 用户openid，只跟当前公众号相关
+    let openid = utils.util.getUrlPrem('openid') || utils.cookie.getCookie()
+    // 用户unionid，用户唯一ID，不随公众号变化
+    let unionid = utils.util.getUrlPrem('unionid') || utils.cookie.getCookie('tunionid')
+    if (!openid || !unionid || unionid === 'null') {
+      let redirectUrl = this.wxLoginUrl(page, query)
+      const isWxWebView = this.isWxWebView()
+      if (isWxWebView) {
+        window.location.replace(redirectUrl)
+      }
+    } else {
+      utils.cookie.setCookie(openid, 30)
+      utils.cookie.setCookie(unionid, 30, 'tunionid')
+      callback && callback(openid, unionid)
+    }
+  },
   isWxWebView () {
     const arr = window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i)
     if (arr && arr.length > 0 && arr[0] === 'micromessenger') {

@@ -8,9 +8,44 @@
       <router-link to="/reserve">广场</router-link> |
       <router-link to="/mine">我的</router-link>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
+<script>
+// import Vue from 'vue'
+import { utils } from './libs/interfaces'
+import weixin from './libs/app/weixin'
+export default {
+  created () {
+    // this.getOpenID()
+    // weixin.getOpenID('thunder/home', { type: this.$store.state.vod_type }, this.saveOpenid)
+  },
+  methods: {
+    // 获取用户openIid和unionid
+
+    getOpenID () {
+      // 用户openid，只跟当前公众号相关
+      let openid = utils.util.getUrlPrem('openid') || utils.cookie.getCookie()
+      // 用户unionid，用户唯一ID，不随公众号变化
+      let unionid = utils.util.getUrlPrem('unionid') || utils.cookie.getCookie('tunionid')
+      let type = this.$store.state.vod_type
+      if (!openid || !unionid || unionid === 'null') {
+        let redirectUrl = weixin.wxLoginUrl('thunder/home', type)
+        const isWxWebView = weixin.isWxWebView()
+        if (isWxWebView) {
+          window.location.replace(redirectUrl)
+        }
+      } else {
+        this.saveOpenid(openid, unionid)
+      }
+    },
+    saveOpenid (openid, unionid) {
+      this.$store.commit('SAVE_OPENID', openid)
+      this.$store.commit('SAVE_UNIONID', unionid)
+    }
+  }
+}
+</script>
 
 <script>
 export default {
