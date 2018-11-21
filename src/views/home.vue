@@ -35,6 +35,7 @@
     </ul>
     <play-control />
     <foot-bar current-page="首页" />
+    <p>{{rights_desc}}</p>
     <swiper :auto="2000">
       <swiper-item :class="'slide'+(index+1)"
                    v-for="(item,index) in swiperSlides"
@@ -43,14 +44,15 @@
              alt="">
       </swiper-item>
     </swiper>
-    <voice />
+    <!-- <voice /> -->
+    <router-link to="/reserve">广场</router-link>
   </div>
 </template>
 <script>
 import {
-  utils,
-  http,
-  chttp
+  utils
+  // http,
+  // chttp
 } from '@/libs/interfaces'
 import paypanel from '@/components/app/pay_panel'
 import songItem from '@/components/app/song_item'
@@ -70,27 +72,50 @@ export default {
       isVoiceShow: false
     }
   },
+  computed: {
+    // user_img () {
+    //   return this.$store.state.user_img
+    // },
+    // rights_desc () {
+    //   return this.$store.state.rights_desc
+    // }
+  },
+  computed: {
+    rights_desc () {
+      return this.$store.state.rights_desc
+    }
+  },
   created () {
-    http.get('/base?id=123')
-    chttp.post('/base', {
-      data: {
-        type: 1
-      }
-    })
+    this.$store.dispatch('getFuncVersion')
+    this.$store.dispatch('getBindStatus')
+    this.$store.dispatch('getUserInfo')
+    console.log(this.rights_desc, 0)
+    // http.get('/base?BaseUrlType=coupon')
+    // http.get('/base?BaseUrlType=app')
+    // http.post('/base', {
+    //   data: {
+    //     type: 1
+    //   }
+    // })
+    // chttp.post('/base', {
+    //   data: {
+    //     type: 1
+    //   }
+    // })
   },
   methods: {
     clickBtn: utils.throttle(function () {
       console.log(this.btnTxt)
       console.log(`now is ${Date.now()}`)
-      this.payPanelShow()
-      this.$toast({
-        message: '操作成功',
-        iconName: 'vip',
-        position: 'bottom'
-        // toastSvg: 'toast-Icon'
-      })
-      this.$messageBox.alert('操作成功', '')
-      this.$messageBox.setDefaults({ confirmButtonText: '去冠名呀', cancelButtonText: '继续点歌' })
+      // this.payPanelShow()
+      // this.$toast({
+      //   message: '操作成功',
+      //   iconName: 'vip',
+      //   position: 'bottom'
+      //   // toastSvg: 'toast-Icon'
+      // })
+      // this.$messageBox.alert('操作成功', '')
+      // this.$messageBox.setDefaults({ confirmButtonText: '去冠名呀', cancelButtonText: '继续点歌' })
       // this.$messageBox.confirm('要去冠名吗？', '').then(confirm => {
       //   console.log(confirm)
       // }).catch(cancel => {
@@ -112,8 +137,8 @@ export default {
   },
   mounted () {
     // Toast()
-    const self = this
-    self.$toast('操作失败')
+    // const self = this
+    // self.$toast('操作失败')
     // self.$loading.open()
     // setTimeout(function () {
     //   self.$loading.close()
