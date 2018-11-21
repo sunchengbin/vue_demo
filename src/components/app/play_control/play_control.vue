@@ -5,7 +5,12 @@
       遥控
     </p>
     <control-pad v-show="show_pad"
+                 :containerShow="show_pad"
                  @hideControlpad='hideControlpad'></control-pad>
+    <div class="home"
+         v-show="show_pad"
+         @click="hideControlpad">
+    </div>
   </div>
 </template>
 <script>
@@ -58,6 +63,16 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.home {
+  z-index: 4000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  animation: backOpacity 0.5s;
+}
 .control-btn {
   z-index: 1000;
   position: fixed;

@@ -71,7 +71,7 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('getFuncVersion')
+    this.$store.dispatch('getDeviceInfo')
     // http.get('/base?BaseUrlType=coupon')
     // http.get('/base?BaseUrlType=app')
     // http.post('/base', {
