@@ -21,17 +21,16 @@ http.interceptors.request.use(config => {
 
 http.interceptors.response.use(response => {
   const res = response.data
-  return res
-  // if (res.errcode === 200) {
-  //   return res
-  // } else {
-  //   if (res.code === 200) {
-  //     return res
-  //   } else {
-  //     // 根据不同错误码进行提示
-  //     return Promise.reject(res.message)
-  //   }
-  // }
+  if (res.errcode === 200) {
+    return res
+  } else {
+    if (res.code === 200) {
+      return res
+    } else {
+      // 根据不同错误码进行提示
+      return Promise.reject(res.errmsg)
+    }
+  }
 }, error => {
   // 调用一个错误提醒dialog
   return Promise.reject(error)
