@@ -29,48 +29,38 @@
 </template>
 
 <script>
-// import Search from "./search";
-// import Pinyin from "pinyin";
-// import { cookie } from "vux";
 import CityPlugin from '@/libs/utils/city.js'
-// import { dpCity, getWxAppid } from "@/service/getData";
+import {
+  apis,
+  chttp
+} from '@/libs/interfaces'
 
 export default {
   components: {},
   data () {
     return {
       citys: [],
-      openid: '',
       ktv_id: 1,
       tipAppear: false,
-      tipTxt: ''
+      tipTxt: '',
+      openid: 'o3JAqt0Jr9vtoVncMW7ZBnHFvUd'
     }
   },
   created () {
     this.ktv_id = 1
-    getWxAppid(this.ktv_id).then(res => {
-      let openid = cookie.get('GZH_openid_3_' + this.ktv_id + '_' + res.appid)
-      this.openid = openid
+    chttp.get(apis.dpCity, {
+      params: { openid: this.openid }
     }).then(res => {
-      dpCity(this.openid).then(res => {
-        this.citys = CityPlugin.formatCitys(res.all_city)
-        // this.citys = CityPlugin.formatCitys(this.citys);
-        // console.log(this.citys);
-      })
+      this.citys = CityPlugin.formatCitys(res.all_city)
+    }).catch(err => {
+      this.$toast(err)
     })
   },
   methods: {
-    // clickLeter(letter) {
-    //   this.tipTxt = letter;
-    //   this.tipAppear = true;
-    //   setTimeout(()=> {
-    //     this.tipAppear=false;
-    //   },500)
-    // },
     clickCity (city) {
       localStorage.setItem('city', city)
       this.$router.push({
-        path: '/reserve?ktv_id=1'
+        name: 'reserve'
       })
     }
   }
@@ -107,22 +97,21 @@ export default {
     }
   }
   .city-item {
-    @include px2rem(height, 44);
-    @include px2rem(line-height, 44);
+    @include px2rem(height, 74);
+    @include px2rem(line-height, 74);
   }
   .rightCity {
-    @include px2rem(width, 40);
+    @include px2rem(width, 60);
     color: #d85750;
     text-align: center;
     position: fixed;
-    @include px2rem(top, 80);
+    @include px2rem(top, 180);
     right: 0;
     overflow-y: auto;
     @include fontSize(14px);
     li {
       display: block;
-      @include px2rem(height, 18);
-      height: 0.18rem;
+      @include px2rem(height, 28);
       a {
         color: #d85750;
       }

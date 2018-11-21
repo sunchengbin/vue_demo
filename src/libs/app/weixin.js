@@ -1,8 +1,10 @@
 import wx from 'weixin-js-sdk'
+import BMap from './BMap'
 import {
   utils,
   apis,
-  http
+  http,
+  chttp
 } from '@/libs/interfaces'
 const weixin = {
   wxLoginUrl: '', // 授权登录url
@@ -19,20 +21,25 @@ const weixin = {
   },
   init (callback) {
     let req = {
-      'action': 'js_signature',
+      // 'action': 'js_signature',
+      'type': 'thunder',
       'url': window.location.href.replace(/#.*$/, '')
     }
-    http.get(`${apis.initWx}?param=` + encodeURIComponent(JSON.stringify(req))).then(function (res) {
+    // http.get(`${apis.initWx}?param=` + encodeURIComponent(JSON.stringify(req))).then(function (res) {
+    http.get(apis.initWx, {
+      params: req
+    }).then(function (res) {
       try {
         wx.config({
           debug: false,
-          appId: res.data.signature.appId,
-          timestamp: parseInt(res.data.signature.timestamp),
-          nonceStr: res.data.signature.nonceStr,
-          signature: res.data.signature.signature,
+          appId: res.appId,
+          timestamp: parseInt(res.timestamp),
+          nonceStr: res.nonceStr,
+          signature: res.signature,
           jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'chooseImage', 'uploadImage', 'scanQRCode', 'startRecord', 'stopRecord', 'chooseWXPay', 'getLocation']
         })
         wx.ready(function () {
+          console.log(7777)
           console.log('微信js初始化成功')
           callback && callback(res)
         })
@@ -222,12 +229,15 @@ const weixin = {
     })
   },
   getLocation (that) {
+    console.log(that)
     wx.getLocation({
       type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
       success: function (res) {
+        console.log(res)
         that.latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
         that.longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
         // var map = new BMap.Map("container"); //初始化地图类
+        console.log(BMap, 'BMap')
         var pointAdd = new BMap.Point(res.longitude, res.latitude)
         var gc = new BMap.Geocoder()
         gc.getLocation(pointAdd, (rs) => {
@@ -239,16 +249,18 @@ const weixin = {
           }
           localStorage.setItem('location_city', that.location_city)
           if (that.key || that.city) {
-            dpStore(
-              that.p,
-              that.ps,
-              that.city,
-              that.latitude,
-              that.longitude,
-              that.location_city,
-              that.key ? that.key : '',
-              that.openid
-            ).then(res => {
+            console.log(that)
+            let data = {
+              p: that.p,
+              ps: that.ps,
+              city: that.city,
+              latitude: that.latitude,
+              longitude: that.longitude,
+              location_city: that.location_city,
+              key: that.key ? that.key : '',
+              openid: that.openid
+            }
+            chttp.get(apis.dpStore, { params: data }).then(res => {
               that.showLoad = false
               if (res.store.length < that.ps) {
                 that.isRefresh = false
@@ -259,8 +271,16 @@ const weixin = {
             })
             return
           }
-          dpStore(that.p, that.ps, that.city, that.latitude, that.longitude,
-            that.location_city, that.key ? that.key : '', that.openid).then(res => {
+          let data2 = {
+            p: that.p,
+            city: that.city,
+            latitude: that.latitude,
+            longitude: that.longitude,
+            location_city: that.location_city,
+            key: that.key ? that.key : '',
+            openid: that.openid
+          }
+          chttp.get(apis.dpStore, data2).then(res => {
             that.showLoad = false
             if (res.store.length < this.ps) {
               that.isRefresh = false
@@ -270,6 +290,9 @@ const weixin = {
             that.showLoad = false
           })
         })
+      },
+      fail: function (res) {
+        alert(res)
       }
     })
   }

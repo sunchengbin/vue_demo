@@ -1,16 +1,15 @@
-const routers = [{
+export default [{
   path: '/reserve',
   name: 'reserve',
   component: () => import('@/views/reserve/reserve.vue')
 },
 {
-  path: '/adress',
+  path: '/reserve/adress',
   name: 'adress',
   component: () => import('@/views/reserve/adress.vue')
 },
 {
-  path: '/searchKTV',
+  path: '/reserve/searchKTV',
   name: 'searchKTV',
   component: () => import('@/views/reserve/searchKTV.vue')
 }]
-export default routers

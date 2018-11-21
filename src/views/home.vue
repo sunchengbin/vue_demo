@@ -35,6 +35,7 @@
     </ul>
     <play-control />
     <foot-bar current-page="首页" />
+    <p>{{rights_desc}}</p>
     <swiper :auto="2000">
       <swiper-item :class="'slide'+(index+1)"
                    v-for="(item,index) in swiperSlides"
@@ -43,7 +44,8 @@
              alt="">
       </swiper-item>
     </swiper>
-    <voice />
+    <!-- <voice /> -->
+    <router-link to="/reserve">广场</router-link>
   </div>
 </template>
 <script>
@@ -70,7 +72,24 @@ export default {
       isVoiceShow: false
     }
   },
+  computed: {
+    // user_img () {
+    //   return this.$store.state.user_img
+    // },
+    // rights_desc () {
+    //   return this.$store.state.rights_desc
+    // }
+  },
+  computed: {
+    rights_desc () {
+      return this.$store.state.rights_desc
+    }
+  },
   created () {
+    this.$store.dispatch('getFuncVersion')
+    this.$store.dispatch('getBindStatus')
+    this.$store.dispatch('getUserInfo')
+    console.log(this.rights_desc, 0)
     // http.get('/base?BaseUrlType=coupon')
     // http.get('/base?BaseUrlType=app')
     // http.post('/base', {

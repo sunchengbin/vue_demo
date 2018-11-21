@@ -13,11 +13,27 @@
         </div>
         <div class="rigth">
           <p class="name">{{item.name}}</p>
-          <rater v-model="item.remark_score"
+          <!-- <rater v-model="item.remark_score"
                  slot="value"
                  active-color="#fa4f45"
                  :font-size="16"
-                 disabled></rater>
+                 disabled></rater> -->
+          <div class="rater">
+            <ul class="rater_ul">
+              <li v-for="(star,idx) in rater"
+                  :key="idx">
+                <svg-icon icon-class="star_good"
+                          class-name="svgStar"
+                          v-if="item.remark_score >= star" />
+                <!-- <svg-icon icon-class="star_good"
+                        v-if="item.remark_score <= item" /> -->
+                <svg-icon icon-class="star_bad"
+                          class-name="svgStar"
+                          v-else />
+              </li>
+            </ul>
+          </div>
+
           <span class="count">{{item.remark_count}}条</span>
           <span v-if="item.is_wgw"
                 class="isMR">
@@ -32,9 +48,6 @@
             </span>
           </div>
         </div>
-        <!--<p class="remark">-->
-        <!--欢迎👏-->
-        <!--</p>-->
       </li>
     </ul>
     <div class="footer">
@@ -57,9 +70,11 @@
 
 <script>
 import Search from './search'
-// import { Rater } from "vux";
-// import { dpStore, getWxAppid, getWxConfig } from "@/service/getData";
 import Wx from '@/libs/app/weixin'
+import {
+  apis,
+  chttp
+} from '@/libs/interfaces'
 
 export default {
   components: { Search },
@@ -78,7 +93,8 @@ export default {
       ktv_id: 1,
       longitude: '',
       latitude: '',
-      location_city: localStorage.getItem('location_city') || ''
+      location_city: localStorage.getItem('location_city') || '',
+      rater: [1, 2, 3, 4, 5]
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -111,8 +127,17 @@ export default {
       }
       this.showLoad = true
       this.p++
-      dpStore(this.p, this.ps, this.city, this.latitude, this.longitude,
-        this.location_city, this.key ? this.key : '', this.openid).then(res => {
+      let data = {
+        p: this.p,
+        ps: this.ps,
+        city: this.city,
+        latitude: this.latitude,
+        longitude: this.longitude,
+        location_city: this.location_city,
+        key: this.key ? this.key : '',
+        openid: this.openid
+      }
+      chttp.get(apis.dpStore, { params: data }).then(res => {
         if (res.store.length < this.ps) {
           this.isRefresh = false
           this.showTitle = !this.showTitle
@@ -125,7 +150,6 @@ export default {
         this.showLoad = false
       })
     }
-
   }
 }
 </script>
@@ -135,55 +159,53 @@ export default {
   @include fontSize(15px);
   background: #f2f2f2;
   .ktv_list {
-    li {
-      @include px2rem(margin-top, 10);
-      background: #fff;
-      @include px2rem(height, 60);
-      &:first-of-type {
-        margin-top: 0;
-      }
-      .remark {
-        @include px2rem(padding-left, 15);
-      }
-    }
     .ktv_li {
       display: flex;
       border-bottom: 1px solid #f2f2f2;
-      @include px2rem(height, 129);
+      @include px2rem(height, 220);
+      background: #fff;
+      @include px2rem(margin-top, 15);
+      &:first-child {
+        @include px2rem(margin-top, 0);
+      }
       .ktv_tu {
         @include px2rem(padding, 15);
         img {
-          @include px2rem(width, 99);
-          @include px2rem(height, 99);
+          @include px2rem(width, 189);
+          @include px2rem(height, 189);
         }
       }
       .rigth {
         @include px2rem(padding-top, 15);
         width: 65%;
-        /*margin-left: 0.3rem;*/
+        text-align: left;
         .isMR {
           @include px2rem(margin-left, 10);
           img {
             @include px2rem(width, 50);
           }
         }
-        .vux-rater {
-          text-align: left;
+        .rater {
           display: inline-block;
-          line-height: normal;
-          @include px2rem(margin, 0 0 5);
-          a.vux-rater-box {
-            color: #dedede;
-            margin-right: 1px !important;
-            width: 16px !important;
+          vertical-align: middle;
+          .rater_ul {
+            display: flex;
+            li {
+              align-items: center;
+              .svgStar {
+                @include px2rem(width, 50);
+                @include px2rem(height, 50);
+              }
+            }
           }
         }
         .name {
           font-family: '平方中黑';
           @include fontSize(20px);
           color: #333;
-          @include px2rem(height, 55);
-          @include px2rem(line-height, 26);
+          text-align: left;
+          @include px2rem(height, 105);
+          // @include px2rem(line-height, 26);
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
@@ -195,8 +217,9 @@ export default {
           @include fontSize(11px);
           display: block;
           display: inline-block;
-          vertical-align: top;
           @include px2rem(padding-top, 5);
+          @include px2rem(margin-left, 8);
+          vertical-align: middle;
         }
         .address {
           color: #666;

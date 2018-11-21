@@ -25,12 +25,12 @@
              class="searchInp searchInp2"
              @click="searchKTV()">
       <p v-show="false">{{setKey}}
-        <p/>
-        <img src="@/imgs/reserve/guanbi.png"
-             class="close-btn"
-             v-show="key !== ''"
-             @click="clearKeyWords">
-        <!--<button @click="btn()" v-if="hasName!='reserve'" v-show="false">搜索</button>-->
+      </p>
+      <img src="@/imgs/reserve/guanbi.png"
+           class="close-btn"
+           v-show="key !== ''"
+           @click="clearKeyWords">
+      <!--<button @click="btn()" v-if="hasName!='reserve'" v-show="false">搜索</button>-->
     </form>
   </div>
 </template>
@@ -86,13 +86,13 @@ export default {
     },
     toAdress () {
       this.$router.push({
-        path: '/v2/gzh/reserve/adress?ktv_id=1&check=1'
+        name: 'adress'
       })
     },
     searchKTV () {
       if (this.hasName !== 'adress') {
         this.$router.push({
-          path: '/v2/gzh/reserve/searchKTV?ktv_id=1'
+          name: 'searchKTV'
         })
       }
     },
@@ -102,7 +102,7 @@ export default {
       //   });
       if (this.hasName !== 'adress') {
         this.$router.push({
-          path: '/reserve?ktv_id=1&check=1',
+          name: 'reserve',
           query: {
             key: this.key
           }
@@ -110,7 +110,7 @@ export default {
       } else {
         localStorage.setItem('city', this.key)
         this.$router.push({
-          path: '/reserve?ktv_id=1&check=1'
+          name: 'reserve'
         })
       }
       //   this.$emit("filterStore", this.store);
@@ -124,15 +124,15 @@ export default {
   @include fontSize(15px);
   border-bottom: 1px solid #f2f2f2;
   background: #fff;
-  @include px2rem(height, 35);
+  @include px2rem(height, 55);
   @include px2rem(line-height, 50);
   @include px2rem(padding-bottom, 20);
   .left_icon {
-    @include px2rem(width, 75);
+    @include px2rem(width, 115);
     @include px2rem(height, 50);
     background: url('../../imgs/reserve/foster_b.png') no-repeat right center;
-    @include px2rem(background-size, 12 7);
-    background-position: 80% 57%;
+    @include px2rem(background-size, 25 15);
+    background-position: 97% 57%;
     .name {
       display: inline-block;
       overflow: hidden;
@@ -142,7 +142,7 @@ export default {
       @include fontSize(15px);
       color: #666;
       text-align: left;
-      @include px2rem(width, 45);
+      @include px2rem(width, 85);
       @include px2rem(max-width, 100);
       @include px2rem(margin-left, 15);
       @include px2rem(line-height, 55);
@@ -152,12 +152,12 @@ export default {
     position: absolute;
     @include fontSize(15px);
     background: url('../../imgs/reserve/sousuo.png') no-repeat left;
-    background-position: 6%;
-    @include px2rem(background-size, 15);
-    @include px2rem(height, 35);
+    background-position: 3%;
+    @include px2rem(background-size, 25);
+    @include px2rem(height, 65);
     @include px2rem(padding-left, 15);
-    @include px2rem(right, 10);
-    @include px2rem(top, 10);
+    @include px2rem(right, 30);
+    @include px2rem(top, 80);
   }
   input::-webkit-search-cancel-button {
     display: none;
@@ -172,8 +172,7 @@ export default {
     outline: none;
     border-radius: 0.06rem;
     border: none;
-    text-indent: 0.2rem;
-    @include px2rem(text-indent, 20);
+    @include px2rem(text-indent, 30);
     @include px2rem(border-radius, 6);
     box-shadow: 0px 0px 10px 5px #f0f0f0;
   }
@@ -181,13 +180,13 @@ export default {
     color: #666;
   }
   .searchInp1 {
-    @include px2rem(width, 270);
+    @include px2rem(width, 570);
   }
   .searchInp2 {
     @include px2rem(margin-left, 15);
-    @include px2rem(width, 350);
-    @include px2rem(height, 35);
-    @include px2rem(text-indent, 24);
+    @include px2rem(width, 700);
+    @include px2rem(height, 55);
+    @include px2rem(text-indent, 34);
   }
   button {
     position: absolute;

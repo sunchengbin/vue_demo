@@ -9,7 +9,7 @@
         <img src="@/imgs/reserve/dingwei.png"
              alt="">
         <span @click="search(city,true)"
-              style="font-family:'中黑体'">{{city}}</span>
+              style="font-family:'中黑体'">{{city}}北京</span>
         <span class="location_txt">GPS定位</span>
       </div>
       <div class="history">
@@ -51,9 +51,11 @@
 <script>
 import Search from './search'
 import City from './city'
-// import { cookie } from "vux";
-// import { dpCity, getWxAppid, getWxConfig } from "@/service/getData";
 import CityPlugin from '@/libs/utils/city.js'
+import {
+  apis,
+  chttp
+} from '@/libs/interfaces'
 
 export default {
   components: { Search, City },
@@ -71,31 +73,25 @@ export default {
     }
   },
   created () {
-    dpCity('').then(res => {
+    chttp.get(apis.dpCity).then(res => {
       this.cityList = CityPlugin.formatCitys(res.all_city)
-    })
-    this.ktv_id = 1
-    getWxAppid(this.ktv_id).then(res => {
-      let openid = cookie.get('GZH_openid_3_' + this.ktv_id + '_' + res.appid)
-      this.openid = openid
-    }).then(res => {
-      dpCity(this.openid).then(res => {
-        this.hot_city = res.hot_city
-        this.history_city = res.history_city
-      })
+      this.hot_city = res.hot_city
+      this.history_city = res.history_city
+    }).catch(err => {
+      this.$toast(err)
     })
   },
   methods: {
     search (city, location) {
       localStorage.setItem('city', city)
       this.$router.push({
-        path: 'reserve?ktv_id=1'
+        name: 'reserve'
       })
     },
     clickCity (city) {
       localStorage.setItem('city', city)
       this.$router.push({
-        path: '/reserve?ktv_id=1'
+        name: 'reserve'
       })
     },
     setKey (newVal) {
@@ -108,6 +104,7 @@ export default {
 
 <style lang="scss">
 .adress {
+  text-align: left;
   @include fontSize(16px);
   color: #333;
   background: #f2f2f2;
@@ -127,17 +124,19 @@ export default {
     .location {
       @include fontSize(16px);
       border-bottom: 1px solid #dedede;
-      @include px2rem(padding, 12 0);
+      @include px2rem(padding, 18 0);
       .location_txt {
         color: #666;
         @include fontSize(12px);
+        @include px2rem(margin-left, 10);
       }
       img {
         width: 0.13rem;
         height: 0.15rem;
-        @include px2rem(width, 13);
-        @include px2rem(height, 15);
+        @include px2rem(width, 25);
+        @include px2rem(height, 30);
         vertical-align: middle;
+        @include px2rem(margin-right, 10);
       }
     }
     p {
@@ -148,13 +147,13 @@ export default {
     }
     .h_city {
       @include fontSize(14px);
-      @include px2rem(width, 10);
-      @include px2rem(height, 36);
+      @include px2rem(width, 180);
+      @include px2rem(height, 66);
       border: 1px solid #dedede;
-      @include px2rem(border-radius, 4);
+      @include px2rem(border-radius, 8);
       text-align: center;
-      @include px2rem(line-height, 36);
-      @include px2rem(margin, 10 10 0 0);
+      @include px2rem(line-height, 66);
+      @include px2rem(margin, 20 20 0 0);
       vertical-align: middle;
       overflow: hidden;
       white-space: nowrap;

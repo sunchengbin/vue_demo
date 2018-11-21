@@ -17,8 +17,10 @@
 
 <script>
 import Search from './search'
-// import { dpHotCity, getWxAppid } from "@/service/getData";
-// import { cookie } from "vux";
+import {
+  apis,
+  chttp
+} from '@/libs/interfaces'
 
 export default {
   components: { Search },
@@ -26,26 +28,29 @@ export default {
     return {
       hasName: 'searchKTV',
       store: [],
-      openid: '',
-      ktv_id: 1
+      ktv_id: 1,
+      openid: 'o3JAqt0Jr9vtoVncMW7ZBnHFvUd&unionid'
     }
   },
   created () {
     this.ktv_id = 1
     // _hmt.push(['_trackEvent', '点评网搜索ktv', '进入页面', 'gzh_searchKTV'])
-    getWxAppid(this.ktv_id).then(res => {
-      let openid = cookie.get('GZH_openid_3_' + this.ktv_id + '_' + res.appid)
-      this.openid = openid
+    let data = {
+      openid: this.openid,
+      city: this.city
+    }
+    chttp.get(apis.hotStore, {
+      params: data
     }).then(res => {
-      dpHotCity(this.openid, this.city).then(res => {
-        this.store = res.store
-      })
+      this.store = res.store
+    }).catch(err => {
+      this.$toast(err)
     })
   },
   methods: {
     search (ktv) {
       this.$router.push({
-        path: '/reserve?ktv_id=1',
+        name: 'reserve',
         query: {
           key: ktv
         }
@@ -60,7 +65,8 @@ export default {
   @include fontSize(15px);
   color: #666;
   .hot_search {
-    @include px2rem(padding, 20 15);
+    text-align: left;
+    @include px2rem(padding, 20 45);
     .hot_ktvs,
     .hot_ktv {
       list-style: none;
@@ -69,10 +75,10 @@ export default {
       display: inline-block;
       background: #dededa;
       @include px2rem(border-radius, 3);
-      @include px2rem(margin, 10 10 0 0);
-      @include px2rem(width, 55);
-      @include px2rem(height, 30);
-      @include px2rem(line-height, 30);
+      @include px2rem(margin, 20 20 0 0);
+      @include px2rem(width, 95);
+      @include px2rem(height, 55);
+      @include px2rem(line-height, 55);
       text-align: center;
       span {
         color: #333;
