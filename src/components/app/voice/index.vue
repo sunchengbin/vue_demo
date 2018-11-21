@@ -60,12 +60,12 @@ export default {
   created () {
     // 如果没有缓存语音字典数据，则获取数据
     // let self = this
-    // http.get('/bar/u/remote_ctrl/dict')
-    //   .then(function (res) {
-    //     self.result_list = res.data
-    //   }).catch(function (err) {
-    //     console.log('Inside error, fetching product line items failed', err)
-    //   })
+    http.get('/bar/u/remote_ctrl/dict')
+      .then(function (res) {
+        self.result_list = res.data
+      }).catch(function (err) {
+        console.log('Inside error, fetching product line items failed', err)
+      })
   },
   methods: {
     // 关闭语音面板

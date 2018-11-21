@@ -88,15 +88,15 @@ export default {
     clickBtn: utils.throttle(function () {
       console.log(this.btnTxt)
       console.log(`now is ${Date.now()}`)
-      this.payPanelShow()
-      this.$toast({
-        message: '操作成功',
-        iconName: 'vip',
-        position: 'bottom'
-        // toastSvg: 'toast-Icon'
-      })
-      this.$messageBox.alert('操作成功', '')
-      this.$messageBox.setDefaults({ confirmButtonText: '去冠名呀', cancelButtonText: '继续点歌' })
+      // this.payPanelShow()
+      // this.$toast({
+      //   message: '操作成功',
+      //   iconName: 'vip',
+      //   position: 'bottom'
+      //   // toastSvg: 'toast-Icon'
+      // })
+      // this.$messageBox.alert('操作成功', '')
+      // this.$messageBox.setDefaults({ confirmButtonText: '去冠名呀', cancelButtonText: '继续点歌' })
       // this.$messageBox.confirm('要去冠名吗？', '').then(confirm => {
       //   console.log(confirm)
       // }).catch(cancel => {
@@ -118,8 +118,8 @@ export default {
   },
   mounted () {
     // Toast()
-    const self = this
-    self.$toast('操作失败')
+    // const self = this
+    // self.$toast('操作失败')
     // self.$loading.open()
     // setTimeout(function () {
     //   self.$loading.close()
