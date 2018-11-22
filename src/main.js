@@ -19,8 +19,13 @@ import {
   util
 } from '@/libs/utils'
 import '@/libs/app/flexible'
+import infiniteScroll from '@/components/common/infinite_scroll'
+import Wx from '@/libs/app/weixin'
 
 Vue.config.productionTip = false
+
+// 微信api认证初始化
+Wx.init()
 
 // 添加fastclick
 if ('addEventListener' in document) {
@@ -39,8 +44,9 @@ if (process.env.NODE_ENV === 'production') {
 // 插件
 Vue.use(lazyload)
 Vue.use(Router)
+Vue.use(infiniteScroll)
 
-// 全局变量
+// vue全局变量
 Vue.$toast = Vue.prototype.$toast = Toast
 Vue.$loading = Vue.prototype.$loading = loading
 Vue.$messageBox = Vue.prototype.$messageBox = MessageBox

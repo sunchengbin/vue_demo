@@ -1,14 +1,21 @@
 <template>
   <div class="about">
-    <h1>{{ message }}</h1>
+    <h1>This is an about page</h1>
+    <div @click="ddd">eee</div>
   </div>
 </template>
+
 <script>
 export default {
-  data () {
-    return {
-      message: 'This is an about page'
+  methods: {
+    ddd () {
+      this.$router.push({
+        name: 'reserve'
+      })
     }
   }
 }
 </script>
+
+<style>
+</style>
