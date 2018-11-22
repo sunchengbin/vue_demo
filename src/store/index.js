@@ -4,6 +4,8 @@ import mutations from './mutations'
 import actions from './action'
 Vue.use(Vuex)
 const state = {
+  openid: '',
+  unionid: '',
   device: '',
   mv_version: '',
   emoji_version: '',
@@ -11,7 +13,15 @@ const state = {
   gm_version: '',
   atm_version: '',
   vod_type: '',
-  ba: ''
+  ba: '',
+  bind_status: '',
+  user_img: null,
+  user_name: '未登录',
+  rights_desc: '',
+  balance: 0,
+  is_vip: false,
+  vip_end_time: '',
+  vip_packages: []
 }
 export default new Vuex.Store({
   state,

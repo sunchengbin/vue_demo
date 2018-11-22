@@ -1,7 +1,6 @@
 // 封装http请求
 import axios from 'axios'
 import qs from 'qs'
-
 const http = axios.create({
   baseURL: process.env.VUE_APP_COUPON_BASEURL,
   timeout: 50000

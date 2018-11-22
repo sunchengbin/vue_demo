@@ -61,9 +61,6 @@
   </div>
 </template>
 <script>
-import {
-  util
-} from '@/libs/utils'
 import weixin from '../libs/app/weixin.js'
 import Footer from '@/components/app/footer/footer.vue'
 import { swiperSlides } from '@/components/common/swiper/static'

@@ -40,5 +40,28 @@ export default {
       }).catch(err => {
         Vue.$toast(err)
       })
+  },
+  // 绑定状态
+  getBindStatus ({ commit, state }) {
+    let openid = state.openid || 'o3JAqt0Jr9vtoVncMW7ZBnHFvUd'
+    let unionid = state.unionid || 'o6qE3t8QKr3uYqrgbknYUSE72RiM'
+    chttp.get(apis.bindStatus + '?openid=' + openid + '&unionid=' + unionid).then(res => {
+      commit('SAVE_BIND_STATUS', {
+        bind_status: true
+      })
+    }).catch(() => {
+      Vue.$messageBox.alert('请扫码绑定房台', '')
+    })
+  },
+  // 用户信息/是否是vip
+  getUserInfo ({ commit, state }) {
+    let openid = state.openid || 'o3JAqt0Jr9vtoVncMW7ZBnHFvUd'
+    let unionid = state.unionid || 'o6qE3t8QKr3uYqrgbknYUSE72RiM'
+    chttp.get(apis.userInfo + '?openid=' + openid + '&unionid=' + unionid).then(res => {
+      console.log(res)
+      commit('SAVE_USER_INFO', res || {})
+    }).catch(() => {
+      Vue.$messageBox.alert('请扫码绑定房台', '')
+    })
   }
 }

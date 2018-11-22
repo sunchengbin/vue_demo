@@ -7,8 +7,6 @@
     <div class="btn">
       {{btnTxt}}
     </div>
-    <!-- <loading message="数据加载中" /> -->
-    <!-- <toast message='警告'></toast> -->
     <paypanel v-show="payShow"
               @hidePanel="hidePanel"
               :price="price"></paypanel>
@@ -35,26 +33,30 @@
     </ul>
     <play-control />
     <foot-bar current-page="首页" />
-    <Swiper :auto="2000">
-      <div :class="'slide'+(index+1)"
+    <p>{{rights_desc}}</p>
+    <swiper :auto="2000">
+      <swiper-item :class="'slide'+(index+1)"
                    v-for="(item,index) in swiperSlides"
                    :key="index">
-        <img :src="item.imgUrl"
+        <img :src="item.classdetailbigimage"
              alt="">
-      </div>
-    </Swiper>
+      </swiper-item>
+    </swiper>
     <!-- <voice /> -->
+    <router-link to="/reserve">广场</router-link>
   </div>
 </template>
 <script>
 import {
   utils
+  // http,
+  // chttp
 } from '@/libs/interfaces'
 import paypanel from '@/components/app/pay_panel'
 import songItem from '@/components/app/song_item'
 import playControl from '@/components/app/play_control'
 import voice from '@/components/app/voice/index'
-import { swiperSlides } from '@/components/common/swiper/static'
+import SWIPER from '@/components/common/swiper/static'
 export default {
   name: 'home',
   data () {
@@ -64,26 +66,47 @@ export default {
       price: 200,
       singers: [{ singer: '哈辉', singerhead: 'https://qnktv.ktvdaren.com/singer/103901.jpg', singerid: 103901 }],
       songs: [{ songid: 7654282, music_name: '刘哈哈与大先生', flag: ['MV', '国语'], singer: '刘心', played: 0 }],
-      swiperSlides: swiperSlides,
+      swiperSlides: SWIPER.swiperSlides,
       isVoiceShow: false
     }
   },
+  computed: {
+    rights_desc () {
+      return this.$store.state.rights_desc
+    }
+  },
   created () {
-    // console.log(this.$store.state.show)
+    this.$store.dispatch('getFuncVersion')
+    this.$store.dispatch('getBindStatus')
+    this.$store.dispatch('getUserInfo')
+    console.log(this.rights_desc, 0)
+    this.$store.dispatch('getDeviceInfo')
+    // http.get('/base?BaseUrlType=coupon')
+    // http.get('/base?BaseUrlType=app')
+    // http.post('/base', {
+    //   data: {
+    //     type: 1
+    //   }
+    // })
+    // chttp.post('/base', {
+    //   data: {
+    //     type: 1
+    //   }
+    // })
   },
   methods: {
     clickBtn: utils.throttle(function () {
       console.log(this.btnTxt)
       console.log(`now is ${Date.now()}`)
-      this.payPanelShow()
-      this.$toast({
-        message: '操作成功',
-        iconName: 'vip',
-        position: 'bottom'
-        // toastSvg: 'toast-Icon'
-      })
-      this.$messageBox.alert('操作成功', '')
-      this.$messageBox.setDefaults({ confirmButtonText: '去冠名呀', cancelButtonText: '继续点歌' })
+      // this.payPanelShow()
+      // this.$toast({
+      //   message: '操作成功',
+      //   iconName: 'vip',
+      //   position: 'bottom'
+      //   // toastSvg: 'toast-Icon'
+      // })
+      // this.$messageBox.alert('操作成功', '')
+      // this.$messageBox.setDefaults({ confirmButtonText: '去冠名呀', cancelButtonText: '继续点歌' })
       // this.$messageBox.confirm('要去冠名吗？', '').then(confirm => {
       //   console.log(confirm)
       // }).catch(cancel => {
@@ -105,12 +128,18 @@ export default {
   },
   mounted () {
     // Toast()
-    const self = this
-    self.$toast('操作失败')
+    // const self = this
+    // self.$toast('操作失败')
     // self.$loading.open()
     // setTimeout(function () {
     //   self.$loading.close()
     // }, 2000)
+    // this.$router.push({
+    //   name: 'about',
+    //   params: {
+    //     id: 'bar'
+    //   }
+    // })
   },
   components: {
     // loading
@@ -124,8 +153,5 @@ export default {
 <style lang="scss" scoped>
 .home {
   height: 100%;
-}
-.mint-swipe{
-  @include px2rem(height, 300);
 }
 </style>

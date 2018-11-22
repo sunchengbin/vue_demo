@@ -15,7 +15,7 @@
 <script>
 import { once, addClass, removeClass } from './util.js'
 export default {
-  name: 'mt-swipe',
+  name: 'Swiper',
   created () {
     this.dragState = {} // 拖动时存储拖动状态
   },
