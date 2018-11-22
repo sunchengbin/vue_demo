@@ -1,7 +1,10 @@
 <template>
-  <div class="home"
-       @click.stop="closePad">
-    <div class="container">
+  <transition name="control">
+    <!-- <div class="home"
+         v-show="containerShow"
+         @click.stop="closePad"> -->
+    <div class="container"
+         v-show="containerShow">
       <div class="pad">
         <!--歌曲控制-->
         <div class="play-control">
@@ -70,7 +73,8 @@
         </li>
       </ul>
     </div>
-  </div>
+    <!-- </div> -->
+  </transition>
 </template>
 <script>
 import { http, apis } from '@/libs/interfaces'
@@ -98,18 +102,15 @@ export default {
       ]
     }
   },
+  props: {
+    containerShow: Boolean
+  },
   computed: {
-    // show_pad: function () {
-    //   return this.$store.state.show_play_control
-    // },
-    loading () {
-      return this.$store.state.is_loading
-    },
     openid () {
-      return this.$store.state.openid
+      return this.$store.state.openid || 'o3JAqt0Jr9vtoVncMW7ZBnHFvUd'
     },
     unionid () {
-      return this.$store.state.unionid
+      return this.$store.state.unionid || 'o6qE3t8QKr3uYqrgbknYUSE72RiM'
     },
     is_bind () {
       return this.$store.state.bind_status
@@ -132,22 +133,19 @@ export default {
         unionid: this.unionid,
         type: type
       }
-      http.get(apis.play + text, params)
+      console.log(params)
+      http.get(apis.play + text, { params: params })
         .then(res => {
-          if (res.errcode === 21001) {
-            // 切换评分状态
-            if (text === 'control') {
-              self.score = (self.score === 1) ? 0 : 1
-            }
-            // 弹出反馈框
-            self.$toast('操作成功')
-          } else if (res.errcode === 40003) {
-            this.$store.commit('SHOW_ALERT_MODAL', '您未绑定房间，请扫描房间二维码')
-          } else {
-            this.$store.commit('SHOW_ALERT_MODAL', '出了点小问题，请稍后再试')
+          // 切换评分状态
+          if (text === 'control') {
+            self.score = (self.score === 1) ? 0 : 1
           }
+          // 弹出反馈框
+          self.$toast('操作成功')
           self.$loading.close()
         }).catch(e => {
+          self.$loading.close()
+          self.$messageBox.alert(e, '')
         })
     },
     jump (path) {
@@ -156,7 +154,7 @@ export default {
         return
       }
       if (!this.is_bind) {
-        this.$store.commit('SHOW_ALERT_MODAL', '请扫码绑定房台')
+        self.$messageBox.alert('请扫码绑定房台', '')
         return
       }
       if (path === 'zhufu') {
@@ -173,7 +171,6 @@ export default {
 @keyframes lift-in {
   0% {
     @include px2rem(bottom, -600);
-    bottom: remOld(-600);
   }
   100% {
     bottom: 0;
@@ -201,12 +198,15 @@ export default {
 }
 
 .container {
-  position: absolute;
-  bottom: 0;
-  animation: lift-in 0.5s;
+  position: fixed;
+  @include px2rem(bottom, 0);
+  // bottom: 0;
+  // animation: lift-in 0.5s;
+  // transition: bottom 10s linear;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  z-index: 4100;
 }
 
 .pad {
@@ -291,5 +291,17 @@ export default {
       color: #fff;
     }
   }
+}
+.control-enter,
+.control-leave-to {
+  @include px2rem(bottom, -600);
+}
+.control-enter-active,
+.control-leave-active {
+  transition: bottom 0.4s linear;
+}
+.control-enter-to,
+.control-leave {
+  @include px2rem(bottom, 0);
 }
 </style>

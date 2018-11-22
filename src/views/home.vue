@@ -73,14 +73,6 @@ export default {
     }
   },
   computed: {
-    // user_img () {
-    //   return this.$store.state.user_img
-    // },
-    // rights_desc () {
-    //   return this.$store.state.rights_desc
-    // }
-  },
-  computed: {
     rights_desc () {
       return this.$store.state.rights_desc
     }
@@ -90,6 +82,7 @@ export default {
     this.$store.dispatch('getBindStatus')
     this.$store.dispatch('getUserInfo')
     console.log(this.rights_desc, 0)
+    this.$store.dispatch('getDeviceInfo')
     // http.get('/base?BaseUrlType=coupon')
     // http.get('/base?BaseUrlType=app')
     // http.post('/base', {

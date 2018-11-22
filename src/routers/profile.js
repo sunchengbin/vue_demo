@@ -9,7 +9,7 @@ export default [{
   component: () => import('@/views/index.vue')
 },
 {
-  path: '/help',
+  path: '/help/:id',
   name: 'help',
   component: () => import('@/views/help.vue')
 }

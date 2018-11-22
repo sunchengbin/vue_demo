@@ -7,6 +7,8 @@
       <router-link to="/index">index</router-link> |
       <router-link to="/reserve">广场</router-link> |
       <router-link to="/mine">我的</router-link>
+      <router-link to="/help/1">Help</router-link> |
+      <router-link to="/songlist">Songlist</router-link>
     </div>
     <router-view />
   </div>
@@ -18,7 +20,7 @@ import weixin from './libs/app/weixin'
 export default {
   created () {
     // this.getOpenID()
-    // weixin.getOpenID('thunder/home', { type: this.$store.state.vod_type }, this.saveOpenid)
+    // weixin.getOpenID('thunder/home', { type: this.$store.state.vod_type })
   },
   methods: {
     // 获取用户openIid和unionid
@@ -54,7 +56,6 @@ export default {
   }
 }
 </script>
-
 
 <style lang="scss">
 #app {

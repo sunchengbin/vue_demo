@@ -6,6 +6,8 @@ import {
   http,
   chttp
 } from '@/libs/interfaces'
+import store from '@/store'
+import Cookies from 'js-cookie'
 const weixin = {
   // wxLoginUrl: '', // 授权登录url
   wxLoginUrl (page, query) {
@@ -21,9 +23,9 @@ const weixin = {
   // 判断是否授权
   getOpenID (page, query, callback) {
     // 用户openid，只跟当前公众号相关
-    let openid = utils.util.getUrlPrem('openid') || utils.cookie.getCookie()
+    let openid = utils.util.getUrlPrem('openid') || Cookies.get('openid') || store.state.openid
     // 用户unionid，用户唯一ID，不随公众号变化
-    let unionid = utils.util.getUrlPrem('unionid') || utils.cookie.getCookie('tunionid')
+    let unionid = utils.util.getUrlPrem('unionid') || Cookies.get('unionid') || store.state.unionid
     if (!openid || !unionid || unionid === 'null') {
       let redirectUrl = this.wxLoginUrl(page, query)
       const isWxWebView = this.isWxWebView()
@@ -31,9 +33,16 @@ const weixin = {
         window.location.replace(redirectUrl)
       }
     } else {
-      utils.cookie.setCookie(openid, 30)
-      utils.cookie.setCookie(unionid, 30, 'tunionid')
-      callback && callback(openid, unionid)
+      Cookies.set('openid', openid, {
+        expires: 30
+      })
+      Cookies.set('unionid', openid, {
+        expires: 30
+      })
+      // utils.cookie.setCookie(openid, 30)
+      // utils.cookie.setCookie(unionid, 30, 'tunionid')
+      store.commit('SAVE_OPENID', openid)
+      store.commit('SAVE_UNIONID', unionid)
     }
   },
   isWxWebView () {
