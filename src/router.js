@@ -22,7 +22,6 @@ router.beforeEach(async (to, from, next) => {
   Vue.$toast({
     message: 'loading'
   })
-  console.log(from)
   // if () {  验证是否授权
   if (!isAdded) {
     let routes = await getAsyncRoutes()
@@ -35,5 +34,8 @@ router.beforeEach(async (to, from, next) => {
   next()
   // }
 })
-router.afterEach(() => {
+router.afterEach((to, from, next) => {
+  if (from.name !== null) {
+    this.$loading.open()
+  }
 })

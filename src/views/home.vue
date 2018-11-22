@@ -35,15 +35,15 @@
     </ul>
     <play-control />
     <foot-bar current-page="首页" />
-    <swiper :auto="2000">
-      <swiper-item :class="'slide'+(index+1)"
+    <Swiper :auto="2000">
+      <div :class="'slide'+(index+1)"
                    v-for="(item,index) in swiperSlides"
                    :key="index">
-        <img :src="item.classdetailbigimage"
+        <img :src="item.imgUrl"
              alt="">
-      </swiper-item>
-    </swiper>
-    <voice />
+      </div>
+    </Swiper>
+    <!-- <voice /> -->
   </div>
 </template>
 <script>
@@ -54,7 +54,7 @@ import paypanel from '@/components/app/pay_panel'
 import songItem from '@/components/app/song_item'
 import playControl from '@/components/app/play_control'
 import voice from '@/components/app/voice/index'
-import SWIPER from '@/components/common/swiper/static'
+import { swiperSlides } from '@/components/common/swiper/static'
 export default {
   name: 'home',
   data () {
@@ -64,7 +64,7 @@ export default {
       price: 200,
       singers: [{ singer: '哈辉', singerhead: 'https://qnktv.ktvdaren.com/singer/103901.jpg', singerid: 103901 }],
       songs: [{ songid: 7654282, music_name: '刘哈哈与大先生', flag: ['MV', '国语'], singer: '刘心', played: 0 }],
-      swiperSlides: SWIPER.swiperSlides,
+      swiperSlides: swiperSlides,
       isVoiceShow: false
     }
   },
@@ -124,5 +124,8 @@ export default {
 <style lang="scss" scoped>
 .home {
   height: 100%;
+}
+.mint-swipe{
+  @include px2rem(height, 300);
 }
 </style>

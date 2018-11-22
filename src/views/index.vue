@@ -12,36 +12,20 @@
     </div>
     <div class="banner-wrapper">
       <Swiper>
-        <div v-for="(item, index) in banner" :key='index' class='banner-slide' v-on:click="skip(item.route)">
+        <div v-for="(item, index) in swiperSlides" :key='index' class='banner-slide' v-on:click="skip(item.route)">
           <img :src="item.imgUrl" alt="">
         </div>
       </Swiper>
     </div>
-    <div class="item-nav-wrapper">
-      <div class='item-nav'>
-        <div class="item-guanming">
-          <p>歌曲冠名</p>
-        </div>
-        <div class="item-thumb">
-          <p>为Ta点赞</p>
-        </div>
-        <div class="item-zhufu">
-          <p>霸屏祝福</p>
-        </div>
-      </div>
-      <div class='item-nav'>
-        <div class="item-vip">
-          <p>会员VIP</p>
-        </div>
-        <div class="item-mv">
-          <p>照片MV</p>
-        </div>
-        <div class="item-biaoqing">
-          <p>魔法表情</p>
-        </div>
-      </div>
-    </div>
+    <ul class="item-nav-wrapper">
+      <li v-for='(item, index) in indexNav' :key='index' v-on:click="skip(item.url)">{{item.key}}</li>
+    </ul>
     <div class="home-title">点歌分类</div>
+    <div class="order-service">
+      <div v-on:click="skip('https://vod.ktvsky.com/thunder/top/hot')">歌名点歌</div>
+      <div v-on:click="skip('https://vod.ktvsky.com/thunder/classify_singer')">歌手点歌</div>
+      <div v-on:click="skip('https://vod.ktvsky.com/thunder/ordered')">已点点歌</div>
+    </div>
     <div class="home-title">歌单分类</div>
     <div class="sort-list">
       <div class="sort-wrapper">
@@ -81,19 +65,18 @@ import {
   util
 } from '@/libs/utils'
 import weixin from '../libs/app/weixin.js'
-import { banner } from '../static/index'
-import Swiper from '@/components/common/swiper/index.vue'
 import Footer from '@/components/app/footer/footer.vue'
-
+import { swiperSlides } from '@/components/common/swiper/static'
+import { indexNav } from '../static/index.js'
 export default {
   name: 'home',
   data () {
     return {
-      banner: []
+      swiperSlides: swiperSlides,
+      indexNav: indexNav
     }
   },
   created () {
-    this.banner = banner
   },
   methods: {
     bindRoom () {
@@ -105,18 +88,20 @@ export default {
       } else {
         this.$router.push(path)
       }
-      
     }
   },
   mounted () {
   },
   components: {
-    Swiper,
     Footer
   }
 }
 </script>
 <style lang="scss" scoped>
+.head-wrapper{
+  display: flex;
+  align-items: center;
+}
 .search-bar {
   display: flex;
   align-items: center;
@@ -131,7 +116,7 @@ export default {
     color: #ff7d0e;
   }
 }
-.banner-wrapper {
+.mint-swipe {
   width: 100%;
   @include px2rem(height, 280);
   .banner-slide {
@@ -150,10 +135,16 @@ export default {
     @include px2rem(height, 32);
   }
 }
-.item-nav, .sort-wrapper{
+.item-nav-wrapper, .sort-wrapper, .order-service {
   display: flex;
   justify-content: space-around;
   @include px2rem(line-height, 60);
+}
+.item-nav-wrapper{
+  flex-wrap: wrap;
+  li{
+    width: 33.3%;
+  }
 }
 .home-title{
   @include px2rem(line-height, 60);

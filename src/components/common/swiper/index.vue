@@ -462,7 +462,6 @@ export default {
   .mint-swipe {
     overflow: hidden;
     position: relative;
-    height: 100%;
     .mint-swipe-items-wrap {
       position: relative;
       overflow: hidden;

@@ -1,23 +1,22 @@
-const banner = [{
-  imgUrl: 'http://autodynemv.b0.upaiyun.com/2a4fea00cf8b5429c6ee12321de78978.png',
-  route: 'https://api.jr.mi.com/insurance/nettel.html?from=leishi_weixin&source=p0&mifiInsFrom=leishi_weixin&productId=401119820065669120&login=f#/newindex'
-},
-{
-  imgUrl: 'https://cdn.cnbj2.fds.api.mi-img.com/autodynemv/1dd6c27b3c697316bc5cf9b07d15d8ef.png',
-  route: 'https://vod.ktvsky.com/thunder/charge'
-},
-{
-  imgUrl: 'https://autodynemv.b0.upaiyun.com/2fd1d89d61b021db7a7ad56f21dd9842.jpg',
-  route: '/thunder/charge'
-},
-{
-  imgUrl: 'https://autodynemv.b0.upaiyun.com/9d8b626eaaa2bfd38d642ee4220c5220.jpg',
-  route: 'https://vod.ktvsky.com/thunder/myvip?p=topbanner'
-},
-{
-  imgUrl: 'https://autodynemv.b0.upaiyun.com/ef705776c7b3e87b5a73e6702c1af14d.jpg',
-  route: 'zhufu'
+const indexNav = [{
+  key: '霸屏表白',
+  url: 'http://coupon.ktvsky.com/ktv/order/occupyb?p=banner&action=12&openid=o3JAqt7S9dnnLoh9e8If3nOESnlI&unionid=o6qE3t_HiGWR-A-Pxi4aA84XpGp4'
+}, {
+  key: '为Ta点赞',
+  url: 'https://vod.ktvsky.com/thunder/thumb'
+}, {
+  key: '霸屏祝福',
+  url: 'http://coupon.ktvsky.com/ktv/order/occupybv3?action=21&openid=o3JAqt7S9dnnLoh9e8If3nOESnlI&unionid=o6qE3t_HiGWR-A-Pxi4aA84XpGp4'
+}, {
+  key: '会员VIP',
+  url: 'https://vod.ktvsky.com/thunder/myvip?p=channel'
+}, {
+  key: '照片MV',
+  url: 'https://vod.ktvsky.com/mv_thunder/page/index.html'
+}, {
+  key: '魔法表情',
+  url: 'https://vod.ktvsky.com/thunder/expression'
 }]
 export {
-  banner
+  indexNav
 }

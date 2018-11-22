@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import home from '@/views/home.vue'
+import index from '@/views/index.vue'
 Vue.use(Router)
 
 let routes = [{
   path: '/',
-  name: 'home',
-  component: home
+  name: 'index',
+  component: index
 }]
 
 export default new Router({
