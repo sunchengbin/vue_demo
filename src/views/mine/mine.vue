@@ -19,7 +19,7 @@
       <ul>
         <li v-for="item in myContent"
             :key="item.id"
-            @click="toMyContent(item.routeName)">
+            @click="toMyContent(item.id)">
           <svg-icon icon-class="zhufu_icon" />
           <p>{{item.name}}</p>
         </li>
@@ -71,10 +71,19 @@ export default {
     }
   },
   methods: {
-    toMyContent (routeName) {
-      this.$router.push({
-        name: 'myVip'
-      })
+    toMyContent (id) {
+      console.log(id, 'id')
+      switch (id) {
+        case 1:
+          location.href = 'http://vod.stage.ktvsky.com/thunder/myvip'
+          break
+        case 2:
+          location.href = 'http://vod.stage.ktvsky.com/thunder/charge'
+          break
+        case 3:
+          location.href = 'http://vod.stage.ktvsky.com/thunder/customer/orderlist'
+          break
+      }
     }
   }
 }
