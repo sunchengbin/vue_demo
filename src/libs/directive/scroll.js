@@ -1,4 +1,5 @@
 /*
+* 全局无限滚动
 * 用例:
 * <ul
 *  v-infinite-scroll = "loadMore"
