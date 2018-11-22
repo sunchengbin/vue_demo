@@ -1,16 +1,17 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import home from '@/views/home.vue'
-Vue.use(Router)
-
-let routes = [{
-  path: '/',
-  name: 'home',
-  component: home
-}]
-
-export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
-})
+export default [
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/404')
+  },
+  {
+    path: '/help',
+    name: 'help',
+    component: () => import('@/views/help')
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import('@/views/about')
+  }
+]

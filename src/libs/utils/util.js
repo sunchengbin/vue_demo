@@ -49,4 +49,22 @@ export default class util {
     }
     return items
   }
+
+  static async getAsyncRoutes () {
+    let routes = []
+    const allRouters = require.context('@/routers', true, /.js$/).keys()
+    for (let i in allRouters) {
+      let fileName = allRouters[i]
+      if (/.\//.test(fileName)) {
+        fileName = fileName.replace('./', '')
+      }
+      let file = await import(`@/routers/${fileName}`)
+      routes = routes.concat(file.default)
+    }
+    routes.push({
+      path: '*',
+      redirect: '/404'
+    })
+    return routes
+  }
 }
