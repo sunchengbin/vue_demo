@@ -11,13 +11,14 @@ import MessageBox from '@/components/common/message_box'
 import Footer from '@/components/app/footer/footer'
 import Swiper from '@/components/common/swiper/swiper'
 import SwipeItem from '@/components/common/swiper/swiper_item'
+import InfiniteScroll from './components/infinite_scroll'
 import '@/router'
 
 Vue.config.productionTip = false
 
 // 插件
 Vue.use(lazyload)
-
+Vue.use(InfiniteScroll)
 // 全局变量
 Vue.$toast = Vue.prototype.$toast = Toast
 Vue.$loading = Vue.prototype.$loading = loading
