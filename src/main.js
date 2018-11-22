@@ -14,6 +14,7 @@ import Raven from 'raven-js'
 import RavenVue from 'raven-js/plugins/vue'
 import FastClick from 'fastclick'
 import RouterGuard from '@/router'
+import Home from '@/views/home'
 import {
   util
 } from '@/libs/utils'
@@ -55,14 +56,13 @@ Vue.component(SwipeItem.name, SwipeItem)
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/home')
+      component: Home
     }
   ]
   let newRoutes = await util.getAsyncRoutes()
   routes = routes.concat(newRoutes)
   let router = new Router({
-    mode: 'history',
-    base: process.env.BASE_URL,
+    mode: process.env.NODE_ENV === 'development' ? 'hash' : 'history',
     routes
   })
   RouterGuard(router)

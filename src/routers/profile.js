@@ -1,7 +1,8 @@
+import Index from '@/views/index.vue'
 export default [
   {
-    path: '/index',
+    path: '/index/:id',
     name: 'index',
-    component: () => import('@/views/index')
+    component: Index
   }
 ]

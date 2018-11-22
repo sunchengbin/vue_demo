@@ -10,7 +10,7 @@ export default [
     component: () => import('@/views/help')
   },
   {
-    path: '/about',
+    path: '/about/:id',
     name: 'about',
     component: () => import('@/views/about')
   }
