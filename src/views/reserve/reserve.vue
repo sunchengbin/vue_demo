@@ -142,10 +142,6 @@ export default {
           this.isRefresh = false
           this.showTitle = !this.showTitle
         }
-        // res.store.forEach(item=>{
-        //   this.store.push(item);
-        //   this.showLoad = false;
-        // })
         this.store = this.store.concat(res.store)
         this.showLoad = false
       })

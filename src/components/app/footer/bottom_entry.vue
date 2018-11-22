@@ -19,6 +19,7 @@
 </template>
 <script>
 import COMMON from './static'
+import COMMONURL from '@/libs/base/common'
 export default {
   name: '',
   computed: {
@@ -44,13 +45,13 @@ export default {
         return
       }
       if (!this.is_bind) {
-        alert('请扫码绑定房台')
+        Vue.$toast('请扫码绑定房台')
         return
       }
       if (path === 'zhufu') {
-        window.location.href = 'https://coupon.ktvsky.com/ktv/order/occupyb?p=banner&action=10&openid=' + this.openid + '&unionid=' + this.unionid
+        window.location.href = COMMONURL.realmName + '?p=banner&action=10&openid=' + this.openid + '&unionid=' + this.unionid
       } else if (path === 'biaobai') {
-        window.location.href = 'https://coupon.ktvsky.com/ktv/order/occupyb?p=banner&action=12&openid=' + this.openid + '&unionid=' + this.unionid
+        window.location.href = COMMONURL.realmName + '?p=banner&action=12&openid=' + this.openid + '&unionid=' + this.unionid
       }
     }
   },

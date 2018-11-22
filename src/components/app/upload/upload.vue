@@ -38,8 +38,11 @@
   </div>
 </template>
 <script>
-import http from '@/libs/base/http.js'
-
+import {
+  apis,
+  chttp
+} from '@/libs/interfaces'
+import COMMONURL from '@/libs/base/common'
 export default {
   data () {
     return {
@@ -52,12 +55,11 @@ export default {
   },
   created () {
     /* eslint-disable */
-    http.get('https://coupon.ktvsky.com/by/upload', {}).then(res => {
+    chttp.get(apis.upload).then(res => {
       this.upyun.policy = res.upyun[1]
       this.upyun.signature = res.upyun[0]
-      console.log('正常1')
     }).catch(err => {
-      console.log('异常1')
+      Vue.$toast('上传错误')
     })
     /* eslint-enable */
   },
@@ -70,7 +72,7 @@ export default {
       // let size = event.target.files[0].size
       // let type = event.target.files[0].type.indexOf('image')
       let formData = new FormData(this.$refs.upload)
-      http.post('https://v0.api.upyun.com/autodynemv', formData).then(res => {
+      chttp.post('https://v0.api.upyun.com/autodynemv', formData).then(res => {
         console.log('正常2', res)
         let url = 'https://autodynemv.b0.upaiyun.com/' + res['url']
         that.myImgUrl = url
