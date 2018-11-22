@@ -9,5 +9,9 @@ export default function (router) {
     next()
     // }
   })
-  router.afterEach(() => {})
+  router.afterEach((to, from, next) => {
+    if (from.name !== null) {
+      this.$loading.open()
+    }
+  })
 }
