@@ -12,6 +12,9 @@ const apis = {
   // 上传图片
   upload: '/by/upload',
   upyun: '/autodynemv',
+  // 语音
+  dict: '/bar/u/remote_ctrl/dict', // 字典
+  song: '/bar/u/remote_ctrl/song/', // 播放控制
   autodynemv: '/',
   mv: '/vod/mv',
   pay: '/vod/pay', // 购买

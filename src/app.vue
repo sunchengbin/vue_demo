@@ -5,7 +5,6 @@
       <router-link to="/about">About</router-link> |
       <router-link to="/404">404</router-link> |
       <router-link to="/help">Help</router-link> |
-      <router-link to="/index">index</router-link> |
       <router-link to="/reserve">广场</router-link> |
       <router-link to="/mine">我的</router-link> |
       <router-link to="/help/1">Help</router-link> |

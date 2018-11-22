@@ -36,7 +36,11 @@ voice组件的使用说明
 
 <script>
 import Wx from '@/libs/app/weixin'
-import http from '@/libs/base/http'
+import {
+  apis,
+  http,
+  chttp
+} from '@/libs/interfaces'
 export default {
   name: 'voice',
   data () {
@@ -60,11 +64,11 @@ export default {
   created () {
     // 如果没有缓存语音字典数据，则获取数据
     // let self = this
-    http.get('/bar/u/remote_ctrl/dict')
+    http.get(apis.dict)
       .then(function (res) {
         self.result_list = res.data
       }).catch(function (err) {
-        console.log('Inside error, fetching product line items failed', err)
+        Vue.$toast(err)
       })
   },
   methods: {
@@ -122,18 +126,18 @@ export default {
         openid: self.openid,
         unionid: self.unionid
       }
-      http.get('https://k.ktvsky.com/bar/u/remote_ctrl/song/' + text, params)
+      http.get(apis.song + text, params)
         .then(res => {
           if (res.errcode === 21001) {
             self.closeVoice()
           } else if (res.errcode === 40003) {
-            alert('您未绑定房间，请扫码访问')
+            Vue.$toast('您未绑定房间，请扫码访问')
           } else {
-            alert('出了点小问题，请稍后再试')
+            Vue.$toast('出了点小问题，请稍后再试')
           }
         })
         .catch(function (err) {
-          console.log('Inside error, fetching product line items failed', err)
+          Vue.$toast(err)
         })
     }
   },
