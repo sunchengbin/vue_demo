@@ -1,4 +1,5 @@
-import weixin from '@/libs/app/weixin'
+// import weixin from '@/libs/app/weixin'
+import Vue from 'vue'
 export default function (router) {
   router.beforeEach(async (to, from, next) => {
     console.log(from)
@@ -9,5 +10,9 @@ export default function (router) {
     next()
     // }
   })
-  router.afterEach(() => { })
+  router.afterEach((to, from, next) => {
+    if (from.name !== null) {
+      // Vue.$loading.open()
+    }
+  })
 }

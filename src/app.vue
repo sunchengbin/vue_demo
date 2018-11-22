@@ -20,6 +20,8 @@ import { utils } from './libs/interfaces'
 import weixin from './libs/app/weixin'
 export default {
   created () {
+    const loading = document.getElementById('loading')
+    loading.style.display = 'none'
     // this.getOpenID()
     // weixin.getOpenID('thunder/home', { type: this.$store.state.vod_type })
   },
@@ -46,14 +48,6 @@ export default {
       this.$store.commit('SAVE_OPENID', openid)
       this.$store.commit('SAVE_UNIONID', unionid)
     }
-  }
-}
-</script>
-
-<script>
-export default {
-  created () {
-    this.$store.dispatch('getUserInfo')
   }
 }
 </script>

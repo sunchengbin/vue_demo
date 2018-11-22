@@ -8,13 +8,12 @@ import Toast from '@/components/common/toast'
 import loading from '@/components/common/loading'
 import MessageBox from '@/components/common/message_box'
 import Footer from '@/components/app/footer/footer'
-import Swiper from '@/components/common/swiper/swiper'
-import SwipeItem from '@/components/common/swiper/swiper_item'
+import Swiper from '@/components/common/swiper/index'
 import Raven from 'raven-js'
 import RavenVue from 'raven-js/plugins/vue'
 import FastClick from 'fastclick'
 import RouterGuard from '@/router'
-import Home from '@/views/home'
+import Index from '@/views/index'
 import {
   util
 } from '@/libs/utils'
@@ -55,14 +54,13 @@ Vue.$messageBox = Vue.prototype.$messageBox = MessageBox
 Vue.component('svg-icon', SvgIcon)
 Vue.component(Footer.name, Footer)
 Vue.component(Swiper.name, Swiper)
-Vue.component(SwipeItem.name, SwipeItem)
 
 ;(async function () {
   let routes = [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'index',
+      component: Index
     }
   ]
   let newRoutes = await util.getAsyncRoutes()

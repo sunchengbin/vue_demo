@@ -120,7 +120,7 @@ export default {
         return
       }
       const self = this
-      self.$loading.open()
+      // self.$loading.open()
       let openid = self.$store.state.openid
       let unionid = self.$store.state.unionid
       let params = {
@@ -147,7 +147,7 @@ export default {
         return
       }
       let self = this
-      self.$loading.open()
+      // self.$loading.open()
       let openid = self.$store.state.openid
       let unionid = self.$store.state.unionid
       let params = {
