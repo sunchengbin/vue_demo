@@ -2,7 +2,8 @@
   <div class="home">
     <div class="head-wrapper">
       <div class="search-bar">
-        <p class="search-region" v-on:click="skip('https://vod.ktvsky.com/thunder/search')">
+        <p class="search-region"
+           v-on:click="skip('https://vod.ktvsky.com/thunder/search')">
           <span class="search-title">输入歌曲名、歌星名</span>
         </p>
       </div>
@@ -12,13 +13,19 @@
     </div>
     <div class="banner-wrapper">
       <Swiper>
-        <div v-for="(item, index) in swiperSlides" :key='index' class='banner-slide' v-on:click="skip(item.route)">
-          <img :src="item.imgUrl" alt="">
+        <div v-for="(item, index) in swiperSlides"
+             :key='index'
+             class='banner-slide'
+             v-on:click="skip(item.route)">
+          <img :src="item.imgUrl"
+               alt="">
         </div>
       </Swiper>
     </div>
     <ul class="item-nav-wrapper">
-      <li v-for='(item, index) in indexNav' :key='index' v-on:click="skip(item.url)">{{item.key}}</li>
+      <li v-for='(item, index) in indexNav'
+          :key='index'
+          v-on:click="skip(item.url)">{{item.key}}</li>
     </ul>
     <div class="home-title">点歌分类</div>
     <div class="order-service">
@@ -57,6 +64,7 @@
         </div>
       </div>
     </div>
+    <play-control />
     <Footer></Footer>
   </div>
 </template>
@@ -65,6 +73,7 @@ import weixin from '../libs/app/weixin.js'
 import Footer from '@/components/app/footer/footer.vue'
 import { swiperSlides } from '@/components/common/swiper/static'
 import { indexNav } from '../static/index.js'
+import playControl from '@/components/app/play_control'
 export default {
   name: 'home',
   data () {
@@ -85,17 +94,24 @@ export default {
       } else {
         this.$router.push(path)
       }
+    },
+    payPanelShow () {
+      this.payShow = true
+    },
+    hidePanel () {
+      this.payShow = false
     }
   },
   mounted () {
   },
   components: {
-    Footer
+    Footer,
+    playControl
   }
 }
 </script>
 <style lang="scss" scoped>
-.head-wrapper{
+.head-wrapper {
   display: flex;
   align-items: center;
 }
@@ -132,18 +148,20 @@ export default {
     @include px2rem(height, 32);
   }
 }
-.item-nav-wrapper, .sort-wrapper, .order-service {
+.item-nav-wrapper,
+.sort-wrapper,
+.order-service {
   display: flex;
   justify-content: space-around;
   @include px2rem(line-height, 60);
 }
-.item-nav-wrapper{
+.item-nav-wrapper {
   flex-wrap: wrap;
-  li{
+  li {
     width: 33.3%;
   }
 }
-.home-title{
+.home-title {
   @include px2rem(line-height, 60);
   @include px2rem(padding-left, 30);
   text-align: left;
