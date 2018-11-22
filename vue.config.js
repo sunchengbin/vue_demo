@@ -51,5 +51,13 @@ module.exports = {
         }
         return options
       })
+    config.plugin('vconsole-webpack-plugin')
+      .use('vconsole-webpack-plugin')
+      .tap(options => {
+        options[0] = {
+          enable: process.env.NODE_ENV === 'stage'
+        }
+        return options
+      })
   }
 }

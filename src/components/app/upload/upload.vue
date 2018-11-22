@@ -40,6 +40,7 @@
 <script>
 import {
   apis,
+  http,
   chttp
 } from '@/libs/interfaces'
 import COMMONURL from '@/libs/base/common'
@@ -59,7 +60,7 @@ export default {
       this.upyun.policy = res.upyun[1]
       this.upyun.signature = res.upyun[0]
     }).catch(err => {
-      Vue.$toast('上传错误')
+      Vue.$toast(err)
     })
     /* eslint-enable */
   },
@@ -72,14 +73,13 @@ export default {
       // let size = event.target.files[0].size
       // let type = event.target.files[0].type.indexOf('image')
       let formData = new FormData(this.$refs.upload)
-      chttp.post('https://v0.api.upyun.com/autodynemv', formData).then(res => {
-        console.log('正常2', res)
-        let url = 'https://autodynemv.b0.upaiyun.com/' + res['url']
+      console.log(apis.upyun)
+      http.post(apis.upyun + '?BaseUrlType=upyun', formData).then(res => {
+        let url = COMMONURL.autodynemv + res['url']
         that.myImgUrl = url
         this.imgArr.push(that.myImgUrl)
-        console.log(this.imgArr)
       }).catch(err => {
-        console.log('异常2', err)
+        Vue.$toast(err)
       })
     },
     deleteImg (index) {

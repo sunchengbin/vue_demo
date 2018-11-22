@@ -7,8 +7,6 @@
     <div class="btn">
       {{btnTxt}}
     </div>
-    <!-- <loading message="数据加载中" /> -->
-    <!-- <toast message='警告'></toast> -->
     <paypanel v-show="payShow"
               @hidePanel="hidePanel"
               :price="price"></paypanel>
@@ -73,14 +71,6 @@ export default {
     }
   },
   computed: {
-    // user_img () {
-    //   return this.$store.state.user_img
-    // },
-    // rights_desc () {
-    //   return this.$store.state.rights_desc
-    // }
-  },
-  computed: {
     rights_desc () {
       return this.$store.state.rights_desc
     }
@@ -90,6 +80,7 @@ export default {
     this.$store.dispatch('getBindStatus')
     this.$store.dispatch('getUserInfo')
     console.log(this.rights_desc, 0)
+    this.$store.dispatch('getDeviceInfo')
     // http.get('/base?BaseUrlType=coupon')
     // http.get('/base?BaseUrlType=app')
     // http.post('/base', {
@@ -143,6 +134,12 @@ export default {
     // setTimeout(function () {
     //   self.$loading.close()
     // }, 2000)
+    // this.$router.push({
+    //   name: 'about',
+    //   params: {
+    //     id: 'bar'
+    //   }
+    // })
   },
   components: {
     // loading

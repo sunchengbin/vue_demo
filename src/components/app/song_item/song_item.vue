@@ -156,7 +156,7 @@ export default {
         mindex: self.order_index,
         unionid: unionid
       }
-      http.get(apis.top, params).then(res => {
+      http.get(apis.top, { params }).then(res => {
         if (res.errcode === 21001) {
           self.$emit('setTop')
           self.$loading.close()
