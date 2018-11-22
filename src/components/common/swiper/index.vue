@@ -371,9 +371,9 @@ export default {
         if (isNaN(offsetLeft) || isNaN(offsetTop)) {
           fireTap = true
         }
-        // if (fireTap) {
-        //   children[this.index].$emit('tap') // 当移动距离很小的时候，说明是点击事件，就触发swipeItem组件的tap事件
-        // }
+        if (fireTap) {
+          // children[this.index].$emit('tap') // 当移动距离很小的时候，说明是点击事件，就触发swipeItem组件的tap事件
+        }
       }
       if (dragDuration < 300 && dragState.currentLeft === undefined) return
       if (dragDuration < 300 || Math.abs(offsetLeft) > pageWidth / 2) {
