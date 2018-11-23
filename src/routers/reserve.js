@@ -9,7 +9,7 @@ export default [{
   component: () => import('@/views/reserve/adress.vue')
 },
 {
-  path: '/reserve/searchKTV',
+  path: '/reserve/search_ktv',
   name: 'searchKTV',
-  component: () => import('@/views/reserve/searchKTV.vue')
+  component: () => import('@/views/reserve/search_ktv.vue')
 }]
