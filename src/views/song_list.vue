@@ -7,9 +7,11 @@
       <ul v-infinite-scroll="loadMore"
           infinite-scroll-disabled="loading"
           infinite-scroll-distance="5"
-          class="list songs-list">
+          class="list songs-list"
+          @touchstart="touch1"
+          @touchend="touch2">
         <song-item v-for="(item,index) in songs"
-                   :key="item.songid"
+                   :key="index"
                    :title="item.music_name"
                    :sub_title="item.singer"
                    :song_ID="item.songid"
@@ -18,7 +20,7 @@
                    :origin="'search'"
                    :songindex="index"></song-item>
       </ul>
-      <p v-show='is_last'>我是有底线的</p>
+      <p v-show='is_show'>我是有底线的</p>
     </div>
   </div>
 </template>
@@ -38,7 +40,8 @@ export default {
       songs: [],
       page: 1,
       type: 'hot',
-      is_last: false
+      is_last: false,
+      is_show: false
 
     }
   },
@@ -46,7 +49,10 @@ export default {
     songItem
   },
   created () {
-    // this.getSongList(this.type, this.page)
+    this.promiseAll().then((res) => {
+      console.log('333333')
+      this.$loading.close()
+    })
   },
   methods: {
     getSongList (type, page) {
@@ -59,6 +65,7 @@ export default {
       http.get(apis.top_type + type, { params }).then(res => {
         if (res.data.length < 10) {
           this.is_last = true
+          this.is_show = true
         }
         this.songs.push.apply(this.songs, res.data)
         this.page++
@@ -68,6 +75,39 @@ export default {
     },
     loadMore () {
       this.getSongList(this.type, this.page)
+    },
+    promiseAll () {
+      const one = this.test1().then(res => {
+        console.log(res)
+      })
+      const two = this.test2().then(res => {
+        console.log(res)
+      })
+      return Promise.all([one, two, this.getSongList(this.type, this.page)])
+    },
+    test1 () {
+      return new Promise((resolve, reject) => {
+        setTimeout(function () {
+          resolve('222222')
+        }, 2000)
+      })
+    },
+    test2 () {
+      return new Promise((resolve, reject) => {
+        setTimeout(function () {
+          resolve('111111')
+        }, 1000)
+      })
+    },
+    check () {
+      console.log('check')
+    },
+    touch1 (e) {
+      console.log('start')
+    },
+    touch2 (e) {
+      console.log('222')
+      this.is_show = false
     }
   }
 }

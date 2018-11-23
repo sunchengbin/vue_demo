@@ -36,6 +36,7 @@ voice组件的使用说明
 
 <script>
 import Wx from '@/libs/app/weixin'
+import Vue from 'vue'
 import {
   apis,
   http
