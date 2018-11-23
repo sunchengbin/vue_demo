@@ -9,7 +9,6 @@ const http = axios.create({
   baseURL: process.env.VUE_APP_KTV_BASEURL,
   timeout: 50000
 })
-
 http.interceptors.request.use(config => {
   // 请求头里面加入各种判断
   if (config.method === 'post' && config.data && config.data.constructor !== FormData) {
@@ -20,6 +19,13 @@ http.interceptors.request.use(config => {
   // 自动切换http请求的BaseUrl为coupon域名
   if (util.getUrlPrem('BaseUrlType', config.url) === 'coupon') {
     config.baseURL = process.env.VUE_APP_COUPON_BASEURL
+  }
+  // 上传图片的域名
+  console.log(config.url, 'config.url', util.getUrlPrem('BaseUrlType', config.url))
+  if (util.getUrlPrem('BaseUrlType', config.url) === 'upyun') {
+    console.log(44, process.env.VUE_APP_UPYUN_BASEURL)
+    config.baseURL = process.env.VUE_APP_UPYUN_BASEURL
+    console.log(config.baseURL)
   }
   return config
 }, error => {
