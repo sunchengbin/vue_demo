@@ -121,8 +121,8 @@ export default {
       }
       const self = this
       // self.$loading.open()
-      let openid = self.$store.state.openid
-      let unionid = self.$store.state.unionid
+      let openid = self.$store.state.openid || 'o14xfwLt4joPUvTpyVFXIOEqxcvQ'
+      let unionid = self.$store.state.unionid || 'o14xfwLt4joPUvTpyVFXIOEqxcvQ'
       let params = {
         musicname: self.title,
         openid: openid,
@@ -133,13 +133,15 @@ export default {
       http.post(apis.list, params).then(res => {
         self.$loading.close()
         if (res.errcode === 21001) {
-          self.$store.commit('SAVE_RAISE_SONGNAME', self.title)
-          self.$store.commit('SAVE_RAISE_SONGID', self.song_ID)
-          self.allow_raise ? self.$store.commit('SHOW_RAISE_SONG') : self.$store.commit('SHOW_FEEDBACK')// messageBox
+          self.$toast('操作成功')
+          // self.$store.commit('SAVE_RAISE_SONGNAME', self.title)
+          // self.$store.commit('SAVE_RAISE_SONGID', self.song_ID)
+          // self.allow_raise ? self.$store.commit('SHOW_RAISE_SONG') : self.$store.commit('SHOW_FEEDBACK')// messageBox
         }
       }).catch(e => {
         self.$loading.close()
-        self.allow_raise ? self.$store.commit('SHOW_RAISE_SONG') : self.$store.commit('SHOW_FEEDBACK')
+        self.$messageBox.alert(e, '')
+        // self.allow_raise ? self.$store.commit('SHOW_RAISE_SONG') : self.$store.commit('SHOW_FEEDBACK')
       })
     },
     setTop () {
@@ -148,8 +150,8 @@ export default {
       }
       let self = this
       // self.$loading.open()
-      let openid = self.$store.state.openid
-      let unionid = self.$store.state.unionid
+      let openid = self.$store.state.openid || 'o14xfwLt4joPUvTpyVFXIOEqxcvQ'
+      let unionid = self.$store.state.unionid || 'o6qE3t6JA9uOPP6veEbLiRKBy3F8'
       let params = {
         openid: openid,
         mno: self.song_ID,
