@@ -39,7 +39,6 @@ if (process.env.NODE_ENV === 'production') {
     .config('http://103103df01d64286b6372e580fc26cf1@3try.ktvsky.com/16')
     .addPlugin(RavenVue, Vue).install()
 }
-
 // 插件
 Vue.use(lazyload)
 Vue.use(Router)
@@ -55,7 +54,7 @@ Vue.component('svg-icon', SvgIcon)
 Vue.component(Footer.name, Footer)
 Vue.component(Swiper.name, Swiper)
 
-;(async function () {
+; (async function () {
   let routes = [
     {
       path: '/',
