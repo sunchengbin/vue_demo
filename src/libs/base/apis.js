@@ -1,5 +1,5 @@
 const apis = {
-  login: '/v1/login',
+  // login: '/v1/login',
   initWx: '/bar/u/wx/config', // 初始化
   deviceUrl: '/stb/device',
   funcUrl: '/stb/func',
@@ -13,7 +13,6 @@ const apis = {
   upload: '/by/upload',
   upyun: '/autodynemv',
   // 语音
-  dict: '/bar/u/remote_ctrl/dict', // 字典
   song: '/bar/u/remote_ctrl/song/', // 播放控制
   autodynemv: '/',
   mv: '/vod/mv',
@@ -24,8 +23,8 @@ const apis = {
   group: '/vod/emoji/group', // 弹幕分组
   user_mv: '/vod/user/mv',
   user_info: '/vod/user_info',
-  'upload_songs': '/u/upload/songs', // 录音列表
-  'upload_song': '/u/upload/song', // 单个录音
+  upload_songs: '/u/upload/songs', // 录音列表
+  upload_song: '/u/upload/song', // 单个录音
   search: '/bar/u/remote_ctrl/search', // 搜索
   list: '/bar/u/remote_ctrl/song/list', // 列表
   top: '/bar/u/remote_ctrl/song/listtop', // 置顶
