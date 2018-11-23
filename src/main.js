@@ -67,6 +67,12 @@ Vue.component(Swiper.name, Swiper)
   routes = routes.concat(newRoutes)
   let router = new Router({
     mode: process.env.NODE_ENV === 'development' ? 'hash' : 'history',
+    scrollBehavior (to, from, savedPosition) {
+      return {
+        x: 0,
+        y: 0
+      }
+    },
     routes
   })
   RouterGuard(router)
