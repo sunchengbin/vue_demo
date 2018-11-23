@@ -36,7 +36,7 @@ const weixin = {
       Cookies.set('openid', openid, {
         expires: 30
       })
-      Cookies.set('unionid', openid, {
+      Cookies.set('unionid', unionid, {
         expires: 30
       })
       // utils.cookie.setCookie(openid, 30)
@@ -297,7 +297,9 @@ const weixin = {
               key: that.key ? that.key : '',
               openid: that.openid
             }
-            chttp.get(apis.dpStore, { params: data }).then(res => {
+            chttp.get(apis.dpStore, {
+              params: data
+            }).then(res => {
               that.showLoad = false
               if (res.store.length < that.ps) {
                 that.isRefresh = false
