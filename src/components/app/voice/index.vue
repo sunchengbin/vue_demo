@@ -68,7 +68,9 @@ export default {
       .then(function (res) {
         self.result_list = res.data
       }).catch(function (err) {
+        /* eslint-disable */
         Vue.$toast(err)
+        /* eslint-enable */
       })
   },
   methods: {
@@ -131,13 +133,19 @@ export default {
           if (res.errcode === 21001) {
             self.closeVoice()
           } else if (res.errcode === 40003) {
+            /* eslint-disable */
             Vue.$toast('您未绑定房间，请扫码访问')
+            /* eslint-enable */
           } else {
+            /* eslint-disable */
             Vue.$toast('出了点小问题，请稍后再试')
+            /* eslint-enable */
           }
         })
         .catch(function (err) {
+          /* eslint-disable */
           Vue.$toast(err)
+          /* eslint-enable */
         })
     }
   },

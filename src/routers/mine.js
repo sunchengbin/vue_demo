@@ -2,6 +2,9 @@ export default [
   {
     path: '/mine',
     name: 'mine',
-    component: () => import('@/views/mine/mine.vue')
+    component: () => import('@/views/mine/mine.vue'),
+    meta: {
+      title: 'mine'
+    }
   }
 ]

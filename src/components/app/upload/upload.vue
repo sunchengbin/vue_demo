@@ -79,7 +79,9 @@ export default {
         that.myImgUrl = url
         this.imgArr.push(that.myImgUrl)
       }).catch(err => {
+        /* eslint-disable */
         Vue.$toast(err)
+        /* eslint-enable */
       })
     },
     deleteImg (index) {

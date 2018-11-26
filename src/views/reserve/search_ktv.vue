@@ -34,7 +34,9 @@ export default {
   },
   created () {
     this.ktv_id = 1
-    // _hmt.push(['_trackEvent', '点评网搜索ktv', '进入页面', 'gzh_searchKTV'])
+    /* eslint-disable */
+    _hmt.push(['_trackEvent', '点评网搜索ktv', '进入页面', 'gzh_searchKTV'])
+    /* eslint-enable */
     let data = {
       openid: this.openid,
       city: this.city
