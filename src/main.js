@@ -51,7 +51,7 @@ Vue.$loading = Vue.prototype.$loading = loading
 Vue.$messageBox = Vue.prototype.$messageBox = MessageBox
 
 // 组件
-Vue.component('svg-icon', SvgIcon)
+Vue.component(SvgIcon.name, SvgIcon)
 Vue.component(Footer.name, Footer)
 Vue.component(Swiper.name, Swiper)
 

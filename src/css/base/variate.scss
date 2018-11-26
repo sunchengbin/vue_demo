@@ -2,9 +2,15 @@
 $base_ui_size: 75;
 
 // font-color
-$base_font_color: #333;
+$title_font_color: #333;
+$base_font_color: #666;
+$explain_font_color: #999;
+$assist_font_color: #ccc;
 $link_font_color: #4990E2;
 $active_font_color: #42b983;
+
+// border-color
+$base_border_color: #e5e5e5;
 
 // background-color
 $lazy_bg_color: #f5f5f5;
