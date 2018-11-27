@@ -7,8 +7,8 @@ import thumb from './modules/thumb'
 
 Vue.use(Vuex)
 const state = {
-  openid: 'o3JAqt0Jr9vtoVncMW7ZBnHFvUd',
-  unionid: 'o6qE3t8QKr3uYqrgbknYUSE72RiM',
+  openid: 'o14xfwKLuC5TdvXUZ1I3tMFRELHw',
+  unionid: 'o6qE3t_HiGWR-A-Pxi4aA84XpGp4',
   device: '',
   mv_version: '',
   emoji_version: '',
@@ -17,7 +17,7 @@ const state = {
   atm_version: '',
   vod_type: '',
   ba: '',
-  bind_status: 'true',
+  bind_status: '',
   user_img: null,
   user_name: '未登录',
   rights_desc: '',

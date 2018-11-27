@@ -4,7 +4,7 @@ const thumb = {
     thumb_toast: false,
     fee: 100,
     entry: '',
-    roomid: ''
+    roomid: '18680441'
   },
   mutations: {
     THUMB_PAYED (state, isPay) {

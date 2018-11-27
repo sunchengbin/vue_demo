@@ -111,7 +111,9 @@ export default {
   },
   created () {
     let that = this
-    // _hmt.push(['_trackEvent', '点评网首页', '进入页面', 'gzh_reserve'])
+    /* eslint-disable */
+    _hmt.push(['_trackEvent', '点评网首页', '进入页面', 'gzh_reserve'])
+    /* eslint-enable */
     Wx.getLocation(that)
   },
   methods: {
@@ -216,7 +218,6 @@ export default {
           display: inline-block;
           @include px2rem(padding-top, 5);
           @include px2rem(margin-left, 8);
-          vertical-align: middle;
         }
         .address {
           color: #666;

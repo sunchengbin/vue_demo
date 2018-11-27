@@ -4,7 +4,8 @@ module.exports = {
     node: true
   },
   globals: {
-    _hmt: true
+    _hmt: true,
+    wx: true
   },
   'extends': [
     'plugin:vue/essential',

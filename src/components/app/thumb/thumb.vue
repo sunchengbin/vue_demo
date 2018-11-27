@@ -62,9 +62,8 @@ export default {
   },
   methods: {
     thumbClick () {
-      this.$router.push('/thumb?p=heart&roomid=' + this.roomid)
       if (!this.is_bind) {
-        this.$store.commit('SHOW_ALERT_MODAL', '请扫码绑定房台')
+        this.$messageBox.alert('请扫码绑定房台', '')
         return
       }
       let params = {
@@ -82,7 +81,7 @@ export default {
         if (count < 800) return
         this.thumbAnimate()
         this.timer = new Date().getTime()
-        chttp.get(apis.send_like, params)
+        chttp.get(apis.send_like, { params: params })
           .then(res => {
             this.$store.commit('THUMB_PAYED', res.is_pay)
             if (res.is_pay !== 1) {

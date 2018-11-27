@@ -43,20 +43,11 @@
   </div>
 </template>
 <script>
-import Toast from '@/components/common/toast'
-import weixin from '@/libs/app/weixin'
 export default {
   name: 'pay_panel',
   data () {
     return {
-      payment: 2,
-      balance: 0
-    }
-  },
-  props: {
-    price: {
-      type: Number,
-      default: 0
+      payment: 2
     }
   },
   computed: {
@@ -65,51 +56,78 @@ export default {
     },
     show_pay_panel () {
       return this.$store.state.payPanel.show_pay
+    },
+    price () {
+      return this.$store.state.payPanel.price_to_pay
+    },
+    balance () {
+      return this.$store.state.payPanel.balance
     }
   },
   methods: {
-    pay () {
-      if (this.payment === 1 && this.can_pay) {
-        // 调用余额支付接口
-      } else if (this.payment === 2) {
-        const openid = '122'
-        const unionid = '122'
-        weixin.wxPay(openid, unionid, this.wxPayCallback)
-      }
+    closePanel () {
+      this.$store.commit('CLOSE_PAY_PANEL')
     },
-    choosePayment (type) { // 支付方式选择
+    // 获取当前用户余额 存入vuex
+    getBalance () {
+      this.$store.dispatch('getBalance', 'thumb')
+    },
+    // 支付方式选择
+    choosePayment (type) {
       if (type === 1 && !this.can_pay) {
         this.jump('charge')
         return
       }
       this.payment = type
     },
-    closePanel () {
-      this.$store.commit('CLOSE_PAY_PANEL');
+    // 支付方式判断
+    pay () {
+      if (this.payment === 1 && this.can_pay) {
+        this.$store.dispatch('balancePay', {
+          type: 'thumb',
+          callback: () => {
+            this.$router.push('/thunder/home')
+            this.entryCollection()
+          }
+        })
+      } else if (this.payment === 2) {
+        this.$store.dispatch('wxPay', {
+          type: 'thumb',
+          callback: () => {
+            this.$router.push('/thunder/home')
+            this.entryCollection()
+          }
+        })
+      }
     },
-    getBalance () {
-      // 调用获取余额接口
-    },
+    // 微信支付
     jump (path) {
-      this.closePanel()
+      this.$store.commit('CLOSE_PAY_PANEL')
       this.$router.push('/thunder/' + path)
     },
-    wxPayCallback (type) {
-      let message = '支付成功'
-      switch (type) {
-        case 'fail':
-          message = 'fail'
+    entryCollection () {
+      let entry = this.entry
+      _hmt.push(['_trackEvent', '无限点赞总支付'])
+      switch (entry) {
+        case 'scan':
+          _hmt.push(['_trackEvent', '无限点赞支付', '微信扫码进入', 'thunder'])
           break
-        case 'cancel':
-          message = 'cancel'
+        case 'banner':
+          _hmt.push(['_trackEvent', '无限点赞支付', '公众号banner进入', 'thunder'])
           break
-        default:
-          message = 'success'
+        case 'ibanner':
+          _hmt.push(['_trackEvent', '无限点赞支付', '首页banner进入', 'thunder'])
+          break
+        case 'channel':
+          _hmt.push(['_trackEvent', '无限点赞支付', 'icon进入', 'thunder'])
+          break
+        case 'heart':
+          _hmt.push(['_trackEvent', '无限点赞支付', '点赞按钮进入', 'thunder'])
+          break
+        default :
+          _hmt.push(['_trackEvent', '无限点赞支付', '其他方式', 'thunder'])
+          break
       }
-      Toast({
-        message: message,
-        position: 'middle'
-      })
     }
   },
   created () {

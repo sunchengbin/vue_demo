@@ -30,10 +30,6 @@ export default {
   components: {
     payPanel
   },
-  data () {
-    return {
-    }
-  },
   computed: {
     loading () {
       return this.$store.state.is_loading
@@ -66,7 +62,8 @@ export default {
         this.$router.push('/thunder/home')
         return
       }
-      chttp.get(apis.send_like, params)
+      let that = this
+      chttp.get(apis.send_like, { params: params })
         .then(res => {
           this.$store.commit('THUMB_PAYED', res.is_pay)
           if (res.is_pay) {
@@ -75,6 +72,8 @@ export default {
           }
           this.$store.commit('SHOW_PAY_PANEL', this.price)
         }).catch(function (err) {
+          console.log(that)
+          that.$store.commit('SHOW_PAY_PANEL', that.price)
           console.log(err)
         })
     },
@@ -111,6 +110,9 @@ export default {
     this.entry = this.$route.query.p
     this.$store.commit('THUMB_ENTRY', this.entry)
     this.entryCollection()
+  },
+  created () {
+    this.$loading.close()
   }
 }
 </script>

@@ -39,7 +39,6 @@ if (process.env.NODE_ENV === 'production') {
     .config('http://103103df01d64286b6372e580fc26cf1@3try.ktvsky.com/16')
     .addPlugin(RavenVue, Vue).install()
 }
-
 // 插件
 Vue.use(lazyload)
 Vue.use(Router)
@@ -51,11 +50,11 @@ Vue.$loading = Vue.prototype.$loading = loading
 Vue.$messageBox = Vue.prototype.$messageBox = MessageBox
 
 // 组件
-Vue.component('svg-icon', SvgIcon)
+Vue.component(SvgIcon.name, SvgIcon)
 Vue.component(Footer.name, Footer)
 Vue.component(Swiper.name, Swiper)
 
-;(async function () {
+; (async function () {
   let routes = [
     {
       path: '/',
@@ -67,6 +66,12 @@ Vue.component(Swiper.name, Swiper)
   routes = routes.concat(newRoutes)
   let router = new Router({
     mode: process.env.NODE_ENV === 'development' ? 'hash' : 'history',
+    scrollBehavior (to, from, savedPosition) {
+      return {
+        x: 0,
+        y: 0
+      }
+    },
     routes
   })
   RouterGuard(router)

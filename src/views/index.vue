@@ -64,6 +64,7 @@
         </div>
       </div>
     </div>
+    <skip-song></skip-song>
     <thumb-control></thumb-control>
     <play-control />
     <Footer></Footer>
@@ -74,8 +75,10 @@ import weixin from '../libs/app/weixin.js'
 import Footer from '@/components/app/footer/footer.vue'
 import { swiperSlides } from '@/components/common/swiper/static'
 import { indexNav } from '../static/index.js'
+import skipSong from '@/components/app/skip_song/index.vue'
 import playControl from '@/components/app/play_control'
 import thumbControl from '@/components/app/thumb/thumb'
+import { http, apis } from '@/libs/interfaces'
 export default {
   name: 'home',
   data () {
@@ -85,6 +88,7 @@ export default {
     }
   },
   created () {
+    this.$loading.close()
   },
   methods: {
     bindRoom () {
@@ -102,14 +106,34 @@ export default {
     },
     hidePanel () {
       this.payShow = false
+    },
+    operation () {
+      if (this.loading) {
+        return
+      }
+      const self = this
+      self.$loading.open()
+      let params = {
+        openid: this.openid,
+        unionid: this.unionid,
+        type: 0
+      }
+      http.get(apis.play + 'next', { params: params })
+        .then(res => {
+          // 弹出反馈框
+          self.$toast('操作成功')
+          self.$loading.close()
+        }).catch(e => {
+          self.$loading.close()
+          self.$messageBox.alert(e, '')
+        })
     }
-  },
-  mounted () {
   },
   components: {
     Footer,
     playControl,
-    thumbControl
+    thumbControl,
+    skipSong
   }
 }
 </script>

@@ -1,5 +1,5 @@
 const apis = {
-  login: '/v1/login',
+  // login: '/v1/login',
   initWx: '/bar/u/wx/config', // 初始化
   deviceUrl: '/stb/device',
   funcUrl: '/stb/func',
@@ -9,9 +9,10 @@ const apis = {
   dpStore: '/dp/store',
   hotStore: '/dp/hot/store',
   dpCity: '/dp/city',
-  upload: '/by/upload', // 上传图片
-  upyun: '/autodynemv', // 语音
-  dict: '/bar/u/remote_ctrl/dict', // 字典
+  // 上传图片
+  upload: '/by/upload',
+  upyun: '/autodynemv',
+  // 语音
   song: '/bar/u/remote_ctrl/song/', // 播放控制
   autodynemv: '/',
   mv: '/vod/mv',
@@ -28,15 +29,16 @@ const apis = {
   list: '/bar/u/remote_ctrl/song/list', // 列表
   top: '/bar/u/remote_ctrl/song/listtop', // 置顶
   play: '/bar/u/remote_ctrl/song/', // 播放控制
+  dict: '/bar/u/remote_ctrl/dict', // 语音字典
   config: '/bar/u/wx/config', // 配置
   top_type: '/bar/u/remote_ctrl/top/',
   like: '/bar/u/remote_ctrl/song/like',
   singer_list: '/bar/u/remote_ctrl/song/getsingerlist', // 歌星列表
-  send_like: '/vod/like/send', // 点赞,
-  balance: '/vod/coupon/user/balance', //账户余额
-  zhuzai_pay: '/vod/zz/cp/pay', //主宰余额支付
-  thumb_pay: '/vod/like/cp/pay', //点赞余额支付
-  zhuzai_wpay: '/v2/zz/apply', //主宰微信支付
-  thumb_wpay: '/vod/like/pay', //点赞微信支付
+  send_like: '/vod/like/send', // 点赞
+  balance: '/vod/coupon/user/balance', // 获取账户余额
+  zhuzai_pay: '/vod/zz/cp/pay', // 主宰余额支付
+  thumb_pay: '/vod/like/cp/pay', // 点赞余额支付
+  zhuzai_wpay: '/v2/zz/apply', // 主宰微信支付
+  thumb_wpay: '/vod/like/pay' // 点赞微信支付
 }
 export default apis
