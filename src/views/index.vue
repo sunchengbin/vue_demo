@@ -64,6 +64,7 @@
         </div>
       </div>
     </div>
+    <thumb-control></thumb-control>
     <play-control />
     <Footer></Footer>
   </div>
@@ -74,6 +75,7 @@ import Footer from '@/components/app/footer/footer.vue'
 import { swiperSlides } from '@/components/common/swiper/static'
 import { indexNav } from '../static/index.js'
 import playControl from '@/components/app/play_control'
+import thumbControl from '@/components/app/thumb/thumb'
 export default {
   name: 'home',
   data () {
@@ -106,7 +108,8 @@ export default {
   },
   components: {
     Footer,
-    playControl
+    playControl,
+    thumbControl
   }
 }
 </script>

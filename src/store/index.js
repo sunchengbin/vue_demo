@@ -2,10 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import mutations from './mutations'
 import actions from './action'
+import payPanel from './modules/pay_panel'
+import thumb from './modules/thumb'
+
 Vue.use(Vuex)
 const state = {
-  openid: '',
-  unionid: '',
+  openid: 'o3JAqt0Jr9vtoVncMW7ZBnHFvUd',
+  unionid: 'o6qE3t8QKr3uYqrgbknYUSE72RiM',
   device: '',
   mv_version: '',
   emoji_version: '',
@@ -14,7 +17,7 @@ const state = {
   atm_version: '',
   vod_type: '',
   ba: '',
-  bind_status: '',
+  bind_status: 'true',
   user_img: null,
   user_name: '未登录',
   rights_desc: '',
@@ -26,5 +29,9 @@ const state = {
 export default new Vuex.Store({
   state,
   actions,
-  mutations
+  mutations,
+  modules: {
+    thumb,
+    payPanel
+  }
 })

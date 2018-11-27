@@ -98,8 +98,8 @@ export default {
     }
   },
   beforeRouteEnter (to, from, next) {
-    var u = navigator.userAgent
-    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
+    // var u = navigator.userAgent
+    // var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
     // XXX: 修复iOS版微信HTML5 History兼容性问题
     // if (isiOS && to.path !== location.pathname) {
     //   // 此处不可使用location.replace

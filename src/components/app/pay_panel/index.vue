@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main" v-show="show_pay_panel">
     <div class="bkg"
          @click="closePanel"></div>
     <div class="panel-main">
@@ -62,6 +62,9 @@ export default {
   computed: {
     can_pay () {
       return this.balance >= this.price
+    },
+    show_pay_panel () {
+      return this.$store.state.payPanel.show_pay
     }
   },
   methods: {
@@ -82,7 +85,7 @@ export default {
       this.payment = type
     },
     closePanel () {
-      this.$emit('hidePanel')
+      this.$store.commit('CLOSE_PAY_PANEL');
     },
     getBalance () {
       // 调用获取余额接口
