@@ -103,6 +103,7 @@ export default {
     }
   },
   mounted () {
+    this.$loading.close()
   },
   components: {
     Footer,

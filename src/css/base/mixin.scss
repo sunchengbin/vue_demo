@@ -74,3 +74,28 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+@mixin titleFont {
+  @include fontSize(18px);
+  color: $title_font_color;
+}
+
+@mixin listFont {
+  @include fontSize(16px);
+  color: $title_font_color;
+}
+
+@mixin logoFont {
+  @include fontSize(15px);
+  color: $title_font_color;
+}
+
+@mixin explainFont {
+  @include fontSize(13px);
+  color: $explain_font_color;
+}
+
+@mixin messageFont {
+  @include fontSize(12px);
+  color: $explain_font_color;
+}

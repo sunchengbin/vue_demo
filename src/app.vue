@@ -6,7 +6,9 @@
       <router-link to="/mine">我的</router-link> |
       <router-link to="/songlist">Songlist</router-link>
     </div>
-    <router-view />
+    <transition name="fade">
+      <router-view />
+    </transition>
   </div>
 </template>
 <script>
@@ -60,5 +62,11 @@ export default {
       color: $active_font_color;
     }
   }
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

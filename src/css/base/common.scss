@@ -8,7 +8,8 @@ input,
 select,
 textarea {
   font-family: system-ui,
-  'PingFang SC',
+  PingFang SC,
+  Helvetica Neue,
   STHeiti,
   sans-serif;
   @include fontSize(12px);
