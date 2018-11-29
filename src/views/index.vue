@@ -79,10 +79,32 @@ export default {
   data () {
     return {
       swiperSlides: swiperSlides,
-      indexNav: indexNav
+      indexNav: indexNav,
+      obj: {
+        a: 1
+      }
     }
   },
   created () {
+    console.log(this.obj, 111111)
+    // var Book = {
+    //   name: 'vue权威指南'
+    // }
+    // console.log(Book.name, 222222)
+    var Book = {}
+    var name = ''
+    Object.defineProperty(Book, 'name', {
+      set: (value) => {
+        name = value
+        console.log('你取了一个书名叫做' + value)
+      },
+      get: () => {
+        return '《' + name + '》'
+      }
+    })
+    Book.name = 'vue权威指南'
+    console.log(Book.name)
+    console.log(Book)
   },
   methods: {
     bindRoom () {

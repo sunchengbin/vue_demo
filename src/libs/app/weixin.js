@@ -274,7 +274,6 @@ const weixin = {
         that.latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
         that.longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
         // var map = new BMap.Map("container"); //初始化地图类
-        console.log(BMap, 'BMap')
         var pointAdd = new BMap.Point(res.longitude, res.latitude)
         var gc = new BMap.Geocoder()
         gc.getLocation(pointAdd, (rs) => {
