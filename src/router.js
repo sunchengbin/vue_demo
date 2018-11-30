@@ -1,30 +1,22 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import home from '@/views/home.vue'
-Vue.use(Router)
-
-let routes = [{
-  path: '/',
-  name: 'home',
-  component: home
-}]
-
-// 动态加载路由
-function importAll (r) {
-  r.keys().forEach(fileName => {
-    if (/.\//.test(fileName)) {
-      fileName = fileName.replace('./', '')
-    }
-    const file = import(`./routers/${fileName}`)
-    file.then(res => {
-      routes = routes.concat(res)
-    })
+import weixin from '@/libs/app/weixin'
+// import Vue from 'vue'
+function setTitle (to) {
+  to.matched.some(record => {
+    document.title = record.meta.title || process.env.VUE_APP_TITLE
   })
 }
-importAll(require.context('@/routers', true, /.js$/))
-
-export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
-})
+export default function (router) {
+  router.beforeEach(async (to, from, next) => {
+    // console.log(2)
+    // Vue.$loading.open()
+    // console.log('loading is opened')
+    // 设置title
+    setTitle(to)
+    // 判断是否授权,如果未授权则跳到授权
+    if (process.env.NODE_ENV !== 'development') {
+      weixin.getOpenID(to.path, to.query)
+    }
+    next()
+  })
+  router.afterEach((to, from) => {})
+}

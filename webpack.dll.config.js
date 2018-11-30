@@ -4,6 +4,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const isDebug = process.env.NODE_ENV === 'development'
 const outputPath = isDebug ? path.join(__dirname, './src/common_chunk/debug') : path.join(__dirname, './src/common_chunk/dist')
 const fileName = '[name]_[hash].js'
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 // 资源依赖包，提前编译
 const lib = [
@@ -15,6 +16,7 @@ const lib = [
 ]
 
 const plugin = [
+  new CleanWebpackPlugin([outputPath]),
   new webpack.DllPlugin({
     /**
      * path
