@@ -6,5 +6,16 @@ export default [
     meta: {
       title: '404'
     }
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: () => import('@/views/search'),
+    meta: {
+      title: '搜索'
+    },
+    props: (route) => ({
+      query: route.query.q
+    })
   }
 ]

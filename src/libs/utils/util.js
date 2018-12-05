@@ -67,4 +67,16 @@ export default class util {
     })
     return routes
   }
+
+  static loadJS (url, callback) {
+    const head = document.getElementsByTagName('head')[0]
+    const script = document.createElement('script')
+    script.src = url
+    document.onreadystatechange = function () {
+      if (document.readyState === 'complete') {
+        callback && callback()
+      }
+    }
+    head.appendChild(script)
+  }
 }

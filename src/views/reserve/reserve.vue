@@ -73,7 +73,8 @@ import Search from './search'
 import Wx from '@/libs/app/weixin'
 import {
   apis,
-  chttp
+  chttp,
+  utils
 } from '@/libs/interfaces'
 
 export default {
@@ -111,8 +112,13 @@ export default {
   },
   created () {
     let that = this
-    // _hmt.push(['_trackEvent', '点评网首页', '进入页面', 'gzh_reserve'])
-    Wx.getLocation(that)
+    /* eslint-disable */
+    _hmt.push(['_trackEvent', '点评网首页', '进入页面', 'gzh_reserve'])
+    /* eslint-enable */
+    utils.util.loadJS('http://api.map.baidu.com/getscript?v=2.0&ak=Ypej0AFVYlot04KR8lOvwglA8KBSoC4S&services=&t=20181029172410', function () {
+      window.BMap_loadScriptTime = new Date().getTime()
+      Wx.getLocation(that)
+    })
   },
   methods: {
     openGzh (url) {

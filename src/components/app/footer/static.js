@@ -20,7 +20,7 @@ const COMMON = {
       defaultSrc: 'my_icon',
       name: '我的',
       activeSrc: 'my_icon_active',
-      routeName: 'help'
+      routeName: 'mine'
     }
   ],
   entry: [

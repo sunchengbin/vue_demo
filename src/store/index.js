@@ -2,10 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import mutations from './mutations'
 import actions from './action'
+import payPanel from './modules/pay_panel'
+import thumb from './modules/thumb'
+
 Vue.use(Vuex)
 const state = {
-  openid: '',
-  unionid: '',
+  openid: 'o14xfwKLuC5TdvXUZ1I3tMFRELHw',
+  unionid: 'o6qE3t_HiGWR-A-Pxi4aA84XpGp4',
   device: '',
   mv_version: '',
   emoji_version: '',
@@ -26,5 +29,9 @@ const state = {
 export default new Vuex.Store({
   state,
   actions,
-  mutations
+  mutations,
+  modules: {
+    thumb,
+    payPanel
+  }
 })

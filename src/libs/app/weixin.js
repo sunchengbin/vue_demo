@@ -1,5 +1,4 @@
 import wx from 'weixin-js-sdk'
-import BMap from './BMap'
 import {
   utils,
   apis,
@@ -266,17 +265,21 @@ const weixin = {
     })
   },
   getLocation (that) {
-    console.log(that)
+    // const pointAdd = new BMap.Point(116.404, 39.915)
+    // const gc = new BMap.Geocoder()
+    // gc.getLocation(pointAdd, (rs) => {
+    //   const city = rs.addressComponents.city
+    //   console.log(city)
+    // })
     wx.getLocation({
       type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
       success: function (res) {
         console.log(res)
         that.latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
         that.longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
-        // var map = new BMap.Map("container"); //初始化地图类
-        console.log(BMap, 'BMap')
-        var pointAdd = new BMap.Point(res.longitude, res.latitude)
-        var gc = new BMap.Geocoder()
+        // 参考文档http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference.html#a7b27
+        const pointAdd = new BMap.Point(res.longitude, res.latitude)
+        const gc = new BMap.Geocoder()
         gc.getLocation(pointAdd, (rs) => {
           const city = rs.addressComponents.city
           if (city.charAt(city.length - 1) === '市') {
@@ -286,7 +289,6 @@ const weixin = {
           }
           localStorage.setItem('location_city', that.location_city)
           if (that.key || that.city) {
-            console.log(that)
             let data = {
               p: that.p,
               ps: that.ps,
