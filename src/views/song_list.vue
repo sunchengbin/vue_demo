@@ -123,7 +123,7 @@ export default {
       this.payShow = true
     },
     hidePanel () {
-      this.this.payShow = false
+      this.payShow = false
     }
   }
 }
