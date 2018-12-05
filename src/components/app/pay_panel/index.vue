@@ -1,5 +1,5 @@
 <template>
-  <div class="main" v-show="show_pay_panel">
+  <div class="main">
     <div class="bkg"
          @click="closePanel"></div>
     <div class="panel-main">
@@ -43,6 +43,9 @@
   </div>
 </template>
 <script>
+import Toast from '@/components/common/toast'
+import weixin from '@/libs/app/weixin'
+import { chttp, apis } from '@/libs/interfaces.js'
 export default {
   name: 'pay_panel',
   data () {
@@ -50,84 +53,108 @@ export default {
       payment: 2
     }
   },
+  props: {
+    price: {
+      type: Number,
+      default: 0
+    },
+    params: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    },
+    elseData: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    }
+  },
   computed: {
     can_pay () {
       return this.balance >= this.price
-    },
-    show_pay_panel () {
-      return this.$store.state.payPanel.show_pay
-    },
-    price () {
-      return this.$store.state.payPanel.price_to_pay
     },
     balance () {
       return this.$store.state.payPanel.balance
     }
   },
   methods: {
-    closePanel () {
-      this.$store.commit('CLOSE_PAY_PANEL')
+    pay () {
+      if (this.payment === 1 && this.can_pay) {
+        // 调用余额支付接口
+        console.log(this.elseData)
+        console.log(this.params)
+        this.balancePay(this.params, this.elseData)
+      } else if (this.payment === 2) {
+        // const openid = '122'
+        // const unionid = '122'
+        weixin.wxPay(this.params, this.elseData, this.wxPayCallback)
+      }
     },
-    // 获取当前用户余额 存入vuex
-    getBalance () {
-      this.$store.dispatch('getBalance', 'thumb')
-    },
-    // 支付方式选择
-    choosePayment (type) {
+    choosePayment (type) { // 支付方式选择
       if (type === 1 && !this.can_pay) {
         this.jump('charge')
         return
       }
       this.payment = type
     },
-    // 支付方式判断
-    pay () {
-      if (this.payment === 1 && this.can_pay) {
-        this.$store.dispatch('balancePay', {
-          type: 'thumb',
-          callback: () => {
-            this.$router.push('/thunder/home')
-            this.entryCollection()
-          }
-        })
-      } else if (this.payment === 2) {
-        this.$store.dispatch('wxPay', {
-          type: 'thumb',
-          callback: () => {
-            this.$router.push('/thunder/home')
-            this.entryCollection()
-          }
-        })
-      }
+    closePanel () {
+      this.$emit('hidePanel')
     },
-    // 微信支付
+    getBalance () {
+      // 调用获取余额接口
+      this.$store.dispatch('getBalance')
+    },
     jump (path) {
-      this.$store.commit('CLOSE_PAY_PANEL')
+      this.closePanel()
       this.$router.push('/thunder/' + path)
     },
-    entryCollection () {
-      let entry = this.entry
-      _hmt.push(['_trackEvent', '无限点赞总支付'])
-      switch (entry) {
-        case 'scan':
-          _hmt.push(['_trackEvent', '无限点赞支付', '微信扫码进入', 'thunder'])
+    wxPayCallback (type) {
+      let message = '支付成功'
+      switch (type) {
+        case 'fail':
+          message = 'fail'
           break
-        case 'banner':
-          _hmt.push(['_trackEvent', '无限点赞支付', '公众号banner进入', 'thunder'])
+        case 'cancel':
+          message = 'cancel'
           break
-        case 'ibanner':
-          _hmt.push(['_trackEvent', '无限点赞支付', '首页banner进入', 'thunder'])
+        default:
+          message = 'success'
+      }
+      Toast({
+        message: message,
+        position: 'middle'
+      })
+    },
+    /* 余额支付 */
+    balancePay (params, data) {
+      let url = ''
+      const self = this
+      switch (data.type) {
+        case 'zhuzai':
+          url = apis.zhuzai_pay
           break
-        case 'channel':
-          _hmt.push(['_trackEvent', '无限点赞支付', 'icon进入', 'thunder'])
+        case 'thumb':
+          url = apis.thumb_pay
           break
-        case 'heart':
-          _hmt.push(['_trackEvent', '无限点赞支付', '点赞按钮进入', 'thunder'])
-          break
-        default :
-          _hmt.push(['_trackEvent', '无限点赞支付', '其他方式', 'thunder'])
+        default:
           break
       }
+      console.log(url)
+      chttp.post(url, params)
+        .then(res => {
+          self.commit('THUMB_PAYED', res.is_pay)
+          if (res.is_pay === 1) {
+            self.closePanel()
+            data.callback() === 'function' && data.callback()
+          } else {
+            self.dispatch('getBalance', 'thumb')
+            self.$messageBox.alert(res.errmsg)
+          }
+        }).catch(err => {
+          self.$messageBox.alert(err)
+        })
     }
   },
   created () {
@@ -220,7 +247,7 @@ export default {
   }
   .wx-icon {
     @include px2rem(height, 34);
-    background: url('./img/icon/wx_pay_icon.png') no-repeat;
+    background: url("./img/icon/wx_pay_icon.png") no-repeat;
     background-size: contain;
   }
   .pay-text {
@@ -259,10 +286,10 @@ export default {
   .confirm-icon {
     @include px2rem(width, 32);
     @include px2rem(height, 32);
-    background: url('./img/icon/pay_not_choose.png') no-repeat;
+    background: url("./img/icon/pay_not_choose.png") no-repeat;
     background-size: contain;
     &.active {
-      background: url('./img/icon/pay_is_choose.png') no-repeat;
+      background: url("./img/icon/pay_is_choose.png") no-repeat;
       background-size: 100%;
     }
   }

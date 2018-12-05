@@ -1,5 +1,11 @@
 <template>
   <div class="home">
+    <button @click="showpayPanel">点击</button>
+    <paypanel v-show="payShow"
+              @hidePanel="hidePanel"
+              :price=1
+              :params="params"
+              :elseData="elseData"></paypanel>
     <div class="top">
 
     </div>
@@ -32,6 +38,7 @@
 <script>
 import songItem from '@/components/app/song_item'
 import { http, apis } from '@/libs/interfaces'
+import paypanel from '@/components/app/pay_panel'
 export default {
   name: '',
   data () {
@@ -41,12 +48,15 @@ export default {
       page: 1,
       type: 'hot',
       is_last: false,
-      is_show: false
-
+      is_show: false,
+      payShow: false,
+      params: { openid: '1111', unionid: '111' },
+      elseData: { type: 'thumb' }
     }
   },
   components: {
-    songItem
+    songItem,
+    paypanel
   },
   created () {
     this.promiseAll().then((res) => {
@@ -108,6 +118,12 @@ export default {
     touch2 (e) {
       console.log('222')
       this.is_show = false
+    },
+    showpayPanel () {
+      this.payShow = true
+    },
+    hidePanel () {
+      this.this.payShow = false
     }
   }
 }
