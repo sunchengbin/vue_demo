@@ -19,6 +19,9 @@ export default {
           q: 'change'
         }
       })
+      // this.$router.push({
+      //   name: 'index'
+      // })
     }
   },
   beforeRouteUpdate (to, from, next) {

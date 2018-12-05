@@ -89,6 +89,7 @@ export default {
   },
   created () {
     this.$loading.close()
+    console.log('created')
   },
   methods: {
     bindRoom () {
@@ -131,6 +132,7 @@ export default {
   },
   mounted () {
     this.$loading.close()
+    console.log('mounted')
   },
   components: {
     Footer,

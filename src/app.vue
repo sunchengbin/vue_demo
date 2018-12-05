@@ -4,7 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/reserve">广场</router-link> |
       <router-link to="/mine">我的</router-link> |
-      <router-link to="/songlist">Songlist</router-link>
+      <router-link to="/songlist">Songlist</router-link> |
+      <router-link to="/search?q=vue">search</router-link>
     </div>
     <router-view />
   </div>
