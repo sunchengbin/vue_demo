@@ -17,12 +17,16 @@ export default {
   created () {
     const loading = document.getElementById('loading')
     loading.style.display = 'none'
+    this.getUserInfo()
+    console.log(this.$store.state)
     // this.getOpenID()
     // weixin.getOpenID('thunder/home', { type: this.$store.state.vod_type })
   },
   methods: {
     // 获取用户openIid和unionid
-
+    getUserInfo () {
+      this.$store.dispatch('getUserInfo')
+    },
     getOpenID () {
       // 用户openid，只跟当前公众号相关
       let openid = utils.util.getUrlPrem('openid') || utils.cookie.getCookie()
