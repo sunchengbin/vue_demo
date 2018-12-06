@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main" v-show="payShow">
     <div class="bkg"
          @click="closePanel"></div>
     <div class="panel-main">
@@ -50,7 +50,8 @@ export default {
   name: 'pay_panel',
   data () {
     return {
-      payment: 2
+      payment: 2,
+      payShow: false
     }
   },
   props: {
@@ -89,7 +90,7 @@ export default {
       } else if (this.payment === 2) {
         // const openid = '122'
         // const unionid = '122'
-        weixin.wxPay(this.params, this.elseData, this.wxPayCallback)
+        weixin.wxPay(this.params, this.elseData)
       }
     },
     choosePayment (type) { // 支付方式选择
@@ -99,8 +100,11 @@ export default {
       }
       this.payment = type
     },
+    showPanel () {
+      this.payShow = true
+    },
     closePanel () {
-      this.$emit('hidePanel')
+      this.payShow = false
     },
     getBalance () {
       // 调用获取余额接口

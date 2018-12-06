@@ -1,8 +1,7 @@
 <template>
   <div class="home">
     <button @click="showpayPanel">点击</button>
-    <paypanel v-show="payShow"
-              @hidePanel="hidePanel"
+    <paypanel ref='paypanel'
               :price=1
               :params="params"
               :elseData="elseData"></paypanel>
@@ -51,7 +50,7 @@ export default {
       is_show: false,
       payShow: false,
       params: { openid: '1111', unionid: '111' },
-      elseData: { type: 'thumb' }
+      elseData: { type: 'zhuzai' }
     }
   },
   components: {
@@ -120,10 +119,7 @@ export default {
       this.is_show = false
     },
     showpayPanel () {
-      this.payShow = true
-    },
-    hidePanel () {
-      this.payShow = false
+      this.$refs.paypanel.showPanel()
     }
   }
 }

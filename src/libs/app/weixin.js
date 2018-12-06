@@ -207,7 +207,7 @@ const weixin = {
       }
     })
   },
-  wxPay (parmas, data, callback) {
+  wxPay (parmas, data) {
     let url = apis.zhuzai_pay
     switch (data.type) {
       case 'zhuzai':
@@ -237,7 +237,6 @@ const weixin = {
           success: function (res) {
             // 支付成功后的回调函数
             if (res.errMsg === 'chooseWXPay:ok') {
-              store.commit('THUMB_PAYED', 1)
               data.callback() === 'function' && data.callback()
             }
           },
