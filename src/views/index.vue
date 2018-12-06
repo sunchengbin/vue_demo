@@ -84,7 +84,10 @@ export default {
   data () {
     return {
       swiperSlides: swiperSlides,
-      indexNav: indexNav
+      indexNav: indexNav,
+      obj: {
+        a: 1
+      }
     }
   },
   created () {

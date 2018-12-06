@@ -1,12 +1,11 @@
 <template>
   <div class="mine">
     <header>
-      <!-- <img :src="headImg"
+      <!-- <img :src="user_img"
            alt=""> -->
       <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542805624867&di=7db30f5a268419f486360d265be30cb2&imgtype=0&src=http%3A%2F%2Fg-ec4.images-amazon.com%2Fimages%2FG%2F28%2Fcn-legacy%2Ft%2Fthss1102751.JPG" />
-      <!-- <p>{{user_name}}</p> -->
-      <p class="userName">笑哈哈
-        <!-- <span>{{isVip ? 'vip' : ''}}</span> -->
+      <p class="userName">{{user_name}}
+        <!-- <span>{{is_vip ? 'vip' : ''}}</span> -->
         <span class="isVip">vip</span>
       </p>
     </header>
@@ -31,6 +30,7 @@
 
 <script>
 import appre from '@/components/app/appreciation/appreciation'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -60,15 +60,20 @@ export default {
     appre
   },
   computed: {
-    headImg () {
-      return this.$store.state.user_img
-    },
-    userName () {
-      return this.$store.state.user_name
-    },
-    isVip () {
-      return this.$store.state.is_vip
-    }
+    // headImg () {
+    //   return this.$store.state.user_img
+    // },
+    // userName () {
+    //   return this.$store.state.user_name
+    // },
+    // isVip () {
+    //   return this.$store.state.is_vip
+    // }
+    ...mapState({
+      'user_img': state => state.user_img,
+      'user_name': state => state.user_name,
+      'is_vip': state => state.is_vip
+    })
   },
   methods: {
     toMyContent (id) {
