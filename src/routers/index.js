@@ -2,11 +2,11 @@ export default [
   {
     path: '/about',
     name: 'about',
-    component: () => import('@/views/about.vue')
+    component: () => import('@/views/about')
   },
   {
     path: '/help',
     name: 'help',
-    component: () => import('@/views/help.vue')
+    component: () => import('@/views/help')
   }
 ]

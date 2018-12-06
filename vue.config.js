@@ -33,23 +33,23 @@ module.exports = {
     // 移除 prefetch 插件
     config.plugins.delete('prefetch')
     // 引入
-    // const chunkFolder = process.env.NODE_ENV !== 'production' ? 'debug' : 'dist'
-    // config.plugin('dll-reference-plugin')
-    //   .use(webpack.DllReferencePlugin)
-    //   .tap(options => {
-    //     options[0] = {
-    //       context: __dirname,
-    //       manifest: require(path.join(__dirname, `./src/common_chunk/${chunkFolder}/manifest.json`))
-    //     }
-    //     return options
-    //   })
-    // config.plugin('add-asset-html-webpack-plugin')
-    //   .use('add-asset-html-webpack-plugin')
-    //   .tap(options => {
-    //     options[0] = {
-    //       filepath: path.resolve(__dirname, `./src/common_chunk/${chunkFolder}/lib_*.js`)
-    //     }
-    //     return options
-    //   })
+    const chunkFolder = process.env.NODE_ENV !== 'production' ? 'debug' : 'dist'
+    config.plugin('dll-reference-plugin')
+      .use(webpack.DllReferencePlugin)
+      .tap(options => {
+        options[0] = {
+          context: __dirname,
+          manifest: require(path.join(__dirname, `./src/common_chunk/${chunkFolder}/manifest.json`))
+        }
+        return options
+      })
+    config.plugin('add-asset-html-webpack-plugin')
+      .use('add-asset-html-webpack-plugin')
+      .tap(options => {
+        options[0] = {
+          filepath: path.resolve(__dirname, `./src/common_chunk/${chunkFolder}/lib_*.js`)
+        }
+        return options
+      })
   }
 }

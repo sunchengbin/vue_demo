@@ -8451,10 +8451,10 @@ vue-loader@^15.4.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-router@2.5.3:
-  version "2.5.3"
-  resolved "http://r.cnpmjs.org/vue-router/download/vue-router-2.5.3.tgz#073783f564b6aece6c8a59c63e298dc2aabfb51b"
-  integrity sha1-BzeD9WS2rs5silnGPimNwqq/tRs=
+vue-router@3.0.1:
+  version "3.0.1"
+  resolved "http://r.cnpmjs.org/vue-router/download/vue-router-3.0.1.tgz#d9b05ad9c7420ba0f626d6500d693e60092cc1e9"
+  integrity sha1-2bBa2cdCC6D2JtZQDWk+YAkswek=
 
 vue-style-loader@^4.1.0:
   version "4.1.2"
@@ -8477,7 +8477,7 @@ vue-template-es2015-compiler@^1.6.0:
   resolved "http://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
   integrity sha1-3EJpcTMwLOMBdSQ1amxht7abShg=
 
-vue@^2.5.13:
+vue@^2.5.17:
   version "2.5.17"
   resolved "http://r.cnpmjs.org/vue/download/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
   integrity sha1-D4eJrXGL5oyhhyYpgy7VM1icato=

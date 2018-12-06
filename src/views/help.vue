@@ -1,5 +1,14 @@
 <template>
   <div>
-    help
+    {{message}}
   </div>
 </template>
+<script>
+export default {
+  data () {
+    return {
+      message: 'help'
+    }
+  }
+}
+</script>
