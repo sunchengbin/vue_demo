@@ -29,7 +29,7 @@ export default {
   SAVE_USER_INFO (state, payload) {
     console.log(payload)
     state.user_img = payload.headimgurl
-    state.user_name = payload.nickname
+    state.user_name = payload.nickname || '小鱼'
     state.rights_desc = payload.rights_desc
     state.balance = payload.balance
     state.is_vip = payload.is_vip
