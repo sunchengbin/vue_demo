@@ -4,6 +4,7 @@ import mutations from './mutations'
 import actions from './action'
 import payPanel from './modules/pay_panel'
 import thumb from './modules/thumb'
+import statistics from './modules/statistics'
 
 Vue.use(Vuex)
 const state = {
@@ -26,12 +27,17 @@ const state = {
   vip_end_time: '',
   vip_packages: []
 }
-export default new Vuex.Store({
+const Store = new Vuex.Store({
   state,
   actions,
   mutations,
   modules: {
     thumb,
-    payPanel
+    payPanel,
+    statistics
   }
 })
+
+process.$store = Store
+
+export default Store

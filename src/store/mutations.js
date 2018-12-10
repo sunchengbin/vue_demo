@@ -27,7 +27,6 @@ export default {
   },
   // 用户信息/判断是否是vip
   SAVE_USER_INFO (state, payload) {
-    console.log(payload)
     state.user_img = payload.headimgurl
     state.user_name = payload.nickname || '小鱼'
     state.rights_desc = payload.rights_desc

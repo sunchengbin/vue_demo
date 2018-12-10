@@ -3,7 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 module.exports = {
   // 修改output.path
-  outputDir: 'dist',
+  outputDir: 'thunder',
   // 修改output.publishPath
   baseUrl: process.env.BASE_URL,
   chainWebpack: config => {
