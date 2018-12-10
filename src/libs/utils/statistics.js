@@ -14,7 +14,7 @@ const statistics = {
   // 推送fromWay相关的事件，action是动态的
   pushFromWay ({ action, optValue }) {
     let obj = {
-      category: this.fromWay,
+      category: process.$store.state.statistics.fromWay,
       action
     }
     if (optValue) {

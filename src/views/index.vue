@@ -94,7 +94,7 @@ export default {
     console.log(this.$store.state.statistics.fromWay)
     utils.statistics.pageLoad()
     utils.statistics.pushFromWay({
-      action: '支付'
+      action: 'vip支付'
     })
     console.log(this.$store.state.statistics.fromWay)
     this.$loading.close()
