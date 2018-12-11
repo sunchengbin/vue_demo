@@ -37,7 +37,4 @@ const Store = new Vuex.Store({
     statistics
   }
 })
-
-process.$store = Store
-
 export default Store

@@ -78,7 +78,7 @@ import { indexNav } from '../static/index.js'
 import skipSong from '@/components/app/skip_song/index.vue'
 import playControl from '@/components/app/play_control'
 import thumbControl from '@/components/app/thumb/thumb'
-import { http, apis, utils } from '@/libs/interfaces'
+import { http, apis } from '@/libs/interfaces'
 export default {
   name: 'home',
   data () {
@@ -91,12 +91,12 @@ export default {
     }
   },
   created () {
-    console.log(this.$store.state.statistics.fromWay)
-    utils.statistics.pageLoad()
-    utils.statistics.pushFromWay({
-      action: 'vip支付'
-    })
-    console.log(this.$store.state.statistics.fromWay)
+    // console.log(this.$store.state.statistics.fromWay)
+    // utils.statistics.pageLoad()
+    // utils.statistics.pushFromWay({
+    //   action: 'vip支付'
+    // })
+    // console.log(this.$store.state.statistics.fromWay)
     this.$loading.close()
   },
   methods: {

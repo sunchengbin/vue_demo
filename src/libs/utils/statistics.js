@@ -1,6 +1,7 @@
 import {
   util
 } from '../utils'
+import store from '@/store'
 const statistics = {
   fromWay: util.getUrlPrem('fromWay') || 'default',
   // category： 要监控的目标的类型名称， 通常是同一组目标的名字， 比如 "视频"等等。 该项必填， 不填、 填 "-"的事件会被抛弃。
@@ -14,7 +15,7 @@ const statistics = {
   // 推送fromWay相关的事件，action是动态的
   pushFromWay ({ action, optValue }) {
     let obj = {
-      category: process.$store.state.statistics.fromWay,
+      category: store.state.statistics.fromWay,
       action
     }
     if (optValue) {
@@ -33,7 +34,7 @@ const statistics = {
       obj['optValue'] = optValue
     }
     this.push(obj)
-    process.$store.commit('SAVE_FROM_WAY', {
+    store.commit('SAVE_FROM_WAY', {
       fromWay: this.fromWay
     })
   }
