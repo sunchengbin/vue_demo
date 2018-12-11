@@ -8,8 +8,8 @@ import statistics from './modules/statistics'
 
 Vue.use(Vuex)
 const state = {
-  openid: 'o14xfwKLuC5TdvXUZ1I3tMFRELHw',
-  unionid: 'o6qE3t_HiGWR-A-Pxi4aA84XpGp4',
+  openid: process.env.NODE_ENV === 'development' ? 'o14xfwKLuC5TdvXUZ1I3tMFRELHw' : '',
+  unionid: process.env.NODE_ENV === 'development' ? 'o6qE3t_HiGWR-A-Pxi4aA84XpGp4' : '',
   device: '',
   mv_version: '',
   emoji_version: '',
