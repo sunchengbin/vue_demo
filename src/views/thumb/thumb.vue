@@ -15,20 +15,32 @@
     <div class="thumb-button-wrapper">
       <div class="thumb-button" @click='thumb'>立刻为Ta点赞</div>
     </div>
-    <payPanel></payPanel>
+    <paypanel ref='paypanel'
+              :price=199
+              :params="params"
+              :elseData="elseData"></paypanel>
   </div>
 </template>
 <script>
 import { chttp, apis } from '@/libs/interfaces'
-import payPanel from '@/components/app/pay_panel/index'
+import paypanel from '@/components/app/pay_panel'
 
 export default {
   name: 'thumb',
-  props: {
-    singer: String
-  },
   components: {
-    payPanel
+    paypanel
+  },
+  data () {
+    return {
+      entry: '',
+      params: {},
+      elseData: {
+        callback: () => {
+          location.pathname = '/thunder/home'
+          this.entryCollection()
+        }
+      }
+    }
   },
   computed: {
     loading () {
@@ -62,7 +74,11 @@ export default {
         this.$router.push('/thunder/home')
         return
       }
-      let that = this
+      let p = this.$route.query.p
+      this.params = {
+        ...params,
+        p: p
+      }
       chttp.get(apis.send_like, { params: params })
         .then(res => {
           this.$store.commit('THUMB_PAYED', res.is_pay)
@@ -70,11 +86,10 @@ export default {
             this.$router.push('/thunder/home')
             return
           }
-          this.$store.commit('SHOW_PAY_PANEL', this.price)
-        }).catch(function (err) {
-          console.log(that)
-          that.$store.commit('SHOW_PAY_PANEL', that.price)
-          console.log(err)
+          this.$refs.paypanel.showPanel()
+        })
+        .catch(() => {
+          this.$refs.paypanel.showPanel()
         })
     },
     entryCollection () {

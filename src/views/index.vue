@@ -84,10 +84,19 @@ export default {
   data () {
     return {
       swiperSlides: swiperSlides,
-      indexNav: indexNav
+      indexNav: indexNav,
+      obj: {
+        a: 1
+      }
     }
   },
   created () {
+    // console.log(this.$store.state.statistics.fromWay)
+    // utils.statistics.pageLoad()
+    // utils.statistics.pushFromWay({
+    //   action: 'vip支付'
+    // })
+    // console.log(this.$store.state.statistics.fromWay)
     this.$loading.close()
     console.log('created')
   },

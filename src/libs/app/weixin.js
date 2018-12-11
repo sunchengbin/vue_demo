@@ -7,6 +7,7 @@ import {
 } from '@/libs/interfaces'
 import store from '@/store'
 import Cookies from 'js-cookie'
+import Vue from 'vue'
 const weixin = {
   // wxLoginUrl: '', // 授权登录url
   wxLoginUrl (page, query) {
@@ -206,14 +207,24 @@ const weixin = {
       }
     })
   },
-  wxPay (openid, unionid, callback) {
-    const req = {
-      openid: openid,
-      unionid: unionid
+  wxPay (parmas, data) {
+    let url = apis.zhuzai_pay
+    switch (data.type) {
+      case 'zhuzai':
+        url = apis.zhuzai_wpay
+        break
+      case 'thumb':
+        url = apis.thumb_wpay
+        break
+      default:
+        break
     }
-    let type = 'success'
-    http.get(`${apis.payWx}?param=` + encodeURIComponent(JSON.stringify(req))).then(function (res) {
-      try {
+    chttp.post(url, parmas).then(res => {
+      console.log(res)
+      res.errcode = parseInt(res.errcode)
+      if (res.errcode === 200) {
+        console.log(res.errmsg)
+        store.state.order_id = res.oid
         wx.chooseWXPay({
           timestamp: res.pay.jspay.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
           nonceStr: res.pay.jspay.nonceStr, // 支付签名随机串，不长于 32 位
@@ -221,24 +232,22 @@ const weixin = {
           signType: res.pay.jspay.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
           paySign: res.pay.jspay.paySign, // 支付签名
           fail: function (res) {
-            type = 'fail'
-            callback && callback(type)
+            Vue.$messageBox.alert('支付失败')
           },
           success: function (res) {
             // 支付成功后的回调函数
-            type = 'success'
             if (res.errMsg === 'chooseWXPay:ok') {
-              callback && callback(type)
+              data.callback() === 'function' && data.callback()
             }
           },
           cancel: function (res) {
-            type = 'cancel'
-            callback && callback(type)
             // 支付取消回调函数
+            Vue.$messageBox.alert('支付取消')
           }
         })
-      } catch (e) {
-
+      } else {
+        console.log(res.errmsg)
+        Vue.$messageBox.alert(res.errmsg)
       }
     })
   },
