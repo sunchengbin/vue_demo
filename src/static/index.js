@@ -16,7 +16,7 @@ const indexNav = [{
   svg: 'zhuzai'
 }, {
   key: 'VIP服务',
-  url: 'https://vod.ktvsky.com/mv_thunder/page/index.html',
+  url: 'https://vod.ktvsky.com/thunder/myvip?p=channel',
   svg: 'vip'
 }, {
   key: '魔法表情',
@@ -24,11 +24,11 @@ const indexNav = [{
   svg: 'expression'
 }, {
   key: '照片MV',
-  url: 'https://vod.ktvsky.com/thunder/expression',
+  url: 'https://vod.ktvsky.com/mv_thunder/page/index.html',
   svg: 'mv'
 }, {
   key: '生日祝福',
-  url: 'https://vod.ktvsky.com/thunder/expression',
+  url: 'http://coupon.ktvsky.com/ktv/order/occupybv3?action=21&openid=o3JAqt7S9dnnLoh9e8If3nOESnlI&unionid=o6qE3t_HiGWR-A-Pxi4aA84XpGp4',
   svg: 'birthday'
 }]
 // 各大排行榜入口
