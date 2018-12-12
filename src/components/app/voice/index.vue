@@ -48,7 +48,7 @@ export default {
       serve: ['切歌', '伴唱', '暂停', '播放'],
       recogniting: false,
       voice_resolve: false,
-      isShow: true,
+      isShow: false,
       result_list: [],
       result: '',
       openid: 'o3JAqt0Jr9vtoVncMW7ZBnHFvUd',
@@ -74,6 +74,10 @@ export default {
       })
   },
   methods: {
+    // 开启语音面板
+    showVoice () {
+      this.isShow = true
+    },
     // 关闭语音面板
     closeVoice () {
       this.recogniting = false

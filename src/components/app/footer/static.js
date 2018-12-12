@@ -3,15 +3,15 @@ const COMMON = {
   footIcons: [
     {
       id: 1,
-      defaultSrc: 'my_icon',
-      name: '广场',
-      activeSrc: 'my_icon',
-      routeName: 'home'
+      defaultSrc: 'home_icon',
+      name: '首页',
+      activeSrc: 'home_icon_active',
+      routeName: 'index'
     },
     {
       id: 2,
       defaultSrc: 'my_icon',
-      name: '点歌',
+      name: '',
       activeSrc: 'my_icon',
       routeName: 'about'
     },

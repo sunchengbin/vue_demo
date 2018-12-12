@@ -39,6 +39,7 @@ const apis = {
   zhuzai_pay: '/vod/zz/cp/pay', // 主宰余额支付
   thumb_pay: '/vod/like/cp/pay', // 点赞余额支付
   zhuzai_wpay: '/v2/zz/apply', // 主宰微信支付
-  thumb_wpay: '/vod/like/pay' // 点赞微信支付
+  thumb_wpay: '/vod/like/pay', // 点赞微信支付
+  home: 'vadd/gzh/home' // 获取首页banner
 }
 export default apis
