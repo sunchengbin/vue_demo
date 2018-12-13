@@ -443,7 +443,7 @@ export default {
   }
 }
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
   .mint-swipe {
     overflow: hidden;
     position: relative;
@@ -464,7 +464,7 @@ export default {
     }
     .mint-swipe-indicators {
       position: absolute;
-      bottom: 10px;
+      @include px2rem(bottom, 10);
       left: 50%;
       transform: translateX(-50%);
       .is-active {
@@ -473,13 +473,13 @@ export default {
       }
     }
     .mint-swipe-indicator {
-      width: 16px;
-      height: 16px;
+      @include px2rem(width, 16);
+      @include px2rem(height, 16);
       display: inline-block;
       border-radius: 100%;
       background: #000;
       opacity: 0.2;
-      margin: 0 8px;
+      @include px2rem(margin, 0 8);
     }
   }
 </style>

@@ -75,16 +75,16 @@
   </div>
 </template>
 <script>
-import weixin from '../libs/app/weixin.js'
-import Footer from '@/components/app/footer/footer.vue'
-import skipSong from '@/components/app/skip_song/index.vue'
-import playControl from '@/components/app/play_control'
-import thumbControl from '@/components/app/thumb/thumb'
-import Swiper from '@/components/common/swiper/index.vue'
-import SwiperItem from '@/components/common/swiper/swiper_item.vue'
-import Voice from '@/components/app/voice/index.vue'
+import weixin from '../libs/app/weixin'
+import Footer from '@/components/app/footer/footer'
+import SkipSong from '@/components/app/skip_song/index'
+import PlayControl from '@/components/app/play_control'
+import ThumbControl from '@/components/app/thumb/thumb'
+import Swiper from '@/components/common/swiper/index'
+import SwiperItem from '@/components/common/swiper/swiper_item'
+import Voice from '@/components/app/voice/index'
 import { chttp, http, apis } from '@/libs/interfaces'
-import { indexNav, roomLists } from '../static/index.js'
+import { indexNav, roomLists } from '../static/index'
 export default {
   name: 'home',
   data () {
@@ -194,9 +194,9 @@ export default {
   },
   components: {
     Footer,
-    playControl,
-    thumbControl,
-    skipSong,
+    PlayControl,
+    ThumbControl,
+    SkipSong,
     Swiper,
     SwiperItem,
     Voice
