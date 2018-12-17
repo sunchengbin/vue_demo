@@ -30,8 +30,8 @@
     <div class="banner-wrapper">
       <Swiper v-if="swiperSlides.length">
         <SwiperItem v-for="(item, index) in swiperSlides"
-          :key='index'
-          class='banner-slide'>
+          :key="index"
+          class="banner-slide">
             <img :src="item.classdetailbigimage"
               alt=""
               @click="skip(item.route)">
@@ -39,8 +39,8 @@
       </Swiper>
     </div>
     <ul class="item-nav-wrapper">
-      <li v-for='(item, index) in indexNav'
-        :key='index'
+      <li v-for="(item, index) in indexNav"
+        :key="index"
         @click="skip(item.url)">
         <div class="img-box">
           <svg-icon
@@ -71,7 +71,7 @@
     <thumb-control></thumb-control>
     <play-control />
     <Voice ref="voice"/>
-    <Footer currentPage='首页'></Footer>
+    <Footer currentPage="首页"></Footer>
   </div>
 </template>
 <script>
@@ -190,7 +190,6 @@ export default {
   },
   mounted () {
     this.$loading.close()
-    console.log('mounted')
   },
   components: {
     Footer,
