@@ -2,12 +2,38 @@
 $base_ui_size: 75;
 
 // font-color
-$base_font_color: #333;
+$title_font_color: #333;
+$base_font_color: #666;
+$explain_font_color: #999;
+$assist_font_color: #ccc;
 $link_font_color: #4990E2;
 $active_font_color: #42b983;
 $write_font_color: #fff;
+
+// border-color
+$base_border_color: #e5e5e5;
 
 // background-color
 $lazy_bg_color: #f5f5f5;
 $dialog_bg_color: rgba(0, 0, 0, 0.7);
 
+// font-size
+$font_title:36px;
+$title_line_height:54;
+$font_list_important_title:32px;
+$list_important_title_line_height:48;
+$font_list_title:30px;
+$list_title_line_height:45;
+$font_litle_title:28px;
+$litle_title_line_height:42;
+$font_detail_describe:26px;
+$detail_describe_line_height:39;
+$font_important_point:24px;
+$important_point_line_height:36;
+$font_menu:22px;
+$menu_line_height:33;
+// line-height
+$line_height:1.5em;
+// font-family
+$font_family:'PingFang SC Light'
+//

@@ -3,9 +3,9 @@ const path = require('path')
 const webpack = require('webpack')
 module.exports = {
   // 修改output.path
-  outputDir: 'dist',
+  outputDir: 'thunder',
   // 修改output.publishPath
-  baseUrl: process.env.NODE_ENV !== 'development' ? '/vue_demo/dist/' : './',
+  baseUrl: process.env.BASE_URL,
   chainWebpack: config => {
     // 添加全局scss文件
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
@@ -48,6 +48,14 @@ module.exports = {
       .tap(options => {
         options[0] = {
           filepath: path.resolve(__dirname, `./src/common_chunk/${chunkFolder}/lib_*.js`)
+        }
+        return options
+      })
+    config.plugin('vconsole-webpack-plugin')
+      .use('vconsole-webpack-plugin')
+      .tap(options => {
+        options[0] = {
+          enable: process.env.NODE_ENV === 'stage'
         }
         return options
       })

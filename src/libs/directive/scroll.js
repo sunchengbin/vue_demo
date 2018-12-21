@@ -17,7 +17,9 @@
 */
 
 import Vue from 'vue'
-import utils from '../utils'
+import {
+  utils
+} from '../interfaces'
 const ctx = '@scroll'
 
 // 获取样式的方法

@@ -32,7 +32,7 @@ export default class util {
   }
 
   static getUrlPrem (key, url) {
-    const search = url || window.location.search
+    const search = url || window.location.href
     const pattern = new RegExp(`[?&]${key}=([^&]+|\\w+)`, 'g')
     const matcher = pattern.exec(search)
     let items = null

@@ -3,6 +3,11 @@ module.exports = {
   env: {
     node: true
   },
+  globals: {
+    _hmt: true,
+    wx: true,
+    BMap: true
+  },
   'extends': [
     'plugin:vue/essential',
     '@vue/standard'
